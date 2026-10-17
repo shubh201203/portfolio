@@ -155,85 +155,215 @@ export const portfolioData = {
       role: "Flagship Data Analytics Project",
       priority: 1,
       isFlagship: true,
-      tagline: "End-to-end sales, customer, and dimensional analytics platform with PostgreSQL, Star Schema modeling, and Power BI.",
-      techStack: [
-        "PostgreSQL",
-        "SQL",
-        "Python",
-        "Pandas",
-        "Power Query",
-        "Power BI",
-        "DAX",
-        "Dimensional Data Modeling",
-        "Star Schema"
-      ],
-      pipeline: [
-        "Raw E-Commerce Data",
-        "Python Cleaning / Transformation",
-        "PostgreSQL",
-        "Star Schema",
-        "SQL Analytics",
-        "Power BI / DAX",
-        "Business Insights"
-      ],
-      analyticsAreas: [
+      status: "Completed & Deployed",
+      tagline: "An end-to-end analytics platform combining Python data preparation, PostgreSQL dimensional modeling, SQL-based business analysis, a 6-page Power BI dashboard suite, and a deployed interactive React + FastAPI analytics application.",
+      syntheticDisclaimer: "All analytical results are derived from an empirically modeled synthetic India-focused e-commerce dataset for project demonstration and analytical rigor.",
+      links: {
+        live: "https://novacart-analytics.vercel.app/",
+        github: "https://github.com/shubh201203/novacart-analytics"
+      },
+      deliverables: [
         {
-          category: "Revenue",
-          items: ["Revenue analysis", "Profitability", "Growth", "AOV", "YoY / MoM"]
+          num: "01",
+          title: "Dimensional Analytics Warehouse",
+          tech: "Python · PostgreSQL 18 · Star Schema",
+          desc: "Cleaned and staged 104,852 sales records into an 8-table star schema warehouse with surrogate keys, 0 foreign-key orphans, deterministic customer recovery, and strict fact-grain isolation."
         },
         {
-          category: "Customers",
-          items: ["Customer analytics", "RFM segmentation", "Repeat purchase analysis", "Customer behavior", "Cohort analysis", "Retention"]
+          num: "02",
+          title: "Executive Power BI Suite",
+          tech: "Power BI Desktop · 30+ DAX Measures",
+          desc: "6-page interactive reporting suite analyzing executive performance, profitability, customer intelligence, product margins, regional operations, and cohort retention with 100% SQL reconciliation."
         },
         {
-          category: "Products",
-          items: ["Product performance", "Category performance", "Pareto analysis"]
-        },
-        {
-          category: "Geography",
-          items: ["Geographic performance", "Regional trends"]
-        },
-        {
-          category: "Business Intelligence",
-          items: ["KPI tracking", "Dashboard development", "Business recommendations"]
+          num: "03",
+          title: "Production Cloud Analytics App",
+          tech: "React 18 · TypeScript · FastAPI · Neon",
+          desc: "Production single-page web BI dashboard deployed on Vercel backed by a Python FastAPI REST service on Render and a Neon Serverless PostgreSQL database with sub-50ms parameterized query responses."
         }
       ],
-      powerBiStructure: {
-        plannedPages: [
-          "Executive Overview",
-          "Sales / Revenue",
-          "Customer Analytics",
-          "Product Analytics",
-          "Geographic Performance",
-          "KPI Tracking"
-        ],
-        daxCapabilities: [
-          "Revenue",
-          "Profit",
-          "AOV",
-          "YoY / MoM growth",
-          "Customer metrics",
-          "Time intelligence",
-          "Retention-related measures"
-        ],
-        previewStatus: "Dashboard Preview — Coming Soon"
-      },
-      caseStudySections: [
-        { num: "01", title: "Business Problem", status: "Defined", content: "Structuring multi-category enterprise e-commerce operational data to analyze sales trends, margin health, customer retention, and regional performance drivers." },
-        { num: "02", title: "Data Source", status: "Defined", content: "Transactional order data, customer demographic profiles, itemized order lines, and payment events." },
-        { num: "03", title: "Data Cleaning", status: "Implemented", content: "Automated data hygiene routines using Python, Pandas, and Power Query: deduplication, schema standardization, missing value handling, and data type validation." },
-        { num: "04", title: "Data Architecture", status: "Implemented", content: "Full end-to-end data pipeline: Raw Operational Data → Python Cleaning/ETL → PostgreSQL DW → Star Schema." },
-        { num: "05", title: "SQL Analytics", status: "Implemented", content: "Structured analytical queries investigating revenue trends, customer lifetime dynamics, product sales distribution, and time-based metrics." },
-        { num: "06", title: "Data Modeling", status: "Implemented", content: "Dimensional modeling implementing a centralized fact table connected to clean dimension tables via an optimized Star Schema." },
-        { num: "07", title: "DAX Measures", status: "Implemented", content: "Analytical measure calculations for dynamic revenue, margin, AOV, YoY / MoM growth, and time-intelligence filters." },
-        { num: "08", title: "Power BI Dashboards", status: "Planned", content: "6 core reporting views: Executive Overview, Sales & Profitability, Customer Analytics, Product Matrix, Geographic Trends, and KPI Tracking." },
-        { num: "09", title: "Insights", status: "In Progress", content: "Analysis underway — real findings displayed as completed." },
-        { num: "10", title: "Recommendations", status: "Planned", content: "Actionable strategic recommendations to be derived directly from verified analytical findings." },
-        { num: "11", title: "Project Outcome", status: "In Progress", content: "End-to-end analytics pipeline and reporting workflow currently being developed." }
+      techStack: [
+        "PostgreSQL 18",
+        "SQL",
+        "Power BI",
+        "DAX",
+        "Python 3.11",
+        "Pandas",
+        "Star Schema",
+        "FastAPI",
+        "React 18",
+        "TypeScript"
       ],
-      links: {
-        github: "https://github.com/shubh201203"
-      }
+      techStackCategorized: {
+        dataAndAnalytics: [
+          "Python 3.11",
+          "Pandas",
+          "PostgreSQL 18",
+          "Dimensional Modeling",
+          "Star Schema",
+          "Data Quality & Quarantine",
+          "Analytical SQL (CTEs, Window Functions)"
+        ],
+        businessIntelligence: [
+          "Microsoft Power BI Desktop",
+          "DAX (30+ Measures)",
+          "Power Query",
+          "Interactive Visualizations",
+          "SQL-to-DAX Reconciliation"
+        ],
+        applicationAndCloud: [
+          "React 18",
+          "TypeScript",
+          "Vite",
+          "FastAPI",
+          "Neon Serverless PostgreSQL",
+          "Vercel",
+          "Render",
+          "Git & GitHub"
+        ]
+      },
+      warehouseTables: {
+        dimensions: [
+          { name: "dim_customer", rows: "5,000", grain: "Registered customer account" },
+          { name: "dim_product", rows: "180", grain: "Catalog SKU across 5 categories" },
+          { name: "dim_location", rows: "54", grain: "Unique city, state, and region" },
+          { name: "dim_payment", rows: "18", grain: "Payment method and status pair" },
+          { name: "dim_date", rows: "1,826", grain: "Calendar day (2022–2026)" }
+        ],
+        facts: [
+          { name: "fact_sales", rows: "104,852", grain: "Product line item within an order" },
+          { name: "fact_returns", rows: "5,792", grain: "Returned item line event" },
+          { name: "fact_payments", rows: "62,952", grain: "Payment transaction attempt" }
+        ]
+      },
+      verifiedMetrics: {
+        placedRevenue: {
+          value: "₹971.49M",
+          raw: "₹971,486,941.80",
+          label: "Total Placed Revenue",
+          desc: "Gross commercial intent placed before lifecycle deductions"
+        },
+        realizedRevenue: {
+          value: "₹847.62M",
+          raw: "₹847,624,781.93",
+          label: "Realized Revenue",
+          desc: "Fulfilled & in-transit orders (Completed: ₹733.52M + Shipped: ₹114.10M)"
+        },
+        returnedRevenue: {
+          value: "₹50.87M",
+          raw: "₹50,871,926.16",
+          label: "Returned Revenue",
+          desc: "Merchandise returned post-delivery across 5,792 return events"
+        },
+        postReturnRevenue: {
+          value: "₹796.75M",
+          raw: "₹796,752,855.77",
+          label: "Post-Return Revenue",
+          desc: "Net settled cash retained (Realized Revenue − Returned Revenue)"
+        },
+        realizedProfit: {
+          value: "₹262.16M",
+          raw: "₹262,159,342.82",
+          label: "Realized Profit",
+          desc: "Operational profit delivered across fulfilled order catalog"
+        },
+        profitMargin: {
+          value: "30.93%",
+          raw: "30.93%",
+          label: "Realized Profit Margin",
+          desc: "Realized profit divided by realized revenue"
+        },
+        activeCustomers: {
+          value: "3,970",
+          raw: "3,970 accounts",
+          label: "Active Customers",
+          desc: "Registered accounts with at least 1 completed or shipped order"
+        },
+        repeatShare: {
+          value: "82.12%",
+          raw: "82.12%",
+          label: "Repeat Customer Share",
+          desc: "3,260 repeat buyers out of 3,970 active customers"
+        },
+        aov: {
+          value: "₹15,452",
+          raw: "₹15,452.38",
+          label: "Average Order Value",
+          desc: "Average realized basket size across 54,854 fulfilled orders"
+        },
+        returnRate: {
+          value: "5.57%",
+          raw: "5.57%",
+          label: "Return Rate",
+          desc: "8,712 returned units / 156,395 ordered units"
+        }
+      },
+      dashboardScreenshots: [
+        {
+          id: 1,
+          title: "Executive Overview",
+          filename: "01_executive_overview.png",
+          caption: "Executive Overview — Revenue, profitability, customers, order status, and regional performance.",
+          focus: "Top-level executive KPIs, monthly realized revenue trendline (2022–2026), regional sales distribution, category profit contribution, and order lifecycle status split."
+        },
+        {
+          id: 2,
+          title: "Sales & Profitability",
+          filename: "02_sales_profitability.png",
+          caption: "Sales & Profitability — Revenue and profit trends, discount impact, product profitability, and order-status analysis.",
+          focus: "Gross demand vs. realized revenue, monthly realized revenue vs. profit combo tracking, placed revenue by order status, promotional discount depth trendline, and top 10 products by profit."
+        },
+        {
+          id: 3,
+          title: "Customer Intelligence",
+          filename: "03_customer_intelligence.png",
+          caption: "Customer Intelligence — Customer value, repeat versus one-time buyers, regional contribution, and purchase frequency.",
+          focus: "Active customer count (3,970), repeat customer share (82.12%), customer purchase frequency ranking (top distinct orders), repeat vs. one-time buyer distribution, and regional revenue."
+        },
+        {
+          id: 4,
+          title: "Product Analytics",
+          filename: "04_product_analytics.png",
+          caption: "Product Analytics — Category profitability, product performance, discounting, and margin analysis.",
+          focus: "Catalog performance across 180 SKUs, Category Profitability Matrix, top 10 profit generators, and an interactive Discount % vs. Profit Margin scatter analysis."
+        },
+        {
+          id: 5,
+          title: "Regional Operations",
+          filename: "05_regional_operations.png",
+          caption: "Regional Operations — Revenue, profit, order-status mix, and regional category performance.",
+          focus: "Geographic demand across 18 Indian states and 6 macro-regions, top revenue-generating urban centers, uniform return rate tracking, and full Category × Region revenue cross-tabulation."
+        },
+        {
+          id: 6,
+          title: "Customer Retention & RFM",
+          filename: "06_customer_retention_rfm.png",
+          caption: "Customer Retention & RFM — Customer segments, repeat purchasing, cohort retention, and customer value.",
+          focus: "Demographic segment revenue, customer lifetime value table, and an authoritative Monthly Customer Cohort Retention Heatmap Matrix (public.vw_cohort_retention) tracking repeat retention across M0 to M18."
+        }
+      ],
+      technicalHighlights: [
+        {
+          title: "8-Table Star Schema & Strict Grain Isolation",
+          desc: "Avoided Cartesian duplication by strictly separating fact_sales (line items) from fact_payments (transactions), requiring order-level CTE pre-aggregation before joining."
+        },
+        {
+          title: "Deterministic Missing Key Recovery & Quarantine",
+          desc: "Recovered 142 missing customer IDs via co-occurring order line items while routing 68 unrecoverable rows to an audited quarantine log."
+        },
+        {
+          title: "100% SQL & DAX Mathematical Reconciliation",
+          desc: "Every metric across PostgreSQL, Power BI, and the React application is reconciled to exact precision (Placed, Realized, Returned, and Post-Return cash flow)."
+        },
+        {
+          title: "Cohort Retention View & RFM Behavioral Tiers",
+          desc: "Engineered public.vw_cohort_retention tracking 18-month retention decay matrices alongside NTILE-based RFM quintile segmentation across 3,970 active customers."
+        },
+        {
+          title: "28 Automated Pytest Verification Tests (100% Pass)",
+          desc: "Comprehensive automated test suite validating data cleaning, schema integrity, fact grains, financial reconciliation, SQL analytical outputs, and FastAPI REST routes."
+        }
+      ]
     },
     {
       id: "product-analytics",

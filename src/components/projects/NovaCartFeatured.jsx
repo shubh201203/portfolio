@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowRight, GitBranch, ArrowDown, BarChart3, Clock, LineChart, PieChart, Database } from 'lucide-react';
+import { ArrowRight, ExternalLink, BarChart3, CheckCircle2, Layers, ShieldCheck, LineChart } from 'lucide-react';
+import { GitHubIcon } from '../common/Icons';
 import { portfolioData } from '../../data/portfolioData';
 
 export default function NovaCartFeatured({ onOpenCaseStudy }) {
@@ -8,37 +9,43 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
 
   const caseStudyFlow = [
     { step: '01', title: 'Business Problem', desc: 'Margin leakage & retention decay' },
-    { step: '02', title: 'Raw Data', desc: 'Operational transactions & orders' },
-    { step: '03', title: 'Transformation', desc: 'Python cleaning & data validation' },
-    { step: '04', title: 'Data Model', desc: 'PostgreSQL Star Schema (Fact/Dim)' },
-    { step: '05', title: 'SQL Analytics', desc: 'Revenue, cohorts & RFM queries' },
-    { step: '06', title: 'Power BI', desc: 'DAX measures & executive canvas' },
-    { step: '07', title: 'Insights', desc: 'Actionable business recommendations' },
+    { step: '02', title: 'Raw Data', desc: '105K+ order transactions & events' },
+    { step: '03', title: 'Transformation', desc: 'Deterministic recovery & quarantine' },
+    { step: '04', title: 'Star Schema', desc: '8-table dimensional warehouse' },
+    { step: '05', title: 'SQL Analytics', desc: '12 business query modules & CTEs' },
+    { step: '06', title: 'Power BI Suite', desc: '6 interactive views & 30+ DAX' },
+    { step: '07', title: 'Cloud Deploy', desc: 'React + FastAPI + Neon live app' },
   ];
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-6 sm:p-8 lg:p-10 shadow-subtle relative space-y-10">
+    <div className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 lg:p-10 shadow-subtle relative space-y-10">
       
       {/* Header Banner */}
       <div className="flex flex-wrap items-start justify-between gap-6 border-b border-gray-100 pb-8">
-        <div className="space-y-2 max-w-3xl">
-          <div className="flex items-center gap-2">
+        <div className="space-y-3 max-w-3xl">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-blue-600 text-white uppercase tracking-wider">
-              Flagship Analytics Case Study
+              Flagship Analytics Project
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-mono text-emerald-800 bg-emerald-50 border border-emerald-200">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Completed & Deployed</span>
             </span>
             <span className="text-xs font-mono text-gray-500">
-              End-to-End Enterprise Project
+              28/28 Pytest Passed
             </span>
           </div>
+
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-950 tracking-tight">
             {project.title}
           </h3>
-          <p className="text-gray-600 text-base leading-relaxed pt-1">
+
+          <p className="text-gray-600 text-base leading-relaxed">
             {project.tagline}
           </p>
 
           {/* Core Tech Stack */}
-          <div className="flex flex-wrap gap-1.5 pt-2">
+          <div className="flex flex-wrap gap-1.5 pt-1">
             {project.techStack.map((tech) => (
               <span
                 key={tech}
@@ -50,13 +57,120 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
           </div>
         </div>
 
-        <button
-          onClick={() => onOpenCaseStudy('novacart')}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-sm font-semibold bg-gray-950 text-white hover:bg-blue-600 transition-colors shadow-subtle active:scale-[0.98] whitespace-nowrap"
-        >
-          <span>Read Full Case Study</span>
-          <ArrowRight className="w-4 h-4" />
-        </button>
+        {/* Action CTAs */}
+        <div className="flex flex-wrap sm:flex-col items-stretch gap-2.5 w-full sm:w-auto">
+          <button
+            onClick={() => onOpenCaseStudy('novacart')}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-md text-sm font-semibold bg-gray-950 text-white hover:bg-blue-600 transition-colors shadow-subtle active:scale-[0.98] whitespace-nowrap"
+          >
+            <span>View Detailed Case Study</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+
+          <div className="flex items-center gap-2 w-full">
+            <a
+              href={project.links.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 transition-colors"
+            >
+              <span>Live Web App</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+
+            <a
+              href={project.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100 hover:text-gray-950 transition-colors"
+            >
+              <GitHubIcon className="w-3.5 h-3.5 text-gray-700" />
+              <span>Source Code</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* 3 Core Architecture Deliverables */}
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <div className="text-xs font-mono uppercase tracking-wider text-gray-500 font-semibold flex items-center gap-2">
+            <Layers className="w-3.5 h-3.5 text-blue-600" />
+            <span>Three Core Analytics Deliverables</span>
+          </div>
+          <span className="text-xs text-gray-400 font-mono">End-to-End Delivery</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {project.deliverables?.map((d) => (
+            <div
+              key={d.num}
+              className="p-5 rounded-lg border border-gray-200 bg-gray-50/50 hover:bg-white hover:border-blue-200 transition-colors flex flex-col justify-between space-y-3"
+            >
+              <div>
+                <div className="flex items-center justify-between text-xs font-mono text-gray-400 mb-1.5">
+                  <span className="font-bold text-blue-600">DELIVERABLE {d.num}</span>
+                  <span className="text-[11px] text-gray-500">{d.tech}</span>
+                </div>
+                <h4 className="text-sm font-bold text-gray-900">{d.title}</h4>
+                <p className="text-xs text-gray-600 leading-relaxed mt-2">{d.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Verified Core Analytical Benchmarks Grid */}
+      <div className="space-y-3">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="text-xs font-mono uppercase tracking-wider text-gray-500 font-semibold flex items-center gap-1.5">
+            <LineChart className="w-3.5 h-3.5 text-blue-600" />
+            <span>Verified Canonical Benchmarks (100% SQL / DAX Reconciled)</span>
+          </div>
+          <span className="text-[11px] font-mono text-gray-400">Deterministic Analysis</span>
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="p-4 rounded-lg bg-white border border-gray-200 shadow-subtle">
+            <div className="text-[11px] font-mono text-gray-500 uppercase">Realized Revenue</div>
+            <div className="text-xl sm:text-2xl font-extrabold text-gray-950 font-mono mt-1">₹847.62M</div>
+            <div className="text-[11px] text-gray-500 mt-1 leading-snug">
+              Fulfilled & in-transit orders (Completed + Shipped)
+            </div>
+          </div>
+
+          <div className="p-4 rounded-lg bg-white border border-gray-200 shadow-subtle">
+            <div className="text-[11px] font-mono text-gray-500 uppercase">Post-Return Revenue</div>
+            <div className="text-xl sm:text-2xl font-extrabold text-blue-600 font-mono mt-1">₹796.75M</div>
+            <div className="text-[11px] text-gray-500 mt-1 leading-snug">
+              Net settled cash retained (−₹50.87M returns)
+            </div>
+          </div>
+
+          <div className="p-4 rounded-lg bg-white border border-gray-200 shadow-subtle">
+            <div className="text-[11px] font-mono text-gray-500 uppercase">Realized Profit Margin</div>
+            <div className="text-xl sm:text-2xl font-extrabold text-emerald-600 font-mono mt-1">30.93%</div>
+            <div className="text-[11px] text-gray-500 mt-1 leading-snug">
+              ₹262.16M operating profit across fulfilled catalog
+            </div>
+          </div>
+
+          <div className="p-4 rounded-lg bg-white border border-gray-200 shadow-subtle">
+            <div className="text-[11px] font-mono text-gray-500 uppercase">Customer Retention</div>
+            <div className="text-xl sm:text-2xl font-extrabold text-gray-950 font-mono mt-1">82.12%</div>
+            <div className="text-[11px] text-gray-500 mt-1 leading-snug">
+              3,260 repeat buyers out of 3,970 active customers
+            </div>
+          </div>
+        </div>
+
+        {/* Synthetic Dataset Notice */}
+        <div className="p-3 rounded-lg bg-gray-50 border border-gray-200 flex items-start gap-2.5 text-xs text-gray-600">
+          <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+          <p className="leading-relaxed">
+            <strong className="text-gray-900 font-medium">Synthetic Dataset Disclosure:</strong> All figures and behavioral patterns reflect rigorous, deterministic analysis on an empirically modeled synthetic India-focused e-commerce dataset generated for analytics engineering and business intelligence demonstration.
+          </p>
+        </div>
       </div>
 
       {/* Case Study Pipeline Story Sequence */}
@@ -65,13 +179,12 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
           <div className="text-xs font-mono uppercase tracking-wider text-gray-400 font-semibold">
             Analytics Methodology & Case Study Sequence
           </div>
-          <span className="text-xs text-gray-500 font-mono">7-Stage Methodology</span>
+          <span className="text-xs text-gray-500 font-mono">7-Stage Pipeline</span>
         </div>
 
         {/* Desktop Pipeline Flow */}
         <div className="hidden lg:grid grid-cols-7 gap-2">
-          {caseStudyFlow.map((s, idx) => {
-            const isLast = idx === caseStudyFlow.length - 1;
+          {caseStudyFlow.map((s) => {
             const isModel = s.step === '04' || s.step === '06';
             return (
               <div
@@ -102,161 +215,111 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
         </div>
       </div>
 
-      {/* SECTION: Supporting Dashboard Preview (Clearly labeled, supporting role) */}
-      <div className="border border-gray-200 rounded-lg bg-gray-50/40 p-6 space-y-6">
-        
-        {/* Frame Header */}
+      {/* Power BI Dashboard Preview Gallery Showcase */}
+      <div className="border border-gray-200 rounded-xl bg-gray-50/40 p-6 space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-200 pb-3">
           <div className="flex items-center gap-2">
             <BarChart3 className="w-4 h-4 text-blue-600" />
-            <span className="text-xs font-bold text-gray-900">Power BI Reporting Canvas Architecture</span>
+            <span className="text-xs font-bold text-gray-900">
+              Power BI Dashboard Suite Preview (6 Interactive Views)
+            </span>
           </div>
 
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-mono text-amber-800 bg-amber-50 border border-amber-200">
-            <Clock className="w-3.5 h-3.5 text-amber-600" />
-            <span>Dashboard Preview — In Development</span>
+          <button
+            onClick={() => onOpenCaseStudy('novacart')}
+            className="text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1"
+          >
+            <span>View All 6 High-Res Views in Case Study</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
+        {/* Responsive Preview Cards showing Actual Screenshots */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div
+            onClick={() => onOpenCaseStudy('novacart')}
+            className="cursor-pointer group border border-gray-200 rounded-lg overflow-hidden bg-white shadow-subtle hover:border-blue-300 transition-all"
+          >
+            <div className="relative aspect-[16/9] overflow-hidden bg-gray-100">
+              <img
+                src={`${import.meta.env.BASE_URL}images/projects/novacart/01_executive_overview.png`}
+                alt="NovaCart Executive Overview Power BI Dashboard"
+                className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
+                loading="lazy"
+              />
+              <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-gray-900/80 text-white text-[10px] font-mono backdrop-blur-sm">
+                View 01 · Executive Overview
+              </div>
+            </div>
+            <div className="p-3.5">
+              <div className="text-xs font-bold text-gray-900">Executive Performance & Revenue Realization</div>
+              <div className="text-[11px] text-gray-500 mt-0.5">Monthly revenue trendlines (2022–2026), regional sales split, and order status breakdown.</div>
+            </div>
+          </div>
+
+          <div
+            onClick={() => onOpenCaseStudy('novacart')}
+            className="cursor-pointer group border border-gray-200 rounded-lg overflow-hidden bg-white shadow-subtle hover:border-blue-300 transition-all"
+          >
+            <div className="relative aspect-[16/9] overflow-hidden bg-gray-100">
+              <img
+                src={`${import.meta.env.BASE_URL}images/projects/novacart/06_customer_retention_rfm.png`}
+                alt="NovaCart Customer Retention & RFM Power BI Dashboard"
+                className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
+                loading="lazy"
+              />
+              <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-gray-900/80 text-white text-[10px] font-mono backdrop-blur-sm">
+                View 06 · Customer Retention & RFM
+              </div>
+            </div>
+            <div className="p-3.5">
+              <div className="text-xs font-bold text-gray-900">18-Month Customer Cohort Heatmap & RFM</div>
+              <div className="text-[11px] text-gray-500 mt-0.5">Authoritative cohort retention matrix (M0 to M18) backed by PostgreSQL view public.vw_cohort_retention.</div>
+            </div>
           </div>
         </div>
 
-        {/* Structural KPI Measures Grid — Natural Analytical Logic */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          <div className="p-3 rounded bg-white border border-gray-200 shadow-subtle">
-            <div className="text-[11px] font-mono text-gray-500 uppercase">Revenue Metric</div>
-            <div className="text-sm font-bold text-gray-900 font-mono mt-0.5">Net Revenue Logic</div>
-            <div className="text-[10px] text-gray-400 mt-1">Post-return calculation</div>
+        <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-gray-600 pt-2 border-t border-gray-200">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>All 6 dashboard views documented with full resolution, metric specifications, and DAX measures.</span>
           </div>
-
-          <div className="p-3 rounded bg-white border border-gray-200 shadow-subtle">
-            <div className="text-[11px] font-mono text-gray-500 uppercase">Customer Base</div>
-            <div className="text-sm font-bold text-gray-900 font-mono mt-0.5">Customer Analysis</div>
-            <div className="text-[10px] text-gray-400 mt-1">Distinct customer count</div>
-          </div>
-
-          <div className="p-3 rounded bg-white border border-gray-200 shadow-subtle">
-            <div className="text-[11px] font-mono text-gray-500 uppercase">Average Order Value</div>
-            <div className="text-sm font-bold text-gray-900 font-mono mt-0.5">Average Basket Value</div>
-            <div className="text-[10px] text-gray-400 mt-1">Revenue / order count</div>
-          </div>
-
-          <div className="p-3 rounded bg-white border border-gray-200 shadow-subtle">
-            <div className="text-[11px] font-mono text-gray-500 uppercase">Growth Rate</div>
-            <div className="text-sm font-bold text-gray-900 font-mono mt-0.5">Time-Series Trajectory</div>
-            <div className="text-[10px] text-gray-400 mt-1">Period-over-period comparison</div>
-          </div>
+          <button
+            onClick={() => onOpenCaseStudy('novacart')}
+            className="text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1"
+          >
+            <span>Explore Dashboard Suite</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
         </div>
-
-        {/* Visual Charts Grid: 2 Columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          
-          {/* Revenue Trajectory Geometry */}
-          <div className="lg:col-span-7 p-4 rounded bg-white border border-gray-200 shadow-subtle space-y-3">
-            <div className="flex items-center justify-between border-b border-gray-100 pb-2">
-              <span className="text-xs font-bold text-gray-800 flex items-center gap-1.5">
-                <LineChart className="w-3.5 h-3.5 text-blue-600" />
-                Revenue Trend & Time Intelligence
-              </span>
-              <span className="text-[10px] font-mono text-gray-400">Model View</span>
-            </div>
-
-            <div className="h-28 w-full pt-2">
-              <svg className="w-full h-full" viewBox="0 0 400 90" preserveAspectRatio="none">
-                <line x1="0" y1="22" x2="400" y2="22" stroke="#F3F4F6" strokeWidth="1" />
-                <line x1="0" y1="45" x2="400" y2="45" stroke="#F3F4F6" strokeWidth="1" />
-                <line x1="0" y1="68" x2="400" y2="68" stroke="#F3F4F6" strokeWidth="1" />
-                
-                <path
-                  d="M0,68 C60,63 110,50 160,54 C210,58 260,32 310,36 C360,40 385,18 400,14"
-                  fill="none"
-                  stroke="#2563EB"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M0,77 C60,74 110,68 160,70 C210,72 260,54 310,52 C360,56 385,43 400,38"
-                  fill="none"
-                  stroke="#CBD5E1"
-                  strokeWidth="1.25"
-                  strokeDasharray="3 3"
-                />
-              </svg>
-            </div>
-            <div className="flex items-center justify-between text-[10px] text-gray-500 font-mono">
-              <span>Time Slices (Q1 → Q4)</span>
-              <span className="text-blue-600 font-medium">— Current Period vs Prior Period Baseline</span>
-            </div>
-          </div>
-
-          {/* Qualitative RFM Segmentation Framework */}
-          <div className="lg:col-span-5 p-4 rounded bg-white border border-gray-200 shadow-subtle space-y-3">
-            <div className="flex items-center justify-between border-b border-gray-100 pb-2">
-              <span className="text-xs font-bold text-gray-800 flex items-center gap-1.5">
-                <PieChart className="w-3.5 h-3.5 text-blue-600" />
-                RFM Segmentation Framework
-              </span>
-              <span className="text-[10px] font-mono text-gray-400">Behavioral Tiers</span>
-            </div>
-
-            <div className="space-y-2 text-xs">
-              <div className="p-2 rounded bg-gray-50 border border-gray-100 flex items-center justify-between">
-                <div>
-                  <div className="font-bold text-gray-900">Champions</div>
-                  <div className="text-[11px] text-gray-500">High Recency · High Frequency · High Monetary</div>
-                </div>
-                <span className="text-[10px] font-mono font-semibold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200">
-                  Tier 1
-                </span>
-              </div>
-
-              <div className="p-2 rounded bg-gray-50 border border-gray-100 flex items-center justify-between">
-                <div>
-                  <div className="font-bold text-gray-900">Loyal Customers</div>
-                  <div className="text-[11px] text-gray-500">High Repeat Purchase Behavior</div>
-                </div>
-                <span className="text-[10px] font-mono font-semibold text-gray-600 bg-white px-1.5 py-0.5 rounded border border-gray-200">
-                  Tier 2
-                </span>
-              </div>
-
-              <div className="p-2 rounded bg-gray-50 border border-gray-100 flex items-center justify-between">
-                <div>
-                  <div className="font-bold text-gray-900">At-Risk</div>
-                  <div className="text-[11px] text-gray-500">Declining Recency & Activity</div>
-                </div>
-                <span className="text-[10px] font-mono font-semibold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">
-                  Tier 3
-                </span>
-              </div>
-
-              <div className="p-2 rounded bg-gray-50 border border-gray-100 flex items-center justify-between">
-                <div>
-                  <div className="font-bold text-gray-900">Lost / Hibernating</div>
-                  <div className="text-[11px] text-gray-500">Dormant Customer Segment</div>
-                </div>
-                <span className="text-[10px] font-mono font-semibold text-gray-400 bg-white px-1.5 py-0.5 rounded border border-gray-200">
-                  Tier 4
-                </span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
       </div>
 
       {/* Footer Link to Full Case Study */}
       <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-gray-100">
         <div className="text-xs text-gray-500 flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-          <span>PostgreSQL Star Schema & SQL Analysis Suite ready • Power BI canvas in development</span>
+          <span>PostgreSQL 18 DW · Power BI 6-Page Suite · FastAPI on Render · React on Vercel</span>
         </div>
 
-        <button
-          onClick={() => onOpenCaseStudy('novacart')}
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors"
-        >
-          <span>Open Complete 11-Stage Case Study</span>
-          <ArrowRight className="w-4 h-4" />
-        </button>
+        <div className="flex items-center gap-3">
+          <a
+            href={project.links.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 hover:text-blue-600 transition-colors"
+          >
+            <span>Launch Live App</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+          <span className="text-gray-300">•</span>
+          <button
+            onClick={() => onOpenCaseStudy('novacart')}
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors"
+          >
+            <span>Open Complete Case Study</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
       </div>
 
     </div>
