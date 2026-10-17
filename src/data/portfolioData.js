@@ -91,7 +91,8 @@ export const portfolioData = {
   certifications: [
     {
       name: "Google Data Practitioner Associate",
-      issuer: "Google",
+      issuer: "Google Cloud",
+      badgeImage: "images/certifications/google-cloud-associate.png",
       status: "Completed",
       statusType: "completed"
     },

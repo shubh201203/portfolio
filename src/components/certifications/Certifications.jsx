@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Award, CheckCircle2, Clock, Calendar } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
 import Badge from '../common/Badge';
@@ -46,19 +46,32 @@ export default function Certifications() {
                 }`}
               >
                 <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-2">
-                      {getStatusIcon(cert.statusType)}
-                      <span className="text-xs font-mono text-gray-500 uppercase tracking-wider">
-                        {cert.issuer}
-                      </span>
+                  <div className="flex items-start justify-between gap-4 mb-3">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        {getStatusIcon(cert.statusType)}
+                        <span className="text-xs font-mono text-gray-500 uppercase tracking-wider">
+                          {cert.issuer}
+                        </span>
+                      </div>
+                      <h3 className="text-base sm:text-lg font-bold text-gray-900 tracking-tight leading-snug">
+                        {cert.name}
+                      </h3>
                     </div>
-                    <Badge status={cert.status} type={cert.statusType} />
-                  </div>
 
-                  <h3 className="text-base sm:text-lg font-bold text-gray-900 tracking-tight leading-snug mb-2">
-                    {cert.name}
-                  </h3>
+                    <div className="flex flex-col items-end gap-2 shrink-0">
+                      <Badge status={cert.status} type={cert.statusType} />
+                      {cert.badgeImage && (
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden bg-white border border-gray-200 p-0.5 shadow-subtle hover:scale-105 transition-transform">
+                          <img
+                            src={`${import.meta.env.BASE_URL}${cert.badgeImage}`}
+                            alt={`${cert.name} Official Badge`}
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
 
                 <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-xs">
