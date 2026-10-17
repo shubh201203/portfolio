@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Database } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
 import NovaCartFeatured from './NovaCartFeatured';
@@ -10,7 +10,7 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
   const productAnalytics = projects.find((p) => p.id === 'product-analytics');
   const disasterReporting = projects.find((p) => p.id === 'disaster-reporting');
   const additionalProjects = projects.filter(
-    (p) => p.id === 'wardrobewhiz' || p.id === 'emotion-music'
+    (p) => p.id === 'wardrobewhiz' || p.id === 'emotion-music' || p.id === 'mental-health-detection'
   );
 
   return (

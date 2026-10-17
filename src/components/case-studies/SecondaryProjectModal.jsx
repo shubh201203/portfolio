@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { X, ArrowLeft, GitBranch, CheckCircle2 } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
 
@@ -76,11 +76,35 @@ export default function SecondaryProjectModal({ projectId, onClose }) {
         </div>
 
         {/* Project Specific Sections */}
-        {project.id === 'wardrobewhiz' && (
+        {(project.id === 'wardrobewhiz' || project.id === 'mental-health-detection') && (
           <div className="space-y-6">
             <section className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 shadow-card space-y-4">
-              <h2 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3">
-                Platform Architecture & Core Concepts
+              <h2 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 flex items-center justify-between">
+                <span>Platform Architecture & Core Concepts</span>
+                {project.links && (
+                  <div className="flex items-center gap-3">
+                    {project.links.live && (
+                      <a
+                        href={project.links.live}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-xs font-mono font-bold text-blue-600 hover:text-blue-800 underline"
+                      >
+                        Live App ↗
+                      </a>
+                    )}
+                    {project.links.github && (
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-xs font-mono font-bold text-gray-700 hover:text-gray-950 underline"
+                      >
+                        GitHub ↗
+                      </a>
+                    )}
+                  </div>
+                )}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs sm:text-sm">
                 {project.concepts.map((concept) => (

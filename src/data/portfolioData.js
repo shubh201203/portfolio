@@ -518,6 +518,39 @@ export const portfolioData = {
         "React Interface"
       ],
       historicalDetail: "Initially used DeepFace and later moved toward a pixel-analysis approach."
+    },
+    {
+      id: "mental-health-detection",
+      title: "AI-Powered Mental Health Detection Using NLP & Machine Learning",
+      shortTitle: "Mental Health NLP",
+      role: "NLP & ML Course Project",
+      priority: 6,
+      isFlagship: false,
+      status: "Deployed & Verified",
+      tagline: "Educational NLP classification platform evaluating Multinomial Naive Bayes, Logistic Regression, and Linear Support Vector Machines on TF-IDF feature representations.",
+      links: {
+        live: "https://mental-health-ai-app-ldakmvakivnws7llfcaajf.streamlit.app/",
+        github: "https://github.com/shubh201203/mental-health-ai-app"
+      },
+      techStack: [
+        "Python",
+        "NLP",
+        "NLTK",
+        "Scikit-learn",
+        "TF-IDF",
+        "Streamlit",
+        "Pandas",
+        "Matplotlib"
+      ],
+      concepts: [
+        "NLTK Tokenization & WordNet Lemmatization",
+        "15,000-Feature Unigram + Bigram TF-IDF Representation",
+        "Tri-Model Benchmark (Naive Bayes: 89.59%, Logistic Regression: 93.53%, Linear SVC: 94.03%)",
+        "Dual-Mode Input (Single Reflection vs. Multi-Post Social Timeline Simulation)",
+        "XSS-Sanitized Real-Time Emotional Keyword Highlighting",
+        "Automated Unittest Suite (8 Tests: Inference, Probability Calibration & Fallback Cues)",
+        "Full Streamlit Cloud Production Deployment with Integrated Crisis Resources"
+      ]
     }
   ]
 };
