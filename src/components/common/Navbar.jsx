@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X, FileText, ArrowUpRight } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
 
@@ -64,8 +64,12 @@ export default function Navbar() {
           onClick={(e) => handleNavClick(e, '#home')}
           className="group flex items-center gap-2.5 text-left"
         >
-          <div className="w-8 h-8 rounded-md bg-gray-900 flex items-center justify-center text-white font-bold text-xs tracking-wider shadow-subtle group-hover:bg-blue-600 transition-colors">
-            SS
+          <div className="w-9 h-9 rounded-full overflow-hidden border border-gray-300 shadow-subtle group-hover:border-blue-500 transition-all bg-gray-100 flex-shrink-0">
+            <img
+              src={`${import.meta.env.BASE_URL}images/profile.jpg`}
+              alt="Shubh Sharma"
+              className="w-full h-full object-cover object-top"
+            />
           </div>
           <div>
             <div className="text-sm font-bold tracking-tight text-gray-900 group-hover:text-blue-600 transition-colors">

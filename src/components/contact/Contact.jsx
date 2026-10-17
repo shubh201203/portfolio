@@ -15,7 +15,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-24 border-b border-gray-200/80 bg-white relative">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
         
         {/* Section Header */}
         <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-1 rounded border border-blue-200 mb-4">
@@ -45,15 +45,19 @@ export default function Contact() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
           
           {/* Email Card */}
-          <div className="bg-gray-50/80 border border-gray-200 rounded-xl p-5 shadow-subtle flex flex-col justify-between">
+          <div className="bg-gray-50/80 border border-gray-200 rounded-xl p-4 sm:p-5 shadow-subtle flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between text-gray-500 mb-2">
                 <span className="text-xs font-mono uppercase">Email</span>
                 <Mail className="w-4 h-4 text-blue-600" />
               </div>
-              <div className="text-xs font-mono font-medium text-gray-900 break-all">
+              <a
+                href={`mailto:${personal.email}`}
+                className="text-[11.5px] sm:text-xs font-mono font-medium text-gray-900 hover:text-blue-600 transition-colors block whitespace-nowrap overflow-hidden text-ellipsis"
+                title={personal.email}
+              >
                 {personal.email}
-              </div>
+              </a>
             </div>
             <button
               onClick={handleCopyEmail}
