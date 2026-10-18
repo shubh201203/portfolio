@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { X, ArrowLeft, GitBranch, CheckCircle2 } from 'lucide-react';
+import { X, ArrowLeft, GitBranch, CheckCircle2, ExternalLink, AlertCircle } from 'lucide-react';
+import { GitHubIcon } from '../common/Icons';
 import { portfolioData } from '../../data/portfolioData';
 
 export default function SecondaryProjectModal({ projectId, onClose }) {
@@ -75,8 +76,90 @@ export default function SecondaryProjectModal({ projectId, onClose }) {
           </div>
         </div>
 
-        {/* Project Specific Sections */}
-        {(project.id === 'wardrobewhiz' || project.id === 'mental-health-detection') && (
+        {/* WardrobeWhiz Dedicated Presentation */}
+        {project.id === 'wardrobewhiz' && (
+          <div className="space-y-6">
+            {/* Visual Branding & Quick Links */}
+            <div className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 shadow-card flex flex-col md:flex-row items-center justify-between gap-6">
+              {project.image && (
+                <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg flex items-center justify-center max-w-[200px]">
+                  <img src={project.image} alt="WardrobeWhiz Logo" className="max-h-20 w-auto object-contain" />
+                </div>
+              )}
+              <div className="flex-1 space-y-2 text-center md:text-left">
+                <span className="text-xs font-mono font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded border border-amber-200 uppercase tracking-wider">
+                  Full-Stack AI Deployment
+                </span>
+                <h3 className="text-xl font-bold text-gray-900">WardrobeWhiz Core Engine</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  Decoupled full-stack architecture featuring a React 19 + Framer Motion client on Vercel, a Node.js/Express inference proxy on Render, and Google Cloud Firestore persistence.
+                </p>
+              </div>
+              <div className="flex flex-wrap sm:flex-col gap-2.5 w-full md:w-auto">
+                {project.links?.live && (
+                  <a
+                    href={project.links.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-subtle"
+                  >
+                    <span>Launch Live App</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                )}
+                {project.links?.github && (
+                  <a
+                    href={project.links.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md text-xs font-semibold bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors border border-gray-300"
+                  >
+                    <GitHubIcon className="w-3.5 h-3.5" />
+                    <span>View Repository</span>
+                  </a>
+                )}
+              </div>
+            </div>
+
+            {/* Platform Architecture & Core Concepts */}
+            <section className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 shadow-card space-y-4">
+              <h2 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 flex items-center justify-between">
+                <span>Verified Core Capabilities</span>
+                <span className="text-xs font-mono text-gray-400">8 Modules Verified</span>
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs sm:text-sm">
+                {project.concepts.map((concept) => (
+                  <div key={concept} className="p-3.5 rounded-lg bg-gray-50 border border-gray-200 flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-800 font-medium leading-relaxed">{concept}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Technical Scope & Integrity Callout */}
+            <section className="bg-amber-50/60 border border-amber-200/80 rounded-xl p-6 space-y-3">
+              <div className="flex items-center gap-2 text-amber-900 font-bold text-sm">
+                <AlertCircle className="w-4 h-4 text-amber-700 flex-shrink-0" />
+                <span>Technical Scope & MVP Architecture Transparency</span>
+              </div>
+              <ul className="text-xs text-amber-950/80 space-y-2 leading-relaxed list-disc list-inside">
+                <li>
+                  <strong>AvatarFit Virtual Fitting:</strong> Implemented as a live camera-based body mapping prototype that simulates garment silhouettes over video feeds. Full real-time 3D physics-based mesh deformation is reserved for future WebGL iterations.
+                </li>
+                <li>
+                  <strong>Multi-Tenancy & Data Isolation:</strong> The current public deployment routes to a shared demo sandbox collection (<code className="bg-amber-100/70 px-1 py-0.5 rounded text-amber-900 font-mono">users/demo_user/wardrobe_items</code>) to allow seamless evaluation without mandatory user registration friction.
+                </li>
+                <li>
+                  <strong>Automated Unit Verification:</strong> Verified with native Node.js test suites (<code className="bg-amber-100/70 px-1 py-0.5 rounded text-amber-900 font-mono">node:test</code>) with 100% pass rates across scenario filters, gap detection, and styling rule heuristics.
+                </li>
+              </ul>
+            </section>
+          </div>
+        )}
+
+        {/* Mental Health Detection Section */}
+        {project.id === 'mental-health-detection' && (
           <div className="space-y-6">
             <section className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 shadow-card space-y-4">
               <h2 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 flex items-center justify-between">

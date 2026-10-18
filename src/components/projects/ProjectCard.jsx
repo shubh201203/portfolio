@@ -1,14 +1,16 @@
-﻿import React from 'react';
-import { ArrowRight, Layers, Shield, Cpu } from 'lucide-react';
+import React from 'react';
+import { ArrowRight, Layers, Shield, Cpu, Sparkles, ExternalLink } from 'lucide-react';
 import Badge from '../common/Badge';
 
 export default function ProjectCard({ project, onOpenCaseStudy }) {
   const isProductAnalytics = project.id === 'product-analytics';
   const isDisasterPlatform = project.id === 'disaster-reporting';
+  const isWardrobeWhiz = project.id === 'wardrobewhiz';
 
   const getCardIcon = () => {
     if (isProductAnalytics) return <Layers className="w-5 h-5 text-blue-600" />;
     if (isDisasterPlatform) return <Shield className="w-5 h-5 text-gray-700" />;
+    if (isWardrobeWhiz) return <Sparkles className="w-5 h-5 text-amber-600" />;
     return <Cpu className="w-5 h-5 text-gray-700" />;
   };
 
@@ -96,6 +98,30 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
           </div>
         )}
 
+        {/* WardrobeWhiz: Core Modules Architecture */}
+        {isWardrobeWhiz && (
+          <div className="pt-2 pb-1 space-y-2">
+            <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-gray-500 font-semibold">
+              <span>Core Application Modules</span>
+              <span className="text-amber-600 font-semibold">AI + Full Stack</span>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-center text-xs">
+              <div className="p-2 rounded bg-gray-50 border border-gray-200">
+                <div className="font-bold text-gray-900 text-xs">Digital Closet</div>
+                <div className="text-[10px] text-gray-400 font-mono mt-0.5">MobileNet Vision</div>
+              </div>
+              <div className="p-2 rounded bg-gray-50 border border-gray-200">
+                <div className="font-bold text-gray-900 text-xs">AI Stylist</div>
+                <div className="text-[10px] text-gray-400 font-mono mt-0.5">OpenAI Context</div>
+              </div>
+              <div className="p-2 rounded bg-gray-50 border border-gray-200 col-span-2 sm:col-span-1">
+                <div className="font-bold text-gray-900 text-xs">Style Analytics</div>
+                <div className="text-[10px] text-gray-400 font-mono mt-0.5">Balance Index</div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Tech Stack */}
         <div className="pt-1">
           <div className="flex flex-wrap gap-1.5">
@@ -112,7 +138,7 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
       </div>
 
       {/* Card Action Link */}
-      <div className="pt-5 border-t border-gray-100 mt-5 flex items-center justify-between">
+      <div className="pt-5 border-t border-gray-100 mt-5 flex flex-wrap items-center justify-between gap-3">
         {onOpenCaseStudy ? (
           <button
             onClick={() => onOpenCaseStudy(project.id)}
@@ -124,7 +150,37 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
         ) : (
           <span className="text-xs text-gray-400 font-mono">Academic Project</span>
         )}
+
+        {project.links && (
+          <div className="flex items-center gap-2">
+            {project.links.live && (
+              <a
+                href={project.links.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded text-xs font-medium bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors border border-blue-200"
+                aria-label={`Open live demo for ${project.shortTitle || project.title}`}
+              >
+                <span>Live Demo</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            )}
+            {project.links.github && (
+              <a
+                href={project.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded text-xs font-medium bg-gray-50 text-gray-700 hover:bg-gray-100 transition-colors border border-gray-200"
+                aria-label={`Open GitHub repository for ${project.shortTitle || project.title}`}
+              >
+                <span>GitHub</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
 }
+

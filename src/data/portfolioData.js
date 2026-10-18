@@ -472,27 +472,39 @@ export const portfolioData = {
     },
     {
       id: "wardrobewhiz",
-      title: "WardrobeWhiz — AI-Powered Wardrobe Recommendation Platform",
+      title: "WardrobeWhiz",
       shortTitle: "WardrobeWhiz",
-      role: "AI + Full Stack Project",
+      role: "AI-Powered Wardrobe Assistant",
+      subtitle: "AI-Powered Wardrobe Assistant",
       priority: 4,
       isFlagship: false,
-      tagline: "AI-powered wardrobe platform providing personalized outfit recommendations based on a user's clothing collection.",
+      status: "Completed & Deployed",
+      tagline: "A modern wardrobe management and styling application that helps users organize clothing and discover personalized outfit combinations.",
+      description: "A modern wardrobe management and styling application that helps users organize clothing and discover personalized outfit combinations.",
+      image: `${import.meta.env.BASE_URL}images/projects/wardrobewhiz/logo.png`,
+      links: {
+        live: "https://wardrobewhiz.vercel.app/home",
+        github: "https://github.com/shubh201203/wardrobewhiz"
+      },
       techStack: [
         "React",
         "Vite",
         "Node.js",
         "Express.js",
         "Firebase",
-        "Vercel"
+        "OpenAI API",
+        "MobileNet",
+        "Framer Motion"
       ],
       concepts: [
-        "Clothing inventory",
-        "Outfit recommendations",
-        "User interaction",
-        "AI functionality",
-        "Web application architecture",
-        "Deployment"
+        "Digital Wardrobe Management: Categorized inventory tracking (tops, bottoms, outerwear, footwear) with image uploads and cloud sync.",
+        "Computer Vision Classification: MobileNet image inference pipeline classifying uploaded apparel into standard wardrobe taxonomies.",
+        "Context-Aware AI Stylist: OpenAI GPT-3.5 integration passing serialized closet inventories to recommend outfits strictly from owned items.",
+        "Fault-Tolerant Heuristic Fallback: Dual-layer recommendation system falling back to color-theory algorithms if API quotas or latency occur.",
+        "Data-Driven Wardrobe Insights: Real-time calculation of closet balance scores, neutral-to-accent palette ratios, and gap detector alerts.",
+        "Interactive Fit Sandbox: Camera-based body mapping prototype simulating garment alignment over live video (Proof-of-Concept).",
+        "Full-Stack Decoupled Architecture: React 19 frontend hosted on Vercel with Node.js/Express REST API on Render and Firebase Firestore persistence.",
+        "Verified Test Coverage: Native Node.js unit tests (node:test) validating outfit filtering, gap detection, and styling rule heuristics."
       ]
     },
     {
