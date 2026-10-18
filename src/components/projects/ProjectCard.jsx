@@ -1,16 +1,18 @@
 import React from 'react';
-import { ArrowRight, Layers, Shield, Cpu, Sparkles, ExternalLink } from 'lucide-react';
+import { ArrowRight, Layers, Shield, Cpu, Sparkles, ExternalLink, Link2 } from 'lucide-react';
 import Badge from '../common/Badge';
 
 export default function ProjectCard({ project, onOpenCaseStudy }) {
   const isProductAnalytics = project.id === 'product-analytics';
   const isDisasterPlatform = project.id === 'disaster-reporting';
   const isWardrobeWhiz = project.id === 'wardrobewhiz';
+  const isShortX = project.id === 'shortx';
 
   const getCardIcon = () => {
     if (isProductAnalytics) return <Layers className="w-5 h-5 text-blue-600" />;
     if (isDisasterPlatform) return <Shield className="w-5 h-5 text-gray-700" />;
     if (isWardrobeWhiz) return <Sparkles className="w-5 h-5 text-amber-600" />;
+    if (isShortX) return <Link2 className="w-5 h-5 text-indigo-600" />;
     return <Cpu className="w-5 h-5 text-gray-700" />;
   };
 

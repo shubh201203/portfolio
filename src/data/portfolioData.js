@@ -563,6 +563,40 @@ export const portfolioData = {
         "Automated Unittest Suite (8 Tests: Inference, Probability Calibration & Fallback Cues)",
         "Full Streamlit Cloud Production Deployment with Integrated Crisis Resources"
       ]
+    },
+    {
+      id: "shortx",
+      title: "ShortX — URL Shortener & Analytics Platform",
+      shortTitle: "ShortX Shortener",
+      role: "Full-Stack Development",
+      priority: 7,
+      isFlagship: false,
+      status: "Completed & Deployed",
+      tagline: "A full-stack URL shortening platform with Redis caching, asynchronous click analytics, and URL classification.",
+      links: {
+        live: "https://shortx-url-shortener-1w5piewh6-shubh201203s-projects.vercel.app/",
+        github: "https://github.com/shubh201203/shortx-url-shortener"
+      },
+      techStack: [
+        "Next.js",
+        "React",
+        "FastAPI",
+        "Python",
+        "MongoDB Atlas",
+        "Upstash Redis",
+        "scikit-learn",
+        "Recharts"
+      ],
+      concepts: [
+        "URL Shortening & Collision-Resistant Token Generation: Generates unique 7-character alphanumeric identifiers with MongoDB index uniqueness validation.",
+        "Redis Cache-Aside Layer with Automatic TTL: Reads directly from Upstash Redis with 24-hour expiration for fast redirection, updating cache on misses.",
+        "Fail-Open Fault Tolerance: Non-blocking exception handling on Redis cache and rate-limit reads to prevent 500 errors during cache network latency.",
+        "Asynchronous Click Analytics: In-memory asyncio.Queue worker decoupling telemetry logging from the HTTP 307 redirect lifecycle.",
+        "Sliding-Window Rate Limiting: 100 requests/minute per-IP sliding threshold implemented via Redis Sorted Sets (ZSET).",
+        "Machine Learning URL Classification: Pre-trained Multinomial Naive Bayes model (TF-IDF character n-grams) scoring URL entropy at creation time.",
+        "Interactive Analytics Dashboard: Real-time Recharts line graph visualizing 7-day click volume trends alongside top 5 performing links.",
+        "Decoupled Cloud Architecture: Next.js frontend deployed on Vercel with FastAPI ASGI service on Render and Motor async MongoDB storage."
+      ]
     }
   ]
 };

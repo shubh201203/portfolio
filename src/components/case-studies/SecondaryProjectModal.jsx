@@ -158,6 +158,49 @@ export default function SecondaryProjectModal({ projectId, onClose }) {
           </div>
         )}
 
+        {/* ShortX Dedicated Section */}
+        {project.id === 'shortx' && (
+          <div className="space-y-6">
+            <section className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 shadow-card space-y-4">
+              <h2 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 flex items-center justify-between">
+                <span>System Architecture & Core Capabilities</span>
+                {project.links && (
+                  <div className="flex items-center gap-3">
+                    {project.links.live && (
+                      <a
+                        href={project.links.live}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-xs font-mono font-bold text-blue-600 hover:text-blue-800 underline"
+                      >
+                        Live App ↗
+                      </a>
+                    )}
+                    {project.links.github && (
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-xs font-mono font-bold text-gray-700 hover:text-gray-950 underline"
+                      >
+                        GitHub ↗
+                      </a>
+                    )}
+                  </div>
+                )}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs sm:text-sm">
+                {project.concepts.map((concept) => (
+                  <div key={concept} className="p-3.5 rounded-lg bg-gray-50 border border-gray-200 flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-indigo-600 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-800 font-medium leading-relaxed">{concept}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+        )}
+
         {/* Mental Health Detection Section */}
         {project.id === 'mental-health-detection' && (
           <div className="space-y-6">
