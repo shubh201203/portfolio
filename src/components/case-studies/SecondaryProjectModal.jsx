@@ -201,6 +201,84 @@ export default function SecondaryProjectModal({ projectId, onClose }) {
           </div>
         )}
 
+        {/* TO-DO Dedicated Section */}
+        {project.id === 'todo' && (
+          <div className="space-y-8">
+            {/* Visual Screenshot Gallery */}
+            <section className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 shadow-card space-y-5">
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-gray-100 pb-4">
+                <div>
+                  <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200 uppercase tracking-wider">
+                    Full-Stack Application Showcase
+                  </span>
+                  <h2 className="text-xl font-bold text-gray-900 mt-2">Production Interface & Live Dashboard</h2>
+                </div>
+                {project.links && (
+                  <div className="flex items-center gap-3">
+                    {project.links.live && (
+                      <a
+                        href={project.links.live}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-700 transition-colors shadow-subtle"
+                      >
+                        <span>Live Demo ↗</span>
+                      </a>
+                    )}
+                    {project.links.github && (
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors border border-gray-300"
+                      >
+                        <GitHubIcon className="w-3.5 h-3.5" />
+                        <span>Source Code ↗</span>
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Screenshots Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
+                {project.screenshots?.map((shot) => (
+                  <div key={shot.id} className="space-y-2">
+                    <div className="rounded-lg overflow-hidden border border-gray-200 bg-gray-950 shadow-sm">
+                      <img
+                        src={shot.image}
+                        alt={shot.title}
+                        className="w-full h-auto object-cover object-top hover:scale-[1.02] transition-transform duration-300"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="px-1">
+                      <div className="text-xs font-bold text-gray-900">{shot.title}</div>
+                      <p className="text-[11px] text-gray-500 leading-relaxed mt-0.5">{shot.caption}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Architecture & Capabilities Section */}
+            <section className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 shadow-card space-y-4">
+              <h2 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 flex items-center justify-between">
+                <span>System Architecture & Engineering Highlights</span>
+                <span className="text-xs font-mono text-gray-500">52 Tests Verified</span>
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs sm:text-sm">
+                {project.concepts.map((concept) => (
+                  <div key={concept} className="p-3.5 rounded-lg bg-gray-50 border border-gray-200 flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-800 font-medium leading-relaxed">{concept}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+        )}
+
         {/* Mental Health Detection Section */}
         {project.id === 'mental-health-detection' && (
           <div className="space-y-6">

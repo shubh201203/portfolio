@@ -29,6 +29,7 @@ export default function App() {
         hash === 'disaster-reporting' ||
         hash === 'wardrobewhiz' ||
         hash === 'shortx' ||
+        hash === 'todo' ||
         hash === 'emotion-music' ||
         hash === 'mental-health-detection'
       ) {
@@ -81,7 +82,7 @@ export default function App() {
       {activeCaseStudy === 'disaster-reporting' && (
         <DisasterReportingModal onClose={handleCloseCaseStudy} />
       )}
-      {(activeCaseStudy === 'wardrobewhiz' || activeCaseStudy === 'shortx' || activeCaseStudy === 'emotion-music' || activeCaseStudy === 'mental-health-detection') && (
+      {(activeCaseStudy === 'wardrobewhiz' || activeCaseStudy === 'shortx' || activeCaseStudy === 'todo' || activeCaseStudy === 'emotion-music' || activeCaseStudy === 'mental-health-detection') && (
         <SecondaryProjectModal projectId={activeCaseStudy} onClose={handleCloseCaseStudy} />
       )}
     </div>

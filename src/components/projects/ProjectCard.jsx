@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Layers, Shield, Cpu, Sparkles, ExternalLink, Link2 } from 'lucide-react';
+import { ArrowRight, Layers, Shield, Cpu, Sparkles, ExternalLink, Link2, CheckSquare } from 'lucide-react';
 import Badge from '../common/Badge';
 
 export default function ProjectCard({ project, onOpenCaseStudy }) {
@@ -7,12 +7,14 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
   const isDisasterPlatform = project.id === 'disaster-reporting';
   const isWardrobeWhiz = project.id === 'wardrobewhiz';
   const isShortX = project.id === 'shortx';
+  const isTodo = project.id === 'todo';
 
   const getCardIcon = () => {
     if (isProductAnalytics) return <Layers className="w-5 h-5 text-blue-600" />;
     if (isDisasterPlatform) return <Shield className="w-5 h-5 text-gray-700" />;
     if (isWardrobeWhiz) return <Sparkles className="w-5 h-5 text-amber-600" />;
     if (isShortX) return <Link2 className="w-5 h-5 text-indigo-600" />;
+    if (isTodo) return <CheckSquare className="w-5 h-5 text-emerald-600" />;
     return <Cpu className="w-5 h-5 text-gray-700" />;
   };
 
@@ -119,6 +121,40 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
               <div className="p-2 rounded bg-gray-50 border border-gray-200 col-span-2 sm:col-span-1">
                 <div className="font-bold text-gray-900 text-xs">Style Analytics</div>
                 <div className="text-[10px] text-gray-400 font-mono mt-0.5">Balance Index</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TO-DO: Real Dashboard Screenshot & Persistence Highlights */}
+        {isTodo && (
+          <div className="pt-2 pb-1 space-y-3">
+            <div className="relative rounded-lg overflow-hidden border border-gray-200 bg-gray-950 group">
+              <img
+                src={project.image}
+                alt="TO-DO Application Live Dashboard"
+                className="w-full h-44 object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[10px] font-mono font-medium text-white/90">
+                <span className="px-2 py-0.5 rounded bg-gray-900/90 border border-gray-700 backdrop-blur-sm">
+                  PostgreSQL (Neon) + SQLite
+                </span>
+                <span className="px-2 py-0.5 rounded bg-emerald-600/90 border border-emerald-400 text-white font-bold backdrop-blur-sm">
+                  52 Tests Passed
+                </span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-1.5 text-center text-xs">
+              <div className="p-2 rounded bg-gray-50 border border-gray-200">
+                <div className="font-bold text-gray-900 text-xs">Full CRUD & Filters</div>
+                <div className="text-[10px] text-gray-500 font-mono mt-0.5">Priority & Overdue Flags</div>
+              </div>
+              <div className="p-2 rounded bg-gray-50 border border-gray-200">
+                <div className="font-bold text-gray-900 text-xs">Dual Persistence</div>
+                <div className="text-[10px] text-gray-500 font-mono mt-0.5">Neon Cloud + Local WAL</div>
               </div>
             </div>
           </div>

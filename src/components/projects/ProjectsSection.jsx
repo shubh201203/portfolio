@@ -10,7 +10,7 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
   const productAnalytics = projects.find((p) => p.id === 'product-analytics');
   const disasterReporting = projects.find((p) => p.id === 'disaster-reporting');
   const additionalProjects = projects.filter(
-    (p) => p.id === 'wardrobewhiz' || p.id === 'shortx' || p.id === 'emotion-music' || p.id === 'mental-health-detection'
+    (p) => p.id === 'wardrobewhiz' || p.id === 'shortx' || p.id === 'todo' || p.id === 'emotion-music' || p.id === 'mental-health-detection'
   );
 
   return (

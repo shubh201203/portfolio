@@ -597,6 +597,57 @@ export const portfolioData = {
         "Interactive Analytics Dashboard: Real-time Recharts line graph visualizing 7-day click volume trends alongside top 5 performing links.",
         "Decoupled Cloud Architecture: Next.js frontend deployed on Vercel with FastAPI ASGI service on Render and Motor async MongoDB storage."
       ]
+    },
+    {
+      id: "todo",
+      title: "TO-DO — Full-Stack Task Management Application",
+      shortTitle: "TO-DO Task Manager",
+      role: "Full-Stack Development",
+      priority: 8,
+      isFlagship: false,
+      status: "Completed & Deployed",
+      tagline: "A full-stack task management application featuring a REST API, priority tracking, task filtering and sorting, and persistent PostgreSQL storage in production with SQLite support for local development.",
+      image: `${import.meta.env.BASE_URL}images/projects/todo/todo-dashboard.png`,
+      screenshots: [
+        {
+          id: 1,
+          title: "Dashboard Overview & KPI Counters",
+          image: `${import.meta.env.BASE_URL}images/projects/todo/todo-dashboard.png`,
+          caption: "Real-time task counter cards (Total, In Progress, Completed, Overdue) and task creation interface."
+        },
+        {
+          id: 2,
+          title: "Active Task Management & Priority Sorting",
+          image: `${import.meta.env.BASE_URL}images/projects/todo/todo-dashboard-tasks.png`,
+          caption: "Live task items with color-coded priority badges, debounced search, status filter tabs, and inline actions."
+        }
+      ],
+      links: {
+        live: "https://todo-app-shubh.onrender.com/",
+        github: "https://github.com/shubh201203/TO-DO"
+      },
+      techStack: [
+        "Node.js",
+        "Express.js",
+        "JavaScript",
+        "PostgreSQL",
+        "Neon",
+        "SQLite",
+        "Render",
+        "Node.js Native Test Runner"
+      ],
+      concepts: [
+        "Create, view, update, complete, and delete tasks with instant state synchronization.",
+        "Search, filter by status (All, Pending, Completed), and sort by priority, due date, or title.",
+        "Track priorities (Low, Medium, High) and calculate overdue dates dynamically against current UTC time.",
+        "View task summary metrics on real-time KPI cards (Total, In Progress, Completed, Overdue).",
+        "REST API with input validation, 100kb payload caps, and parameterized database queries.",
+        "PostgreSQL-backed production persistence using Neon Serverless Postgres with TLS encryption.",
+        "SQLite local-development fallback with Write-Ahead Logging (WAL) and memory-mode testing.",
+        "Strict Fail-Fast Architecture: Halts immediately if configured PostgreSQL connection fails without silent data loss.",
+        "Automated Test Coverage: 52 passing automated tests across unit, integration, and logic suites using node:test.",
+        "Health-check endpoint (/health) and automated cloud deployment on Render Free Web Service."
+      ]
     }
   ]
 };
