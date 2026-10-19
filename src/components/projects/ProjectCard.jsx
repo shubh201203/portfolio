@@ -126,35 +126,23 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
           </div>
         )}
 
-        {/* TO-DO: Real Dashboard Screenshot & Persistence Highlights */}
+        {/* TO-DO: Clean Architecture & Test Coverage Highlights (No image) */}
         {isTodo && (
-          <div className="pt-2 pb-1 space-y-3">
-            <div className="relative rounded-lg overflow-hidden border border-gray-200 bg-gray-950 group">
-              <img
-                src={project.image}
-                alt="TO-DO Application Live Dashboard"
-                className="w-full h-44 object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[10px] font-mono font-medium text-white/90">
-                <span className="px-2 py-0.5 rounded bg-gray-900/90 border border-gray-700 backdrop-blur-sm">
-                  PostgreSQL (Neon) + SQLite
-                </span>
-                <span className="px-2 py-0.5 rounded bg-emerald-600/90 border border-emerald-400 text-white font-bold backdrop-blur-sm">
-                  52 Tests Passed
-                </span>
-              </div>
+          <div className="pt-2 pb-1 space-y-2">
+            <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-gray-500 font-semibold">
+              <span>Core Architecture & Storage</span>
+              <span className="inline-flex items-center gap-1 text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                52 Tests Passed
+              </span>
             </div>
-
-            <div className="grid grid-cols-2 gap-1.5 text-center text-xs">
-              <div className="p-2 rounded bg-gray-50 border border-gray-200">
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="p-2.5 rounded bg-gray-50 border border-gray-200">
                 <div className="font-bold text-gray-900 text-xs">Full CRUD & Filters</div>
                 <div className="text-[10px] text-gray-500 font-mono mt-0.5">Priority & Overdue Flags</div>
               </div>
-              <div className="p-2 rounded bg-gray-50 border border-gray-200">
+              <div className="p-2.5 rounded bg-gray-50 border border-gray-200">
                 <div className="font-bold text-gray-900 text-xs">Dual Persistence</div>
-                <div className="text-[10px] text-gray-500 font-mono mt-0.5">Neon Cloud + Local WAL</div>
+                <div className="text-[10px] text-gray-500 font-mono mt-0.5">PostgreSQL (Neon) + SQLite</div>
               </div>
             </div>
           </div>
