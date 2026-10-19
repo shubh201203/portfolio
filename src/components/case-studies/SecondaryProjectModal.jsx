@@ -279,6 +279,40 @@ export default function SecondaryProjectModal({ projectId, onClose }) {
           </div>
         )}
 
+        {/* SmartResume AI Dedicated Section */}
+        {project.id === 'smart-resume' && (
+          <div className="space-y-6">
+            <section className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 shadow-card space-y-4">
+              <h2 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 flex flex-wrap items-center justify-between gap-2">
+                <span>Platform Architecture & Core Capabilities</span>
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-mono text-blue-700 bg-blue-50 px-2.5 py-1 rounded border border-blue-200 font-bold">
+                    29 Pytest Tests Verified
+                  </span>
+                  {project.links?.github && (
+                    <a
+                      href={project.links.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-xs font-mono font-bold text-gray-700 hover:text-gray-950 underline"
+                    >
+                      GitHub ↗
+                    </a>
+                  )}
+                </div>
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs sm:text-sm">
+                {project.concepts.map((concept) => (
+                  <div key={concept} className="p-3.5 rounded-lg bg-gray-50 border border-gray-200 flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-800 font-medium leading-relaxed">{concept}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+        )}
+
         {/* Mental Health Detection Section */}
         {project.id === 'mental-health-detection' && (
           <div className="space-y-6">

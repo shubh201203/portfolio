@@ -471,6 +471,42 @@ export const portfolioData = {
       ]
     },
     {
+      id: "smart-resume",
+      title: "SmartResume AI — AI-Powered Resume Screening Platform",
+      shortTitle: "SmartResume AI",
+      role: "AI Recruitment & Analytics Platform",
+      priority: 4,
+      isFlagship: false,
+      status: "Completed & Verified",
+      tagline: "A production-grade recruitment intelligence platform featuring in-memory resume parsing, deterministic math-based candidate scoring, direct textual evidence grounding, and recruiter analytics.",
+      description: "A production-grade recruitment intelligence platform featuring in-memory resume parsing, deterministic math-based candidate scoring, direct textual evidence grounding, and recruiter analytics.",
+      links: {
+        github: "https://github.com/shubh201203/smart-resume-screener"
+      },
+      techStack: [
+        "FastAPI",
+        "Python 3.11",
+        "React 19",
+        "TypeScript",
+        "SQLAlchemy",
+        "PostgreSQL",
+        "SQLite",
+        "Scikit-Learn",
+        "Recharts",
+        "Tailwind CSS"
+      ],
+      concepts: [
+        "Hybrid Matching Engine: Combines LLM contextual analysis with an autonomous Scikit-Learn TF-IDF cosine similarity fallback engine.",
+        "Deterministic Weighted Math Scoring: Strictly normalized formula (1.0–10.0 scale) eliminating black-box AI rating hallucinations.",
+        "Direct Evidence Grounding: Quotes verbatim resume text snippets for all required/preferred competency matches and gap diagnostics.",
+        "Diagnostic 'Why Not 10/10?': Transparent score reduction feedback detailing exact missing technical skills and experience gaps.",
+        "Recruiter Workflow Dashboard: Side-by-side comparison of up to 3 candidates, cohort skill coverage analytics, and interview notes.",
+        "Sanitized Data Export: Automated candidate report generation with RFC-4180 compliance and CSV formula injection protection.",
+        "Dual Database Architecture: SQLite local development fallback with automatic Neon Serverless PostgreSQL connection pooling in production.",
+        "29 Automated Pytest Tests: Rigorous test suite validating document parsing, SHA-256 deduplication, math scoring, and API health."
+      ]
+    },
+    {
       id: "wardrobewhiz",
       title: "WardrobeWhiz",
       shortTitle: "WardrobeWhiz",

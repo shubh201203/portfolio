@@ -27,6 +27,7 @@ export default function App() {
         hash === 'novacart' ||
         hash === 'product-analytics' ||
         hash === 'disaster-reporting' ||
+        hash === 'smart-resume' ||
         hash === 'wardrobewhiz' ||
         hash === 'shortx' ||
         hash === 'todo' ||
@@ -82,7 +83,7 @@ export default function App() {
       {activeCaseStudy === 'disaster-reporting' && (
         <DisasterReportingModal onClose={handleCloseCaseStudy} />
       )}
-      {(activeCaseStudy === 'wardrobewhiz' || activeCaseStudy === 'shortx' || activeCaseStudy === 'todo' || activeCaseStudy === 'emotion-music' || activeCaseStudy === 'mental-health-detection') && (
+      {(activeCaseStudy === 'smart-resume' || activeCaseStudy === 'wardrobewhiz' || activeCaseStudy === 'shortx' || activeCaseStudy === 'todo' || activeCaseStudy === 'emotion-music' || activeCaseStudy === 'mental-health-detection') && (
         <SecondaryProjectModal projectId={activeCaseStudy} onClose={handleCloseCaseStudy} />
       )}
     </div>

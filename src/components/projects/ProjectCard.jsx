@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Layers, Shield, Cpu, Sparkles, ExternalLink, Link2, CheckSquare } from 'lucide-react';
+import { ArrowRight, Layers, Shield, Cpu, Sparkles, ExternalLink, Link2, CheckSquare, FileText } from 'lucide-react';
 import Badge from '../common/Badge';
 
 export default function ProjectCard({ project, onOpenCaseStudy }) {
@@ -8,6 +8,7 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
   const isWardrobeWhiz = project.id === 'wardrobewhiz';
   const isShortX = project.id === 'shortx';
   const isTodo = project.id === 'todo';
+  const isSmartResume = project.id === 'smart-resume';
 
   const getCardIcon = () => {
     if (isProductAnalytics) return <Layers className="w-5 h-5 text-blue-600" />;
@@ -15,6 +16,7 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
     if (isWardrobeWhiz) return <Sparkles className="w-5 h-5 text-amber-600" />;
     if (isShortX) return <Link2 className="w-5 h-5 text-indigo-600" />;
     if (isTodo) return <CheckSquare className="w-5 h-5 text-emerald-600" />;
+    if (isSmartResume) return <FileText className="w-5 h-5 text-blue-600" />;
     return <Cpu className="w-5 h-5 text-gray-700" />;
   };
 
@@ -121,6 +123,28 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
               <div className="p-2 rounded bg-gray-50 border border-gray-200 col-span-2 sm:col-span-1">
                 <div className="font-bold text-gray-900 text-xs">Style Analytics</div>
                 <div className="text-[10px] text-gray-400 font-mono mt-0.5">Balance Index</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* SmartResume AI: Architecture & Capabilities Highlights */}
+        {isSmartResume && (
+          <div className="pt-2 pb-1 space-y-2">
+            <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-gray-500 font-semibold">
+              <span>Core Architecture & Intelligence</span>
+              <span className="inline-flex items-center gap-1 text-blue-700 font-semibold bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                29 Tests Verified
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="p-2.5 rounded bg-gray-50 border border-gray-200">
+                <div className="font-bold text-gray-900 text-xs">Deterministic Scoring</div>
+                <div className="text-[10px] text-gray-500 font-mono mt-0.5">Math 1.0–10.0 + Evidence Quotes</div>
+              </div>
+              <div className="p-2.5 rounded bg-gray-50 border border-gray-200">
+                <div className="font-bold text-gray-900 text-xs">Recruiter Intelligence</div>
+                <div className="text-[10px] text-gray-500 font-mono mt-0.5">3-Way Compare + CSV Export</div>
               </div>
             </div>
           </div>
