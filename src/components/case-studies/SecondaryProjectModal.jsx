@@ -359,25 +359,86 @@ export default function SecondaryProjectModal({ projectId, onClose }) {
         {project.id === 'emotion-music' && (
           <div className="space-y-6">
             <section className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 shadow-card space-y-5">
-              <h2 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 flex items-center gap-2">
-                <GitBranch className="w-5 h-5 text-emerald-600" />
-                <span>Detection & Recommendation Pipeline</span>
+              <h2 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <GitBranch className="w-5 h-5 text-purple-600" />
+                  <span>Affective Audio Recommendation Architecture</span>
+                </div>
+                {project.links && (
+                  <div className="flex items-center gap-2.5">
+                    {project.links.live && (
+                      <a
+                        href={project.links.live}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-subtle"
+                      >
+                        <span>Live App</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                    {project.links.docs && (
+                      <a
+                        href={project.links.docs}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-800 hover:bg-emerald-100 transition-colors border border-emerald-300"
+                      >
+                        <span>API Docs</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                    {project.links.github && (
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors border border-gray-300"
+                      >
+                        <GitHubIcon className="w-3.5 h-3.5" />
+                        <span>Source Code</span>
+                      </a>
+                    )}
+                  </div>
+                )}
               </h2>
-              
+
               <div className="p-4 rounded-xl bg-[#F7F7F3] border border-gray-200">
+                <div className="text-[11px] font-mono text-gray-500 uppercase tracking-wider mb-2.5 font-semibold">
+                  End-to-End Affective Audio Pipeline
+                </div>
                 <div className="grid grid-cols-2 sm:grid-cols-6 gap-2 text-center text-xs font-mono">
                   {project.pipeline.map((p, idx) => (
                     <div key={p} className="p-2.5 rounded-lg bg-white border border-gray-200 text-gray-800 shadow-subtle">
-                      <span className="text-[10px] text-gray-400 block mb-1">0{idx + 1}</span>
+                      <span className="text-[10px] text-purple-600 font-bold block mb-1">STAGE 0{idx + 1}</span>
                       <span className="text-xs font-semibold">{p}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
+              {project.concepts && (
+                <div className="space-y-3 pt-2">
+                  <div className="text-xs font-mono uppercase tracking-wider text-gray-500 font-semibold">
+                    Core Technical Implementations
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+                    {project.concepts.map((concept) => (
+                      <div key={concept} className="p-3.5 rounded-lg bg-gray-50 border border-gray-200 flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-purple-600 flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-800 font-medium leading-relaxed">{concept}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {project.historicalDetail && (
-                <div className="p-4 rounded-xl bg-gray-50 border border-gray-200 text-xs text-gray-600 leading-relaxed">
-                  <strong className="text-gray-800">Engineering Detail:</strong> {project.historicalDetail}
+                <div className="p-4 rounded-xl bg-purple-50/50 border border-purple-200/80 text-xs text-purple-950 leading-relaxed space-y-1">
+                  <div className="font-bold flex items-center gap-1.5 text-purple-900">
+                    <span>Engineering Disclosure & Dual-Mode Strategy</span>
+                  </div>
+                  <p>{project.historicalDetail}</p>
                 </div>
               )}
             </section>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Layers, Shield, Cpu, Sparkles, ExternalLink, Link2, CheckSquare, FileText } from 'lucide-react';
+import { ArrowRight, Layers, Shield, Cpu, Sparkles, ExternalLink, Link2, CheckSquare, FileText, Music } from 'lucide-react';
 import Badge from '../common/Badge';
 
 export default function ProjectCard({ project, onOpenCaseStudy }) {
@@ -9,6 +9,7 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
   const isShortX = project.id === 'shortx';
   const isTodo = project.id === 'todo';
   const isSmartResume = project.id === 'smart-resume';
+  const isEmotionMusic = project.id === 'emotion-music';
 
   const getCardIcon = () => {
     if (isProductAnalytics) return <Layers className="w-5 h-5 text-blue-600" />;
@@ -17,6 +18,7 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
     if (isShortX) return <Link2 className="w-5 h-5 text-indigo-600" />;
     if (isTodo) return <CheckSquare className="w-5 h-5 text-emerald-600" />;
     if (isSmartResume) return <FileText className="w-5 h-5 text-blue-600" />;
+    if (isEmotionMusic) return <Music className="w-5 h-5 text-purple-600" />;
     return <Cpu className="w-5 h-5 text-gray-700" />;
   };
 
@@ -172,6 +174,28 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
           </div>
         )}
 
+        {/* Emotion-Driven Beats: Core Architecture Highlights */}
+        {isEmotionMusic && (
+          <div className="pt-2 pb-1 space-y-2">
+            <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-gray-500 font-semibold">
+              <span>Core Architecture & Audio Synthesis</span>
+              <span className="inline-flex items-center gap-1 text-purple-700 font-semibold bg-purple-50 px-2 py-0.5 rounded border border-purple-200">
+                Live Cloud Deployed
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="p-2.5 rounded bg-gray-50 border border-gray-200">
+                <div className="font-bold text-gray-900 text-xs">Fuzzy Mood Engine</div>
+                <div className="text-[10px] text-gray-500 font-mono mt-0.5">Valence, Energy & Tempo Map</div>
+              </div>
+              <div className="p-2.5 rounded bg-gray-50 border border-gray-200">
+                <div className="font-bold text-gray-900 text-xs">Spotify + RL Feedback</div>
+                <div className="text-[10px] text-gray-500 font-mono mt-0.5">MongoDB Seed Genre Pivoting</div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Tech Stack */}
         <div className="pt-1">
           <div className="flex flex-wrap gap-1.5">
@@ -212,6 +236,18 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
                 aria-label={`Open live demo for ${project.shortTitle || project.title}`}
               >
                 <span>Live Demo</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            )}
+            {project.links.docs && (
+              <a
+                href={project.links.docs}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded text-xs font-medium bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors border border-emerald-200"
+                aria-label={`Open API documentation for ${project.shortTitle || project.title}`}
+              >
+                <span>API Docs</span>
                 <ExternalLink className="w-3 h-3" />
               </a>
             )}

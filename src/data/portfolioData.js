@@ -545,27 +545,46 @@ export const portfolioData = {
     },
     {
       id: "emotion-music",
-      title: "Emotion-Based Music Recommendation System",
-      shortTitle: "Emotion Music System",
-      role: "Computer Vision & Recommendation System",
+      title: "Emotion-Driven Beats — Emotion-Aware Music Recommendation",
+      shortTitle: "Emotion-Driven Beats",
+      role: "Affective Computing & Audio Recommendation",
       priority: 5,
       isFlagship: false,
-      tagline: "Facial emotion detection pipeline recommending tailored music playlists.",
+      status: "Completed & Deployed",
+      tagline: "An interactive full-stack music recommendation application that analyzes webcam image signals, maps experimental emotion profiles to musical mood dimensions, and recommends tracks through Spotify integration, with feedback-driven genre adaptation.",
+      description: "An interactive full-stack music recommendation application that analyzes webcam image signals, maps experimental emotion profiles to musical mood dimensions, and recommends tracks through Spotify integration, with feedback-driven genre adaptation.",
+      links: {
+        live: "https://emotion-music-system.vercel.app/",
+        github: "https://github.com/shubh201203/emotion-music-system",
+        docs: "https://emotion-music-system-unge.onrender.com/docs"
+      },
       techStack: [
         "React",
+        "Vite",
         "FastAPI",
         "Python",
-        "AI / Emotion Analysis"
+        "OpenCV",
+        "NumPy",
+        "MongoDB",
+        "Spotify API"
+      ],
+      concepts: [
+        "Affective Visual Signal Extraction: In-memory Base64 image decoding and bilateral frame standardization via OpenCV with luminance and chromatic warmth analysis.",
+        "Deterministic Mood Mapping: Linear rule-based formulation mapping discrete emotion distributions into normalized musical Valence (0.0–1.0), Energy (0.0–1.0), and Tempo (60–140 BPM).",
+        "Spotify Web API Orchestration: Server-to-server Client Credentials authentication dynamically fetching live tracks and 30-second audio previews by compound mood-genre seeds.",
+        "Adaptive Reinforcement Learning Lite: MongoDB-backed feedback loop that tracks song-level user dislikes and automatically triggers genre pivots after 2 consecutive rejections.",
+        "Fault-Tolerant Resilience: Graceful fallback pipelines serving structured mock audio metadata and artwork when Spotify API quotas or external databases are unreachable.",
+        "Modern Glassmorphic Client: High-performance single-page React interface featuring Framer Motion micro-interactions, animated confidence bars, and responsive CSS grid cards."
       ],
       pipeline: [
-        "User",
-        "Image / Face Input",
-        "Emotion Detection",
-        "Emotion Classification",
-        "Music Recommendation",
-        "React Interface"
+        "Webcam Capture",
+        "OpenCV Preprocessing",
+        "Signal Analysis",
+        "Mathematical Mood Mapping",
+        "Spotify Synthesis",
+        "Adaptive Playback"
       ],
-      historicalDetail: "Initially used DeepFace and later moved toward a pixel-analysis approach."
+      historicalDetail: "Features a dual-mode architectural design: a lightweight statistical signal analyzer in production for zero-crash cloud execution, with verified DeepFace CNN integration available in repository history for high-compute local demos."
     },
     {
       id: "mental-health-detection",
