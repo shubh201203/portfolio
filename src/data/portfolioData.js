@@ -477,10 +477,11 @@ export const portfolioData = {
       role: "AI Recruitment & Analytics Platform",
       priority: 4,
       isFlagship: false,
-      status: "Completed & Verified",
+      status: "Completed & Deployed",
       tagline: "A production-grade recruitment intelligence platform featuring in-memory resume parsing, deterministic math-based candidate scoring, direct textual evidence grounding, and recruiter analytics.",
       description: "A production-grade recruitment intelligence platform featuring in-memory resume parsing, deterministic math-based candidate scoring, direct textual evidence grounding, and recruiter analytics.",
       links: {
+        live: "https://smart-resume-screener-pi.vercel.app/",
         github: "https://github.com/shubh201203/smart-resume-screener"
       },
       techStack: [
