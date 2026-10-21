@@ -103,10 +103,10 @@ export const portfolioData = {
       statusType: "in_progress"
     },
     {
-      name: "Microsoft Azure Data Fundamentals (DP-900)",
+      name: "Microsoft Certified: Azure Data Fundamentals (DP-900)",
       issuer: "Microsoft",
-      status: "Planned",
-      statusType: "planned"
+      status: "Completed",
+      statusType: "completed"
     },
     {
       name: "Tableau Certified Data Analyst",
