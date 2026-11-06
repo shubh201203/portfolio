@@ -21,6 +21,7 @@ export default function SmoothScroll({ children }) {
     });
 
     lenis.on('scroll', ScrollTrigger.update);
+    window.__lenis = lenis;
 
     const tickerCb = (time) => {
       lenis.raf(time * 1000);
@@ -30,6 +31,7 @@ export default function SmoothScroll({ children }) {
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      delete window.__lenis;
       lenis.destroy();
       gsap.ticker.remove(tickerCb);
       ScrollTrigger.getAll().forEach((t) => t.kill());

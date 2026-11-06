@@ -3,81 +3,99 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const FIRST_NAME = 'SHUBH';
-const LAST_NAME = 'SHARMA';
-const TAGLINE = 'FROM RAW DATA TO DECISIONS';
+const SESSION_KEY = 'shubh_portfolio_intro_seen';
+const DISPLAY_NAME = 'SHUBH SHARMA';
+const TAGLINE = 'TURNING DATA INTO DECISIONS.';
 
-// Analytical scatter-to-matrix target coordinates
-const DATA_NODES = [
-  // Outer circular ring
-  { id: 1, scatterX: -260, scatterY: -180, targetX: -120, targetY: -70, type: 'metric', label: 'SQL' },
-  { id: 2, scatterX: 240, scatterY: -190, targetX: 120, targetY: -70, type: 'metric', label: 'DAX' },
-  { id: 3, scatterX: -280, scatterY: 150, targetX: -120, targetY: 70, type: 'metric', label: 'STAR' },
-  { id: 4, scatterX: 270, scatterY: 160, targetX: 120, targetY: 70, type: 'metric', label: 'WAREHOUSE' },
-  { id: 5, scatterX: -90, scatterY: -220, targetX: 0, targetY: -110, type: 'core', label: 'ETL' },
-  { id: 6, scatterX: 110, scatterY: -210, targetX: 0, targetY: 110, type: 'core', label: 'ANALYTICS' },
-  { id: 7, scatterX: -200, scatterY: -10, targetX: -160, targetY: 0, type: 'metric', label: 'PIPELINE' },
-  { id: 8, scatterX: 210, scatterY: 15, targetX: 160, targetY: 0, type: 'metric', label: 'RECONCILIATION' },
-  // Diagonal anchors
-  { id: 9, scatterX: -140, scatterY: -140, targetX: -70, targetY: -40, type: 'grid' },
-  { id: 10, scatterX: 150, scatterY: -130, targetX: 70, targetY: -40, type: 'grid' },
-  { id: 11, scatterX: -130, scatterY: 130, targetX: -70, targetY: 40, type: 'grid' },
-  { id: 12, scatterX: 140, scatterY: 140, targetX: 70, targetY: 40, type: 'grid' },
+// Analytical target coordinates for Stage 2 assembly
+const NODES = [
+  { id: 1, scatterX: -260, scatterY: -160, targetX: -140, targetY: -65, label: 'SQL' },
+  { id: 2, scatterX: 240, scatterY: -170, targetX: 140, targetY: -65, label: 'DAX' },
+  { id: 3, scatterX: -280, scatterY: 150, targetX: -140, targetY: 65, label: 'STAR SCHEMA' },
+  { id: 4, scatterX: 270, scatterY: 160, targetX: 140, targetY: 65, label: 'WAREHOUSE' },
+  { id: 5, scatterX: -80, scatterY: -210, targetX: 0, targetY: -100, label: 'ETL' },
+  { id: 6, scatterX: 90, scatterY: -210, targetX: 0, targetY: 100, label: 'ANALYTICS' },
+  { id: 7, scatterX: -210, scatterY: -10, targetX: -180, targetY: 0, label: 'RECONCILIATION' },
+  { id: 8, scatterX: 220, scatterY: 10, targetX: 180, targetY: 0, label: 'DECISION' },
+  { id: 9, scatterX: -130, scatterY: -120, targetX: -80, targetY: -35 },
+  { id: 10, scatterX: 140, scatterY: -120, targetX: 80, targetY: -35 },
+  { id: 11, scatterX: -120, scatterY: 120, targetX: -80, targetY: 35 },
+  { id: 12, scatterX: 130, scatterY: 120, targetX: 80, targetY: 35 },
 ];
 
 export default function CinematicIntro({ onComplete }) {
   const [isVisible, setIsVisible] = useState(true);
-  const [isExiting, setIsExiting] = useState(false);
+  const [animationStage, setAnimationStage] = useState(1); // 1: Stroke -> 2: Matrix Assembly -> 3: Reveal
+  const [isInstantBypass, setIsInstantBypass] = useState(false);
 
-  const handleDismiss = useCallback(() => {
-    if (isExiting) return;
-    setIsExiting(true);
+  const handleDismiss = useCallback((instant = false) => {
+    if (instant) {
+      setIsInstantBypass(true);
+    }
     setIsVisible(false);
-    if (typeof document !== 'undefined') {
+    if (typeof window !== 'undefined') {
+      try {
+        sessionStorage.setItem(SESSION_KEY, 'true');
+      } catch (e) {
+        // Safe fallback
+      }
       document.body.style.overflow = '';
     }
     if (onComplete) onComplete();
-  }, [isExiting, onComplete]);
+  }, [onComplete]);
 
   useEffect(() => {
-    // Check prefers-reduced-motion
-    if (typeof window !== 'undefined') {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) {
-        setIsVisible(false);
-        if (onComplete) onComplete();
-        return;
-      }
+    if (typeof window === 'undefined') return;
+
+    // 1. Reduced motion check: bypass immediately
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setIsInstantBypass(true);
+      setIsVisible(false);
+      document.body.style.overflow = '';
+      if (onComplete) onComplete();
+      return;
     }
 
-    // Lock scrolling while intro is active
-    if (typeof document !== 'undefined') {
-      document.body.style.overflow = 'hidden';
+    // 2. Returning visitor check: bypass immediately without animation
+    const hasSeenIntro = sessionStorage.getItem(SESSION_KEY) === 'true';
+    if (hasSeenIntro) {
+      setIsInstantBypass(true);
+      setIsVisible(false);
+      document.body.style.overflow = '';
+      if (onComplete) onComplete();
+      return;
     }
 
-    // Auto dismiss after 1.85 seconds (total under 2 seconds)
-    const autoDismissTimer = setTimeout(() => {
-      handleDismiss();
-    }, 1850);
+    // 3. Lock scroll during intro
+    document.body.style.overflow = 'hidden';
 
-    // Keyboard dismissal (ESC, Space, Enter)
+    // Choreographed stages (< 2.2s total)
+    const stage2Timer = setTimeout(() => setAnimationStage(2), 450);
+    const stage3Timer = setTimeout(() => setAnimationStage(3), 1400);
+    const completeTimer = setTimeout(() => handleDismiss(), 2000);
+
+    // ESC / Space / Enter key skip - instant bypass
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
         e.preventDefault();
-        handleDismiss();
+        handleDismiss(true);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      clearTimeout(autoDismissTimer);
+      clearTimeout(stage2Timer);
+      clearTimeout(stage3Timer);
+      clearTimeout(completeTimer);
       window.removeEventListener('keydown', handleKeyDown);
-      if (typeof document !== 'undefined') {
-        document.body.style.overflow = '';
-      }
+      document.body.style.overflow = '';
     };
   }, [handleDismiss, onComplete]);
+
+  // If reduced motion or bypassed instantly, render nothing
+  if (isInstantBypass) return null;
 
   return (
     <AnimatePresence
@@ -86,228 +104,265 @@ export default function CinematicIntro({ onComplete }) {
         if (typeof document !== 'undefined') {
           document.body.style.overflow = '';
         }
-        if (onComplete) onComplete();
       }}
     >
       {isVisible && (
         <motion.aside
-          key="cinematic-intro"
+          key="apple-startup-intro"
+          data-intro="true"
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{
             opacity: 0,
-            scale: 1.03,
+            scale: 1.02,
             filter: 'blur(8px)',
-            transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] }
+            transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
           }}
-          className="fixed inset-0 z-[100] bg-[#0A0A0B] text-[#F5F5F4] flex flex-col items-center justify-center p-6 select-none overflow-hidden cursor-pointer"
+          className="fixed inset-0 z-[100] bg-[#0A0A0B] text-[#F5F5F4] flex flex-col items-center justify-center p-6 select-none overflow-hidden"
           onClick={handleDismiss}
           role="dialog"
           aria-label="Cinematic Startup Animation"
           aria-modal="true"
         >
-          {/* Subtle Grid Background */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none" />
+          {/* Subtle Ambient Background Grids */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
           <div className="absolute inset-0 bg-radial from-transparent via-[#0A0A0B]/80 to-[#0A0A0B] pointer-events-none" />
 
-          {/* Top Telemetry / Coordinates bar */}
-          <div className="absolute top-6 left-6 right-6 flex items-center justify-between text-[10px] font-mono tracking-wider text-slate-500 pointer-events-none">
+          {/* Top Status Bar & Identity Telemetry */}
+          <div className="absolute top-6 left-6 right-6 flex items-center justify-between text-[11px] font-mono tracking-widest text-slate-500 pointer-events-none">
             <motion.div
               initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: [0, 0.8, 0.6], x: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              animate={{ opacity: 0.8, x: 0 }}
+              transition={{ duration: 0.4 }}
               className="flex items-center gap-2"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#14B8A6] animate-pulse" />
-              <span>SYS_INIT // 2026.11</span>
+              <span>SHUBH SHARMA // DATA ANALYST</span>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: [0, 0.8, 0.6], x: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
+              animate={{ opacity: 0.8, x: 0 }}
+              transition={{ duration: 0.4 }}
+              className="hidden sm:flex items-center gap-2"
             >
-              <span>COORDS // 13.0827°N 80.2707°E</span>
+              <span className="text-slate-600">SYS //</span>
+              <span className="text-[#3B82F6]">INITIALIZING ANALYTICAL MATRIX</span>
             </motion.div>
           </div>
 
-          {/* Stage 1 & Stage 2: Central Data Transformation & Matrix */}
-          <div className="relative w-full max-w-xl h-80 flex items-center justify-center">
+          {/* Central Interactive Animation Arena */}
+          <div className="relative w-full max-w-2xl h-80 sm:h-96 flex flex-col items-center justify-center">
             
-            {/* SVG Connecting Vectors (Stage 2: 0.5s - 1.4s) */}
+            {/* Stage 1 & 2: SVG Connecting Lines & Radar Grid */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
               <defs>
-                <linearGradient id="introBlueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.6" />
-                  <stop offset="100%" stopColor="#14B8A6" stopOpacity="0.2" />
+                <linearGradient id="appleGlowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="#14B8A6" stopOpacity="0.6" />
                 </linearGradient>
+                <filter id="luminousGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
               </defs>
 
-              {/* Connecting axes */}
-              <motion.line
-                x1="50%" y1="10%" x2="50%" y2="90%"
-                stroke="url(#introBlueGrad)"
-                strokeWidth="1"
-                strokeDasharray="4 4"
+              {/* Apple-style luminous precision handwriting stroke path */}
+              <motion.path
+                d="M 60 120 C 120 70, 180 150, 240 100 C 300 50, 360 130, 420 80 C 480 40, 540 120, 600 75"
+                fill="none"
+                stroke="url(#appleGlowGrad)"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                filter="url(#luminousGlow)"
                 initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 0.4 }}
-                transition={{ duration: 0.8, delay: 0.45, ease: 'easeOut' }}
-              />
-              <motion.line
-                x1="10%" y1="50%" x2="90%" y2="50%"
-                stroke="url(#introBlueGrad)"
-                strokeWidth="1"
-                strokeDasharray="4 4"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 0.4 }}
-                transition={{ duration: 0.8, delay: 0.45, ease: 'easeOut' }}
+                animate={{
+                  pathLength: [0, 1, 1],
+                  opacity: animationStage === 1 ? [0, 1, 0.4] : 0,
+                }}
+                transition={{
+                  duration: 1.0,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
               />
 
-              {/* Matrix concentric radar rings */}
+              {/* Stage 2 Crosshair Axes & Radar Matrix */}
+              <motion.line
+                x1="50%" y1="12%" x2="50%" y2="88%"
+                stroke="#3B82F6"
+                strokeWidth="1"
+                strokeDasharray="4 4"
+                initial={{ opacity: 0, pathLength: 0 }}
+                animate={{
+                  opacity: animationStage >= 2 ? 0.35 : 0,
+                  pathLength: animationStage >= 2 ? 1 : 0,
+                }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+              />
+              <motion.line
+                x1="8%" y1="50%" x2="92%" y2="50%"
+                stroke="#14B8A6"
+                strokeWidth="1"
+                strokeDasharray="4 4"
+                initial={{ opacity: 0, pathLength: 0 }}
+                animate={{
+                  opacity: animationStage >= 2 ? 0.35 : 0,
+                  pathLength: animationStage >= 2 ? 1 : 0,
+                }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+              />
               <motion.circle
-                cx="50%" cy="50%" r="90"
+                cx="50%" cy="50%" r="96"
                 fill="none"
                 stroke="#3B82F6"
                 strokeWidth="1"
                 strokeDasharray="3 6"
-                initial={{ scale: 0.3, opacity: 0 }}
-                animate={{ scale: 1, opacity: 0.25 }}
-                transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                initial={{ scale: 0.4, opacity: 0 }}
+                animate={{
+                  scale: animationStage >= 2 ? 1 : 0.4,
+                  opacity: animationStage >= 2 ? 0.25 : 0,
+                }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               />
               <motion.circle
-                cx="50%" cy="50%" r="140"
+                cx="50%" cy="50%" r="148"
                 fill="none"
                 stroke="#14B8A6"
                 strokeWidth="1"
                 strokeDasharray="2 8"
                 initial={{ scale: 0.5, opacity: 0 }}
-                animate={{ scale: 1, opacity: 0.18 }}
-                transition={{ duration: 1.0, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                animate={{
+                  scale: animationStage >= 2 ? 1 : 0.5,
+                  opacity: animationStage >= 2 ? 0.18 : 0,
+                }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               />
             </svg>
 
-            {/* Scattered Data Nodes that Converge to Matrix (0.5s - 1.4s) */}
-            {DATA_NODES.map((node, i) => (
-              <motion.div
-                key={node.id}
-                initial={{
-                  x: node.scatterX,
-                  y: node.scatterY,
-                  opacity: 0,
-                  scale: 0.4,
-                }}
-                animate={{
-                  x: [node.scatterX, node.targetX],
-                  y: [node.scatterY, node.targetY],
-                  opacity: [0, 0.9, 0.7],
-                  scale: [0.4, 1.2, 1],
-                }}
-                transition={{
-                  duration: 0.85,
-                  delay: 0.15 + i * 0.035,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="absolute flex items-center gap-1.5 pointer-events-none"
-              >
-                <span
-                  className={`w-1.5 h-1.5 rounded-full ${
-                    node.type === 'core'
-                      ? 'bg-[#14B8A6] shadow-[0_0_8px_#14B8A6]'
-                      : node.type === 'metric'
-                      ? 'bg-[#3B82F6] shadow-[0_0_8px_#3B82F6]'
-                      : 'bg-slate-400'
-                  }`}
-                />
-                {node.label && (
-                  <span className="text-[9px] font-mono text-slate-400 tracking-wider hidden sm:inline">
-                    {node.label}
-                  </span>
-                )}
-              </motion.div>
-            ))}
+            {/* Stage 2: Scattered Data Points Assembling into Structured Visual */}
+            {animationStage >= 2 &&
+              NODES.map((node, i) => (
+                <motion.div
+                  key={node.id}
+                  initial={{
+                    x: node.scatterX,
+                    y: node.scatterY,
+                    opacity: 0,
+                    scale: 0.4,
+                  }}
+                  animate={{
+                    x: node.targetX,
+                    y: node.targetY,
+                    opacity: [0, 0.95, 0.7],
+                    scale: [0.4, 1.25, 1],
+                  }}
+                  transition={{
+                    duration: 0.65,
+                    delay: i * 0.025,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="absolute flex items-center gap-1.5 pointer-events-none"
+                >
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full ${
+                      i % 2 === 0
+                        ? 'bg-[#3B82F6] shadow-[0_0_8px_#3B82F6]'
+                        : 'bg-[#14B8A6] shadow-[0_0_8px_#14B8A6]'
+                    }`}
+                  />
+                  {node.label && (
+                    <span className="text-[9px] font-mono text-slate-400 tracking-wider hidden sm:inline">
+                      {node.label}
+                    </span>
+                  )}
+                </motion.div>
+              ))}
 
-            {/* Stage 1: Identity Reveal with Staggered Letters (0 - 0.5s) */}
+            {/* Central Monolithic Typography with Apple-Style Light Sweep */}
             <div className="relative z-10 text-center flex flex-col items-center justify-center space-y-3 px-4">
               
-              {/* Category Micro-Label */}
+              {/* Category Micro-Badge */}
               <motion.div
-                initial={{ opacity: 0, y: -8 }}
+                initial={{ opacity: 0, y: -6 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.05 }}
-                className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-white/[0.04] border border-white/10 text-[10px] font-mono uppercase tracking-[0.25em] text-[#14B8A6]"
+                transition={{ duration: 0.4, delay: 0.1 }}
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-[10px] font-mono uppercase tracking-[0.26em] text-[#14B8A6]"
               >
-                <span className="w-1 h-1 rounded-full bg-[#14B8A6]" />
-                DATA ANALYST &bull; BI ANALYST
+                <span className="w-1.5 h-1.5 rounded-full bg-[#14B8A6] animate-ping" />
+                <span>DATA ANALYST &bull; AMARAVATI, INDIA</span>
               </motion.div>
 
-              {/* Monolithic Name Reveal with Staggered Letters */}
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-[#F5F5F4] flex items-center justify-center flex-wrap gap-x-4">
-                <span className="inline-flex overflow-hidden">
-                  {FIRST_NAME.split('').map((char, index) => (
+              {/* SHUBH SHARMA Centered with Light Sweep */}
+              <div className="relative overflow-hidden py-1">
+                <motion.h1
+                  initial={{ opacity: 0, y: 16, filter: 'blur(6px)' }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    filter: 'blur(0px)',
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.15,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-[#F5F5F4] font-headline"
+                >
+                  <span className="inline-block relative">
+                    {DISPLAY_NAME}
+                    {/* Subtle Specular Light Sweep */}
                     <motion.span
-                      key={`fn-${index}`}
-                      initial={{ y: 40, opacity: 0, filter: 'blur(6px)' }}
-                      animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+                      initial={{ x: '-150%', opacity: 0 }}
+                      animate={{ x: '150%', opacity: [0, 0.85, 0] }}
                       transition={{
-                        duration: 0.45,
-                        delay: 0.08 + index * 0.04,
-                        ease: [0.16, 1, 0.3, 1],
+                        duration: 1.0,
+                        delay: 0.55,
+                        ease: 'easeInOut',
                       }}
-                      className="inline-block"
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                </span>
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 pointer-events-none"
+                    />
+                  </span>
+                </motion.h1>
+              </div>
 
-                <span className="inline-flex overflow-hidden text-transparent bg-clip-text bg-gradient-to-r from-[#F5F5F4] via-[#3B82F6] to-[#14B8A6]">
-                  {LAST_NAME.split('').map((char, index) => (
-                    <motion.span
-                      key={`ln-${index}`}
-                      initial={{ y: 40, opacity: 0, filter: 'blur(6px)' }}
-                      animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
-                      transition={{
-                        duration: 0.45,
-                        delay: 0.22 + index * 0.04,
-                        ease: [0.16, 1, 0.3, 1],
-                      }}
-                      className="inline-block"
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                </span>
-              </h1>
-
-              {/* Stage 2: Supporting Phrase Fades In (0.5s - 1.4s) */}
+              {/* Stage 2 Supporting Phrase: "TURNING DATA INTO DECISIONS." */}
               <motion.div
-                initial={{ opacity: 0, y: 10, letterSpacing: '0.15em' }}
-                animate={{ opacity: 1, y: 0, letterSpacing: '0.28em' }}
-                transition={{ duration: 0.6, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                className="text-xs sm:text-sm font-mono uppercase text-slate-400 font-medium"
+                initial={{ opacity: 0, y: 10, letterSpacing: '0.12em' }}
+                animate={{
+                  opacity: animationStage >= 2 ? 1 : 0,
+                  y: animationStage >= 2 ? 0 : 10,
+                  letterSpacing: animationStage >= 2 ? '0.24em' : '0.12em',
+                }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="text-xs sm:text-sm font-mono uppercase text-slate-300 font-semibold flex items-center gap-2"
               >
-                {TAGLINE}
+                <span className="text-[#3B82F6] font-bold">&bull;</span>
+                <span>{TAGLINE}</span>
+                <span className="text-[#14B8A6] font-bold">&bull;</span>
               </motion.div>
 
-              {/* Dynamic Loading Telemetry Progress Line */}
-              <div className="w-48 h-[2px] bg-white/10 rounded-full overflow-hidden mt-2">
+              {/* Analytical Progress Sweep Bar */}
+              <div className="w-56 h-[2px] bg-white/10 rounded-full overflow-hidden mt-3">
                 <motion.div
                   initial={{ width: '0%' }}
                   animate={{ width: '100%' }}
-                  transition={{ duration: 1.3, delay: 0.2, ease: 'easeInOut' }}
-                  className="h-full bg-gradient-to-r from-[#3B82F6] to-[#14B8A6]"
+                  transition={{ duration: 1.8, delay: 0.1, ease: 'easeInOut' }}
+                  className="h-full bg-gradient-to-r from-[#3B82F6] via-[#14B8A6] to-[#3B82F6]"
                 />
               </div>
             </div>
           </div>
 
-          {/* Bottom Interactive Skip Controller */}
+          {/* Bottom Interactive Skip Controller with ESC shortcut */}
           <div className="absolute bottom-8 left-0 right-0 flex items-center justify-center">
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                handleDismiss();
+                handleDismiss(true);
               }}
-              className="group flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 text-xs font-mono text-slate-400 hover:text-white transition-all duration-200 shadow-sm cursor-pointer"
+              className="group flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 text-xs font-mono text-slate-400 hover:text-white transition-all duration-200 cursor-pointer shadow-lg"
               aria-label="Skip Intro Animation"
             >
               <span>Skip Intro</span>

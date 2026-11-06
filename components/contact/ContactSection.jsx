@@ -1,18 +1,19 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { 
   Mail, 
   Copy, 
   Check, 
-  ArrowRight, 
   ArrowUpRight, 
   FileText, 
+  MapPin, 
+  Sparkles,
   ArrowUp,
-  MapPin,
-  Clock,
-  Sparkles
+  FolderGit2
 } from 'lucide-react';
+import { GitHubIcon, LinkedInIcon } from '@/components/common/Icons';
 import { asset } from '@/lib/utils';
 import { portfolioData } from '@/data/portfolioData';
 
@@ -21,160 +22,224 @@ export default function ContactSection() {
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(personal.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2400);
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(personal.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2400);
+    }
+  };
+
+  const scrollTo = (id) => {
+    if (typeof window !== 'undefined' && window.__lenis) {
+      window.__lenis.scrollTo(`#${id}`, { duration: 1.2 });
+      return;
+    }
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToTop = () => {
+    if (typeof window !== 'undefined' && window.__lenis) {
+      window.__lenis.scrollTo(0, { duration: 1.2 });
+      return;
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <section id="contact" className="pt-24 sm:pt-32 pb-12 bg-[#07080B] text-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="pt-24 sm:pt-32 pb-12 bg-[#0A0A0B] text-[#F5F5F4] border-b border-white/10 relative overflow-hidden">
+      
+      {/* Background Subtle Data Particle Field / Ambient Glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[340px] bg-[#3B82F6]/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-[400px] h-[250px] bg-[#14B8A6]/5 rounded-full blur-[120px] pointer-events-none" />
+
+      {/* Decorative Subtle Grid Lines Behind CTA */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="pb-8 border-b border-white/10 mb-14 sm:mb-16">
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.24em] text-blue-400 font-bold mb-3">
+        {/* Section Header with Exact Required Headline & Subheading */}
+        <div className="pb-12 border-b border-white/10 mb-14 sm:mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.24em] text-[#3B82F6] font-bold mb-4"
+          >
             <span>06 // CONTACT</span>
             <span className="text-white/20">•</span>
-            <span>LET'S CONNECT</span>
-          </div>
+            <span>GET IN TOUCH</span>
+          </motion.div>
 
           <div className="space-y-4 max-w-4xl">
-            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-headline font-extrabold tracking-tight text-white leading-[0.98]">
-              LET'S MAKE SOMETHING<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-white">
-                MEANINGFUL.
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl sm:text-6xl lg:text-7xl font-headline font-extrabold tracking-tight text-[#F5F5F4] leading-[1.02]"
+            >
+              Have a business problem<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-[#3B82F6]">
+                that needs data?
               </span>
-            </h2>
+            </motion.h2>
 
-            <p className="text-base sm:text-xl font-display font-medium text-slate-300 pt-2">
-              Have an interesting problem, an opportunity, or an idea worth exploring? Let's talk.
-            </p>
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-xl sm:text-2xl font-headline font-bold text-[#14B8A6] pt-1"
+            >
+              Let&apos;s turn it into a decision.
+            </motion.p>
           </div>
         </div>
 
-        {/* Closing Interaction Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20 items-stretch">
+        {/* 4 Interactive CTA Buttons */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
           
-          {/* Guaranteed Single-Line Email Touchpoint Card */}
-          <div className="lg:col-span-7 rounded-3xl bg-[#0B0E17] border border-white/15 p-6 sm:p-10 shadow-2xl flex flex-col justify-between space-y-6">
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs font-mono text-slate-400">
-                <span className="font-bold uppercase tracking-wider text-blue-400">PRIMARY CONTACT // DIRECT EMAIL</span>
-                <Mail className="w-4 h-4 text-blue-400" />
+          {/* Button 1: Email Me (With Copy Interaction & "Copied" Confirmation) */}
+          <button
+            onClick={handleCopyEmail}
+            className="p-6 rounded-3xl bg-[#0D0E12] border border-white/10 hover:border-[#3B82F6]/50 transition-all duration-200 flex flex-col justify-between space-y-4 text-left group hover:-translate-y-1 shadow-xl cursor-pointer"
+          >
+            <div className="flex items-center justify-between">
+              <div className="p-3 rounded-2xl bg-[#3B82F6]/20 text-[#3B82F6] group-hover:scale-110 transition-transform">
+                <Mail className="w-5 h-5" />
               </div>
-
-              {/* Single-Line Email Guaranteed Display */}
-              <div className="pt-2 overflow-hidden">
-                <a
-                  href={`mailto:${personal.email}`}
-                  className="text-base sm:text-xl md:text-2xl font-mono font-bold text-white hover:text-blue-300 transition-colors inline-block whitespace-nowrap tracking-tight truncate max-w-full select-all"
-                  title={personal.email}
-                >
-                  {personal.email}
-                </a>
+              <span className="text-xs font-mono text-slate-500 flex items-center gap-1 group-hover:text-white">
+                {copied ? (
+                  <span className="text-[#14B8A6] font-bold flex items-center gap-1">
+                    <Check className="w-3.5 h-3.5" /> Copied!
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-1">
+                    <Copy className="w-3.5 h-3.5" /> Copy
+                  </span>
+                )}
+              </span>
+            </div>
+            <div>
+              <div className="text-base font-bold text-white group-hover:text-[#3B82F6] transition-colors">
+                Email Me
               </div>
-
-              <p className="text-xs sm:text-sm text-slate-300 font-normal">
-                Always open for Data Analyst, Business Intelligence, Analytics Engineering, and Product Analytics internships for Summer 2027. Typical response window: within 24 hours.
-              </p>
-            </div>
-
-            <div className="pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
-              <button
-                onClick={handleCopyEmail}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 font-bold text-white transition-all cursor-pointer active:scale-[0.98]"
-              >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-blue-400" />}
-                <span>{copied ? 'Copied to Clipboard!' : 'Copy Address'}</span>
-              </button>
-
-              <a
-                href={`mailto:${personal.email}?subject=Data%20Analyst%20Role%20Inquiry%20-%20Shubh%20Sharma`}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-500 font-bold transition-all shadow-md shadow-blue-600/30"
-              >
-                <span>Compose Email</span>
-                <ArrowRight className="w-3.5 h-3.5 text-blue-200" />
-              </a>
-            </div>
-          </div>
-
-          {/* Social Profiles & Resume Strip */}
-          <div className="lg:col-span-5 rounded-3xl bg-[#0F131F] border border-blue-500/30 p-6 sm:p-10 shadow-2xl flex flex-col justify-between space-y-6">
-            <div className="space-y-4">
-              <div className="text-xs font-mono uppercase tracking-wider text-blue-400 font-bold">
-                CONNECT &amp; VERIFY
+              <div className="text-xs font-mono text-slate-400 truncate mt-1">
+                {personal.email}
               </div>
-              <p className="text-sm text-slate-300 leading-relaxed font-normal">
-                Review codebases, explore analytical schemas, or download my official curriculum vitae.
-              </p>
             </div>
+          </button>
 
-            <div className="space-y-3 font-mono text-xs">
-              <a
-                href={personal.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between p-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white font-semibold"
-              >
-                <div className="flex items-center gap-2.5">
-                  <span className="w-2 h-2 rounded-full bg-blue-400" />
-                  <span>LinkedIn Profile</span>
-                </div>
-                <ArrowUpRight className="w-4 h-4 text-slate-400" />
-              </a>
-
-              <a
-                href={personal.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between p-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white font-semibold"
-              >
-                <div className="flex items-center gap-2.5">
-                  <span className="w-2 h-2 rounded-full bg-white" />
-                  <span>GitHub Repositories</span>
-                </div>
-                <ArrowUpRight className="w-4 h-4 text-slate-400" />
-              </a>
-
-              <a
-                href={asset('/resume.pdf')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between p-3.5 rounded-2xl bg-white text-gray-950 font-bold transition-all shadow-md hover:bg-blue-300"
-              >
-                <div className="flex items-center gap-2.5">
-                  <FileText className="w-4 h-4 text-gray-950" />
-                  <span>Download Resume PDF</span>
-                </div>
-                <ArrowUpRight className="w-4 h-4 text-gray-950" />
-              </a>
+          {/* Button 2: Connect on LinkedIn */}
+          <a
+            href={personal.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-6 rounded-3xl bg-[#0D0E12] border border-white/10 hover:border-[#3B82F6]/50 transition-all duration-200 flex flex-col justify-between space-y-4 text-left group hover:-translate-y-1 shadow-xl cursor-pointer"
+          >
+            <div className="flex items-center justify-between">
+              <div className="p-3 rounded-2xl bg-blue-500/20 text-blue-400 group-hover:scale-110 transition-transform">
+                <LinkedInIcon className="w-5 h-5" />
+              </div>
+              <ArrowUpRight className="w-4 h-4 text-slate-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
             </div>
-          </div>
+            <div>
+              <div className="text-base font-bold text-white group-hover:text-[#3B82F6] transition-colors">
+                Connect on LinkedIn
+              </div>
+              <div className="text-xs font-mono text-slate-400 mt-1">
+                in/shubh-sharma-2067981b5 ↗
+              </div>
+            </div>
+          </a>
+
+          {/* Button 3: View Resume */}
+          <a
+            href={asset('/resume.pdf')}
+            download="Shubh_Sharma_Data_Analyst_Resume.pdf"
+            className="p-6 rounded-3xl bg-[#0D0E12] border border-white/10 hover:border-[#14B8A6]/50 transition-all duration-200 flex flex-col justify-between space-y-4 text-left group hover:-translate-y-1 shadow-xl cursor-pointer"
+          >
+            <div className="flex items-center justify-between">
+              <div className="p-3 rounded-2xl bg-[#14B8A6]/20 text-[#14B8A6] group-hover:scale-110 transition-transform">
+                <FileText className="w-5 h-5" />
+              </div>
+              <ArrowUpRight className="w-4 h-4 text-slate-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            </div>
+            <div>
+              <div className="text-base font-bold text-white group-hover:text-[#14B8A6] transition-colors">
+                View Resume
+              </div>
+              <div className="text-xs font-mono text-slate-400 mt-1">
+                Official PDF Download ↗
+              </div>
+            </div>
+          </a>
+
+          {/* Button 4: Explore Projects */}
+          <button
+            onClick={() => scrollTo('work')}
+            className="p-6 rounded-3xl bg-[#0D0E12] border border-white/10 hover:border-white/30 transition-all duration-200 flex flex-col justify-between space-y-4 text-left group hover:-translate-y-1 shadow-xl cursor-pointer"
+          >
+            <div className="flex items-center justify-between">
+              <div className="p-3 rounded-2xl bg-white/10 text-white group-hover:scale-110 transition-transform">
+                <FolderGit2 className="w-5 h-5" />
+              </div>
+              <ArrowUpRight className="w-4 h-4 text-slate-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            </div>
+            <div>
+              <div className="text-base font-bold text-white group-hover:text-[#3B82F6] transition-colors">
+                Explore Projects
+              </div>
+              <div className="text-xs font-mono text-slate-400 mt-1">
+                Selected Work &amp; Schemas ↓
+              </div>
+            </div>
+          </button>
 
         </div>
 
-        {/* Editorial Colophon & Bottom Footer */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-slate-400">
-          <div className="space-y-1 text-center sm:text-left">
-            <div>
-              Designed &amp; Engineered by <strong className="text-white">Shubh Sharma</strong>.
-            </div>
-            <div className="text-[11px] text-slate-500">
-              Next.js App Router • Framer Motion + GSAP • Lenis • Recharts • GitHub Pages Static Export
+        {/* Bottom Editorial Colophon & Direct Links */}
+        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6 font-mono text-xs text-slate-500">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-slate-300 font-bold">SHUBH SHARMA</span>
+            <span>•</span>
+            <span>DATA ANALYST</span>
+            <span>•</span>
+            <div className="inline-flex items-center gap-1.5 text-slate-400">
+              <MapPin className="w-3.5 h-3.5 text-[#3B82F6]" />
+              <span>Amaravati, AP, India</span>
             </div>
           </div>
 
-          <button
-            onClick={scrollToTop}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white font-bold shadow-sm transition-all cursor-pointer active:scale-95"
-          >
-            <span>Return to Top</span>
-            <ArrowUp className="w-3.5 h-3.5 text-blue-400" />
-          </button>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://github.com/shubh201203"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-white transition-colors"
+            >
+              GitHub
+            </a>
+            <span>•</span>
+            <a
+              href={personal.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-white transition-colors"
+            >
+              LinkedIn
+            </a>
+            <span>•</span>
+            <button
+              onClick={scrollToTop}
+              className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors cursor-pointer"
+            >
+              <span>Back to Top</span>
+              <ArrowUp className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
 
       </div>

@@ -6,6 +6,9 @@
   html {
     scroll-behavior: smooth;
     color-scheme: dark;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
   }
   
   body {
@@ -13,6 +16,8 @@
     color: #F5F5F4;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -70,6 +75,11 @@
     100% { transform: translateX(-50%); }
   }
 
+  @keyframes marquee-reverse {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0%); }
+  }
+
   .animate-marquee {
     display: flex;
     width: 200%;
@@ -79,6 +89,21 @@
   .animate-marquee:hover {
     animation-play-state: paused;
   }
+
+  .animate-marquee-reverse {
+    display: flex;
+    width: 200%;
+    animation: marquee-reverse 32s linear infinite;
+  }
+
+  .animate-marquee-reverse:hover {
+    animation-play-state: paused;
+  }
+}
+
+/* Fast dismiss / Returning visitor */
+html.intro-seen [data-intro="true"] {
+  display: none !important;
 }
 
 /* Accessibility: Reduced Motion */
@@ -89,7 +114,10 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .animate-marquee {
+  .animate-marquee, .animate-marquee-reverse {
     animation: none !important;
+  }
+  [data-intro="true"] {
+    display: none !important;
   }
 }

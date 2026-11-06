@@ -8,6 +8,7 @@ import Marquee from '@/components/Marquee';
 import HowIWorkSequence from '@/components/animations/HowIWorkSequence';
 import ProjectsSection from '@/components/projects/ProjectsSection';
 import SkillsMatrix from '@/components/skills/SkillsMatrix';
+import ExperienceTimeline from '@/components/about/ExperienceTimeline';
 import AboutSection from '@/components/about/AboutSection';
 import ToolkitSection from '@/components/skills/ToolkitSection';
 import CertificationsSection from '@/components/certifications/CertificationsSection';
@@ -92,6 +93,9 @@ export default function Home() {
 
         {/* 7. Interactive Skills Matrix Connecting Skills to Projects */}
         <SkillsMatrix onOpenProject={handleOpenCaseStudy} />
+
+        {/* 8. Vertical Experience Timeline & Measured Impact Metrics */}
+        <ExperienceTimeline />
 
         {/* 8. Genuine About & Education (VIT-AP CSE & IIT Madras Data Science, Zero Speculation) */}
         <AboutSection />
