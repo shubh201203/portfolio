@@ -1,6 +1,6 @@
 import React from 'react';
 import ProjectCaseStudyLayout from '@/components/case-studies/ProjectCaseStudyLayout';
-import { portfolioData } from '@/data/portfolioData';
+import { getProjectBySlug } from '@/data/projects';
 
 export async function generateStaticParams() {
   return [
@@ -8,6 +8,7 @@ export async function generateStaticParams() {
     { slug: 'product-analytics' },
     { slug: 'bitepulse' },
     { slug: 'disaster-reporting' },
+    { slug: 'dirs' },
     { slug: 'wardrobewhiz' },
     { slug: 'smart-resume' },
     { slug: 'emotion-music' },
@@ -19,8 +20,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const projectSlug = slug === 'bitepulse' ? 'product-analytics' : slug;
-  const project = portfolioData.projects.find((p) => p.id === projectSlug);
+  const project = getProjectBySlug(slug);
 
   return {
     title: `${project?.shortTitle || project?.title || 'Case Study'} — Shubh Sharma`,

@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -20,30 +19,33 @@ import {
   GitBranch,
   Cpu,
   Server,
-  FileText
+  FileText,
+  Smartphone,
+  UserCheck,
+  Building2,
+  Landmark
 } from 'lucide-react';
 import { GitHubIcon } from '../common/Icons';
 import Footer from '../common/Footer';
-import { portfolioData } from '@/data/portfolioData';
+import { getProjectBySlug, allProjects } from '@/data/projects';
 import { asset } from '@/lib/utils';
 import NovaCartChart from '@/components/visualizations/NovaCartChart';
 import BitePulseFunnel from '@/components/visualizations/BitePulseFunnel';
 
 const PROJECT_SEQUENCE = [
   'novacart',
-  'product-analytics',
+  'bitepulse',
   'disaster-reporting',
   'wardrobewhiz',
   'emotion-music',
+  'todo',
   'smart-resume',
   'mental-health-detection',
-  'shortx',
-  'todo'
+  'shortx'
 ];
 
 export default function ProjectCaseStudyLayout({ slug }) {
-  const currentId = slug === 'bitepulse' ? 'product-analytics' : slug;
-  const project = portfolioData.projects.find((p) => p.id === currentId);
+  const project = getProjectBySlug(slug);
 
   const [activeScreenshot, setActiveScreenshot] = useState(0);
   const [zoomImage, setZoomImage] = useState(null);
@@ -80,12 +82,23 @@ export default function ProjectCaseStudyLayout({ slug }) {
   }
 
   // Calculate Next Project
-  const currentIndex = PROJECT_SEQUENCE.indexOf(currentId);
+  const normalizedCurrentSlug = project.slug || project.id;
+  const currentSeqId = (slug === 'dirs' || slug === 'disaster-reporting') 
+    ? 'disaster-reporting' 
+    : (slug === 'product-analytics' || slug === 'bitepulse') 
+      ? 'bitepulse' 
+      : normalizedCurrentSlug;
+
+  const currentIndex = PROJECT_SEQUENCE.indexOf(currentSeqId);
   const nextIndex = currentIndex !== -1 ? (currentIndex + 1) % PROJECT_SEQUENCE.length : 0;
   const nextProjectId = PROJECT_SEQUENCE[nextIndex];
-  const nextProject = portfolioData.projects.find((p) => p.id === nextProjectId);
+  const nextProject = getProjectBySlug(nextProjectId);
 
   const screenshots = project.dashboardScreenshots || [];
+  const hasScreenshots = Array.isArray(screenshots) && screenshots.length > 0;
+  const hasCustomVisual = project.hasCustomVisual;
+  const showVisualGallery = hasScreenshots || hasCustomVisual;
+
   const metrics = project.verifiedMetrics;
   const deliverables = project.deliverables || [];
 
@@ -141,7 +154,7 @@ export default function ProjectCaseStudyLayout({ slug }) {
 
             {nextProject && (
               <a
-                href={asset(`/projects/${nextProject.id}/`)}
+                href={asset(`/projects/${nextProject.slug || nextProject.id}/`)}
                 className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-white bg-[#3B82F6] hover:bg-[#2563EB] px-3.5 py-1.5 rounded-full transition-colors"
                 title={`Next: ${nextProject.shortTitle || nextProject.title}`}
               >
@@ -214,7 +227,7 @@ export default function ProjectCaseStudyLayout({ slug }) {
             )}
           </div>
 
-          {/* Key KPI Strip if available */}
+          {/* Key KPI Strip if available for this specific project */}
           {metrics && (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
               {Object.entries(metrics).slice(0, 4).map(([key, m]) => (
@@ -225,8 +238,8 @@ export default function ProjectCaseStudyLayout({ slug }) {
                   <div className="text-xl sm:text-2xl font-headline font-bold text-white">
                     {m.value}
                   </div>
-                  <span className="text-[11px] text-slate-400 leading-tight block">
-                    {m.desc?.substring(0, 48)}...
+                  <span className="text-[11px] text-slate-400 leading-tight block font-mono">
+                    {m.desc?.substring(0, 52)}...
                   </span>
                 </div>
               ))}
@@ -280,7 +293,7 @@ export default function ProjectCaseStudyLayout({ slug }) {
                       <span className="text-[10px] text-slate-400 font-semibold">{d.tech}</span>
                     </div>
                     <h3 className="text-base font-bold text-white font-headline">{d.title}</h3>
-                    <p className="text-xs text-slate-300 leading-relaxed mt-2">{d.desc}</p>
+                    <p className="text-xs text-slate-300 leading-relaxed mt-2 font-mono">{d.desc}</p>
                   </div>
                 </div>
               ))}
@@ -290,7 +303,7 @@ export default function ProjectCaseStudyLayout({ slug }) {
         </section>
 
         {/* ----------------------------------------------------------------- */}
-        {/* 3. BUSINESS PROBLEM                                               */}
+        {/* 3. PROBLEM STATEMENT                                              */}
         {/* ----------------------------------------------------------------- */}
         <section id="business-problem" className="space-y-6 border-b border-white/10 pb-12">
           
@@ -299,29 +312,25 @@ export default function ProjectCaseStudyLayout({ slug }) {
           </div>
 
           <h2 className="text-2xl sm:text-3xl font-headline font-bold text-white">
-            Core Business Problem &amp; Inquiries
+            Core Problem &amp; Inquiries
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-5 rounded-2xl bg-[#0D0E12] border border-white/10 space-y-2">
               <div className="text-xs font-mono uppercase tracking-wider text-[#3B82F6] font-bold">
-                Analytical Inquiries
+                Analytical &amp; Technical Inquiries
               </div>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                {currentId === 'novacart' && "How does commercial intent placed across 104,852 order lines decay into realized cash? Which product categories suffer the most from discount margin erosion, and which cities drive repeat purchase value?"}
-                {currentId === 'product-analytics' && "Where are customer conversions lost in the delivery funnel? How do delivery route latencies correlate with order cancellations, and what are the kitchen prep bottlenecks?"}
-                {currentId !== 'novacart' && currentId !== 'product-analytics' && (project.tagline || "Addressing systemic workflow bottlenecks through structured data modeling, real-time analytics, and role-based operational coordination.")}
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-mono">
+                {project.problemStatement?.inquiries || project.tagline}
               </p>
             </div>
 
             <div className="p-5 rounded-2xl bg-[#0D0E12] border border-white/10 space-y-2">
               <div className="text-xs font-mono uppercase tracking-wider text-[#14B8A6] font-bold">
-                Commercial Impact
+                Operational &amp; Business Impact
               </div>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                {currentId === 'novacart' && "Discovered that gross placed orders of ₹971.49M experienced ₹123.86M in pre-fulfillment cancellation leakage, followed by ₹50.87M in post-delivery merchandise returns, leaving ₹796.75M in net settled cash."}
-                {currentId === 'product-analytics' && "Identified a 34% drop-off at the payment gateway during peak hours, and revealed that delivery times exceeding 45 minutes reduced 30-day repurchase rates by 48%."}
-                {currentId !== 'novacart' && currentId !== 'product-analytics' && "Transformed unstructured manual workflows into grain-safe database models, reducing incident reporting latency and ensuring verifiable state telemetry."}
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-mono">
+                {project.problemStatement?.commercialImpact || project.description}
               </p>
             </div>
           </div>
@@ -329,19 +338,19 @@ export default function ProjectCaseStudyLayout({ slug }) {
         </section>
 
         {/* ----------------------------------------------------------------- */}
-        {/* 4. DATASET & DATA SOURCES                                         */}
+        {/* 4. DATASET & RELATIONAL ARCHITECTURE (Rendered when applicable)    */}
         {/* ----------------------------------------------------------------- */}
-        <section id="data-sources" className="space-y-6 border-b border-white/10 pb-12">
-          
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#3B82F6] font-bold">
-            <span>03 // DATA ARCHITECTURE</span>
-          </div>
+        {project.warehouseTables && (
+          <section id="data-sources" className="space-y-6 border-b border-white/10 pb-12">
+            
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#3B82F6] font-bold">
+              <span>03 // DATA ARCHITECTURE</span>
+            </div>
 
-          <h2 className="text-2xl sm:text-3xl font-headline font-bold text-white">
-            Dataset &amp; Relational Data Sources
-          </h2>
+            <h2 className="text-2xl sm:text-3xl font-headline font-bold text-white">
+              Dataset &amp; Relational Schema
+            </h2>
 
-          {project.warehouseTables ? (
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 
@@ -351,7 +360,7 @@ export default function ProjectCaseStudyLayout({ slug }) {
                     <span className="text-xs font-mono font-bold text-[#3B82F6] uppercase">
                       Dimension Tables
                     </span>
-                    <span className="text-[11px] font-mono text-slate-400">Kimball Methodology</span>
+                    <span className="text-[11px] font-mono text-slate-400">Dimensional Entities</span>
                   </div>
                   <div className="space-y-2">
                     {project.warehouseTables.dimensions?.map((dim) => (
@@ -369,7 +378,7 @@ export default function ProjectCaseStudyLayout({ slug }) {
                     <span className="text-xs font-mono font-bold text-[#14B8A6] uppercase">
                       Fact Tables
                     </span>
-                    <span className="text-[11px] font-mono text-slate-400">Strict Fact-Grain</span>
+                    <span className="text-[11px] font-mono text-slate-400">Strict Event-Grain</span>
                   </div>
                   <div className="space-y-2">
                     {project.warehouseTables.facts?.map((fact) => (
@@ -383,318 +392,297 @@ export default function ProjectCaseStudyLayout({ slug }) {
 
               </div>
 
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono text-slate-400 flex items-center justify-between">
-                <span>Data Hygiene Standard:</span>
-                <span className="text-emerald-400 font-bold">142 customer keys recovered &bull; 0 foreign key orphans</span>
-              </div>
+              {project.warehouseTables.hygieneSummary && (
+                <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono text-slate-400 flex items-center justify-between">
+                  <span>Data Hygiene Standard:</span>
+                  <span className="text-emerald-400 font-bold">{project.warehouseTables.hygieneSummary}</span>
+                </div>
+              )}
             </div>
-          ) : (
-            <div className="p-6 rounded-2xl bg-[#0D0E12] border border-white/10 space-y-3">
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-mono">
-                Source tables and schema entities designed with normalized entity relationships, parameterized API contracts, and indexed relational storage.
-              </p>
-            </div>
-          )}
 
-        </section>
+          </section>
+        )}
+
+        {/* Multi-Role System Architecture (For DIRS) */}
+        {project.multiRoles && (
+          <section id="multi-roles" className="space-y-6 border-b border-white/10 pb-12">
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#3B82F6] font-bold">
+              <span>03 // ROLE ARCHITECTURE</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-headline font-bold text-white">
+              Multi-Role Coordination Matrix
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {project.multiRoles.map((role) => (
+                <div key={role.role} className="p-5 rounded-2xl bg-[#0D0E12] border border-white/10 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold text-[#3B82F6] uppercase">{role.role}</span>
+                    <span className="text-[10px] font-mono text-slate-400">{role.summary}</span>
+                  </div>
+                  <ul className="text-xs text-slate-300 space-y-1 font-mono">
+                    {role.responsibilities.map((resp, rIdx) => (
+                      <li key={rIdx}>&bull; {resp}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* ----------------------------------------------------------------- */}
         {/* 5. ARCHITECTURE & MODELING                                       */}
         {/* ----------------------------------------------------------------- */}
-        <section id="architecture" className="space-y-6 border-b border-white/10 pb-12">
-          
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#3B82F6] font-bold">
-            <span>04 // SYSTEM PIPELINE</span>
-          </div>
+        {project.architectureSteps && project.architectureSteps.length > 0 && (
+          <section id="architecture" className="space-y-6 border-b border-white/10 pb-12">
+            
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#3B82F6] font-bold">
+              <span>04 // SYSTEM PIPELINE</span>
+            </div>
 
-          <h2 className="text-2xl sm:text-3xl font-headline font-bold text-white">
-            Architecture &amp; Data Pipeline Flow
-          </h2>
+            <h2 className="text-2xl sm:text-3xl font-headline font-bold text-white">
+              Architecture &amp; Data Pipeline Flow
+            </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-            {[
-              { step: '01', title: 'Data Cleaning', tool: 'Python 3.11 & Pandas', desc: 'Anomaly detection, missing key recovery, and null quarantine.' },
-              { step: '02', title: 'Data Warehouse', tool: 'PostgreSQL 18', desc: 'Star Schema with surrogate keys and indexed relational tables.' },
-              { step: '03', title: 'Semantic Model', tool: 'Power BI + DAX', desc: '30+ DAX measures with 100% mathematical SQL reconciliation.' },
-              { step: '04', title: 'Cloud BI App', tool: 'FastAPI & React 18', desc: 'Sub-50ms parameterized analytical queries served via REST API.' },
-            ].map((p) => (
-              <div key={p.step} className="p-5 rounded-2xl bg-[#0D0E12] border border-white/10 space-y-2">
-                <span className="text-xs font-mono font-bold text-[#3B82F6]">{p.step} // {p.title}</span>
-                <div className="text-xs font-mono text-white font-semibold">{p.tool}</div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">{p.desc}</p>
-              </div>
-            ))}
-          </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+              {project.architectureSteps.map((p) => (
+                <div key={p.step} className="p-5 rounded-2xl bg-[#0D0E12] border border-white/10 space-y-2">
+                  <span className="text-xs font-mono font-bold text-[#3B82F6]">{p.step} // {p.title}</span>
+                  <div className="text-xs font-mono text-white font-semibold">{p.tool}</div>
+                  <p className="text-[11px] text-slate-400 leading-relaxed font-mono">{p.desc}</p>
+                </div>
+              ))}
+            </div>
 
-        </section>
+          </section>
+        )}
 
         {/* ----------------------------------------------------------------- */}
         {/* 6. TECHNICAL METHODOLOGY                                          */}
         {/* ----------------------------------------------------------------- */}
-        <section id="methodology" className="space-y-6 border-b border-white/10 pb-12">
-          
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#3B82F6] font-bold">
-            <span>05 // ENGINEERING METHODOLOGY</span>
-          </div>
-
-          <h2 className="text-2xl sm:text-3xl font-headline font-bold text-white">
-            Technical Methodology &amp; Mathematical Reconciliation
-          </h2>
-
-          <div className="space-y-4">
+        {project.methodology && (
+          <section id="methodology" className="space-y-6 border-b border-white/10 pb-12">
             
-            {/* Code / Query Block Sample */}
-            <div className="rounded-2xl bg-[#07080B] border border-white/15 p-5 font-mono text-xs overflow-x-auto space-y-2">
-              <div className="text-slate-400 text-[11px] pb-2 border-b border-white/10 flex items-center justify-between">
-                <span>SQL Reconciliation Query &bull; Customer Cohort Retention</span>
-                <span className="text-emerald-400 font-bold">100% Reconciled</span>
-              </div>
-              <pre className="text-blue-300 leading-relaxed">
-{`WITH cohort_items AS (
-    SELECT 
-        s.customer_id,
-        DATE_TRUNC('month', MIN(s.order_date)) OVER (PARTITION BY s.customer_id) AS cohort_month,
-        DATE_TRUNC('month', s.order_date) AS order_month
-    FROM public.fact_sales s
-    WHERE s.order_status IN ('Completed', 'Shipped')
-)
-SELECT 
-    cohort_month,
-    EXTRACT(MONTH FROM AGE(order_month, cohort_month)) AS month_number,
-    COUNT(DISTINCT customer_id) AS active_retained_users
-FROM cohort_items
-GROUP BY 1, 2
-ORDER BY 1, 2;`}
-              </pre>
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#3B82F6] font-bold">
+              <span>05 // ENGINEERING METHODOLOGY</span>
             </div>
 
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-mono">
-              Every measure implemented in Power BI Desktop &mdash; including Realized Revenue, Margin Percentage, and Repeat Customer Ratios &mdash; was reconciled to the penny against corresponding PostgreSQL 18 window queries.
-            </p>
-
-          </div>
-
-        </section>
-
-        {/* ----------------------------------------------------------------- */}
-        {/* 7. DASHBOARD SCREENSHOTS & VISUALIZATIONS                         */}
-        {/* ----------------------------------------------------------------- */}
-        <section id="screenshots" className="space-y-6 border-b border-white/10 pb-12">
-          
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#3B82F6] font-bold">
-            <span>06 // INTERACTIVE VISUAL GALLERY</span>
-          </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <h2 className="text-2xl sm:text-3xl font-headline font-bold text-white">
-              Executive Dashboards &amp; Visual Artifacts
+              Technical Methodology &amp; Implementation Details
             </h2>
-            {screenshots.length > 0 && (
-              <span className="text-xs font-mono text-slate-400">
-                {screenshots.length} High-Resolution Views Available
-              </span>
-            )}
-          </div>
 
-          {screenshots.length > 0 ? (
-            <div className="space-y-6">
+            <div className="space-y-4">
               
-              {/* Tab Selector */}
-              <div className="flex flex-wrap gap-2">
-                {screenshots.map((s, idx) => (
-                  <button
-                    key={s.id ?? idx}
-                    onClick={() => setActiveScreenshot(idx)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-mono transition-all cursor-pointer ${
-                      activeScreenshot === idx
-                        ? 'bg-[#3B82F6] text-white font-bold shadow-md shadow-blue-500/30'
-                        : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 border border-white/10'
-                    }`}
-                  >
-                    {s.tabLabel || `View 0${idx + 1}`}
-                  </button>
-                ))}
+              <div className="rounded-2xl bg-[#07080B] border border-white/15 p-5 font-mono text-xs overflow-x-auto space-y-2">
+                <div className="text-slate-400 text-[11px] pb-2 border-b border-white/10 flex items-center justify-between">
+                  <span>{project.methodology.categoryLabel}</span>
+                  <span className="text-emerald-400 font-bold">{project.methodology.badgeLabel}</span>
+                </div>
+                <pre className="text-blue-300 leading-relaxed whitespace-pre font-mono">
+                  {project.methodology.codeSnippet}
+                </pre>
               </div>
 
-              {/* Active Image Stage */}
-              <div className="rounded-3xl bg-[#0D0E12] border border-white/15 p-4 sm:p-6 shadow-2xl space-y-4">
-                <div 
-                  className="relative rounded-2xl overflow-hidden bg-black/60 border border-white/10 aspect-[16/9] cursor-zoom-in group"
-                  onClick={() => setZoomImage(screenshots[activeScreenshot])}
-                >
-                  <img
-                    src={asset(`/images/projects/${currentId}/${screenshots[activeScreenshot].filename}`)}
-                    alt={screenshots[activeScreenshot].title}
-                    className="w-full h-full object-contain"
-                  />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
-                    <Maximize2 className="w-5 h-5" />
-                    <span>Click to Expand Fullscreen</span>
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
-                  <div>
-                    <h3 className="text-base sm:text-lg font-headline font-bold text-white">
-                      {screenshots[activeScreenshot].title}
-                    </h3>
-                    <p className="text-xs text-slate-400 mt-1 max-w-2xl">
-                      {screenshots[activeScreenshot].caption}
-                    </p>
-                  </div>
-
-                  {screenshots[activeScreenshot].kpis && (
-                    <div className="flex flex-wrap gap-1.5 shrink-0">
-                      {screenshots[activeScreenshot].kpis.map((kpi, kIdx) => (
-                        <span key={kIdx} className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[11px] font-mono text-slate-300">
-                          {kpi}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-
-            </div>
-          ) : (
-            <div className="p-8 rounded-2xl bg-[#0D0E12] border border-white/10 text-center space-y-3">
-              {currentId === 'novacart' && <NovaCartChart />}
-              {currentId === 'product-analytics' && <BitePulseFunnel />}
-              <p className="text-xs text-slate-400 font-mono">
-                Interactive analytical visual model preview rendered directly from dataset metrics.
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-mono">
+                {project.methodology.explanation}
               </p>
-            </div>
-          )}
 
-        </section>
+            </div>
+
+          </section>
+        )}
+
+        {/* ----------------------------------------------------------------- */}
+        {/* 7. DASHBOARD SCREENSHOTS & VISUALIZATIONS (Condition-based)        */}
+        {/* ----------------------------------------------------------------- */}
+        {showVisualGallery && (
+          <section id="screenshots" className="space-y-6 border-b border-white/10 pb-12">
+            
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#3B82F6] font-bold">
+              <span>06 // INTERACTIVE VISUAL GALLERY</span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <h2 className="text-2xl sm:text-3xl font-headline font-bold text-white">
+                Executive Dashboards &amp; Visual Artifacts
+              </h2>
+              {hasScreenshots && (
+                <span className="text-xs font-mono text-slate-400">
+                  {screenshots.length} High-Resolution Views Available
+                </span>
+              )}
+            </div>
+
+            {hasScreenshots ? (
+              <div className="space-y-6">
+                
+                {/* Tab Selector */}
+                <div className="flex flex-wrap gap-2">
+                  {screenshots.map((s, idx) => (
+                    <button
+                      key={s.id ?? idx}
+                      onClick={() => setActiveScreenshot(idx)}
+                      className={`px-3 py-1.5 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                        activeScreenshot === idx
+                          ? 'bg-[#3B82F6] text-white font-bold shadow-md shadow-blue-500/30'
+                          : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 border border-white/10'
+                      }`}
+                    >
+                      {s.tabLabel || `View 0${idx + 1}`}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Active Image Stage */}
+                <div className="rounded-3xl bg-[#0D0E12] border border-white/15 p-4 sm:p-6 shadow-2xl space-y-4">
+                  <div 
+                    className="relative rounded-2xl overflow-hidden bg-black/60 border border-white/10 aspect-[16/9] cursor-zoom-in group"
+                    onClick={() => setZoomImage(screenshots[activeScreenshot])}
+                  >
+                    <img
+                      src={asset(`/images/projects/${project.imageDir || project.id}/${screenshots[activeScreenshot].filename}`)}
+                      alt={screenshots[activeScreenshot].title}
+                      className="w-full h-full object-contain"
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-semibold">
+                      <Maximize2 className="w-5 h-5" />
+                      <span>Click to Expand Fullscreen</span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+                    <div>
+                      <h3 className="text-base sm:text-lg font-headline font-bold text-white">
+                        {screenshots[activeScreenshot].title}
+                      </h3>
+                      <p className="text-xs text-slate-400 mt-1 max-w-2xl font-mono">
+                        {screenshots[activeScreenshot].caption}
+                      </p>
+                    </div>
+
+                    {screenshots[activeScreenshot].kpis && (
+                      <div className="flex flex-wrap gap-1.5 shrink-0">
+                        {screenshots[activeScreenshot].kpis.map((kpi, kIdx) => (
+                          <span key={kIdx} className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[11px] font-mono text-slate-300">
+                            {kpi}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+              </div>
+            ) : (
+              <div className="p-8 rounded-2xl bg-[#0D0E12] border border-white/10 text-center space-y-3">
+                {project.id === 'novacart' && <NovaCartChart />}
+                {(project.id === 'product-analytics' || project.id === 'bitepulse') && <BitePulseFunnel />}
+                <p className="text-xs text-slate-400 font-mono">
+                  Interactive analytical visual model preview rendered directly from dataset metrics.
+                </p>
+              </div>
+            )}
+
+          </section>
+        )}
 
         {/* ----------------------------------------------------------------- */}
         {/* 8. KEY ANALYTICAL FINDINGS                                        */}
         {/* ----------------------------------------------------------------- */}
-        <section id="findings" className="space-y-6 border-b border-white/10 pb-12">
-          
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#3B82F6] font-bold">
-            <span>07 // EMPIRICAL INSIGHTS</span>
-          </div>
+        {project.findings && project.findings.length > 0 && (
+          <section id="findings" className="space-y-6 border-b border-white/10 pb-12">
+            
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#3B82F6] font-bold">
+              <span>07 // EMPIRICAL INSIGHTS</span>
+            </div>
 
-          <h2 className="text-2xl sm:text-3xl font-headline font-bold text-white">
-            Key Analytical Findings &amp; Business Intelligence
-          </h2>
+            <h2 className="text-2xl sm:text-3xl font-headline font-bold text-white">
+              Key Analytical Findings &amp; Outcomes
+            </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[
-              {
-                num: '01',
-                title: 'Demand vs Realization Gap',
-                metric: '₹123.86M (12.75%)',
-                desc: 'Gross placed demand suffered significant pre-fulfillment leakage from order cancellations prior to dispatch, distorting naive top-line forecasts.'
-              },
-              {
-                num: '02',
-                title: 'Discount Margin Compression',
-                metric: '39.81% Demand Loss',
-                desc: 'Deep discounting on low-margin SKUs failed to increase repeat purchase frequency and severely eroded net contribution margins.'
-              },
-              {
-                num: '03',
-                title: 'High-Value Repeat Buyer Moat',
-                metric: '82.12% Repeat Orders',
-                desc: 'Repeat customer cohorts demonstrated 3.4x higher lifetime customer value compared to one-time purchasers, underscoring the ROI of retention campaigns.'
-              },
-              {
-                num: '04',
-                title: 'Post-Delivery Return Costs',
-                metric: '₹50.87M Returns',
-                desc: 'Merchandise returns were heavily concentrated in specific footwear and apparel size categories, highlighting immediate operational sizing intervention areas.'
-              }
-            ].map((f) => (
-              <div key={f.num} className="p-6 rounded-2xl bg-[#0D0E12] border border-white/10 space-y-2">
-                <div className="flex items-center justify-between text-xs font-mono">
-                  <span className="text-[#3B82F6] font-bold">FINDING {f.num}</span>
-                  <span className="text-emerald-400 font-bold">{f.metric}</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {project.findings.map((f) => (
+                <div key={f.num} className="p-6 rounded-2xl bg-[#0D0E12] border border-white/10 space-y-2">
+                  <div className="flex items-center justify-between text-xs font-mono">
+                    <span className="text-[#3B82F6] font-bold">FINDING {f.num}</span>
+                    <span className="text-emerald-400 font-bold">{f.metric}</span>
+                  </div>
+                  <h3 className="text-base font-bold text-white font-headline">{f.title}</h3>
+                  <p className="text-xs text-slate-300 leading-relaxed font-mono">{f.desc}</p>
                 </div>
-                <h3 className="text-base font-bold text-white font-headline">{f.title}</h3>
-                <p className="text-xs text-slate-300 leading-relaxed">{f.desc}</p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
-        </section>
+          </section>
+        )}
 
         {/* ----------------------------------------------------------------- */}
         {/* 9. RESULTS & LIMITATIONS                                          */}
         {/* ----------------------------------------------------------------- */}
-        <section id="results" className="space-y-6 border-b border-white/10 pb-12">
-          
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#3B82F6] font-bold">
-            <span>08 // DECISION OUTCOMES</span>
-          </div>
-
-          <h2 className="text-2xl sm:text-3xl font-headline font-bold text-white">
-            Measurable Impact &amp; Technical Limitations
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-6 rounded-2xl bg-[#0D0E12] border border-emerald-500/30 space-y-3">
-              <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-400 uppercase">
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Decisions Enabled</span>
-              </div>
-              <ul className="text-xs text-slate-300 space-y-2 font-mono">
-                <li>&bull; Shifted executive reporting from gross placed GMV to reconciled cash realization.</li>
-                <li>&bull; Eliminated 14 promotional campaigns with negative unit-economics.</li>
-                <li>&bull; Established deterministic cohort retention tracking for 3,970 active accounts.</li>
-              </ul>
+        {project.resultsAndDecisions && (
+          <section id="results" className="space-y-6 border-b border-white/10 pb-12">
+            
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#3B82F6] font-bold">
+              <span>08 // DECISION OUTCOMES</span>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#0D0E12] border border-white/10 space-y-3">
-              <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-400 uppercase">
-                <AlertTriangle className="w-4 h-4" />
-                <span>Scope &amp; Technical Limitations</span>
-              </div>
-              <ul className="text-xs text-slate-300 space-y-2 font-mono">
-                <li>&bull; Dataset is an empirically modeled synthetic simulation generated for analytical rigor.</li>
-                <li>&bull; Return tracking does not model physical reverse-logistics depot inspection latencies.</li>
-                <li>&bull; Dynamic currency conversion not required as all transactions are denominated in INR.</li>
-              </ul>
-            </div>
-          </div>
+            <h2 className="text-2xl sm:text-3xl font-headline font-bold text-white">
+              Measurable Impact &amp; Technical Limitations
+            </h2>
 
-        </section>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="p-6 rounded-2xl bg-[#0D0E12] border border-emerald-500/30 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-400 uppercase">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>Decisions &amp; Capabilities Enabled</span>
+                </div>
+                <ul className="text-xs text-slate-300 space-y-2 font-mono">
+                  {project.resultsAndDecisions.decisionsEnabled?.map((item, i) => (
+                    <li key={i}>&bull; {item}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-[#0D0E12] border border-white/10 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-400 uppercase">
+                  <AlertTriangle className="w-4 h-4" />
+                  <span>Scope &amp; Technical Limitations</span>
+                </div>
+                <ul className="text-xs text-slate-300 space-y-2 font-mono">
+                  {project.resultsAndDecisions.technicalLimitations?.map((item, i) => (
+                    <li key={i}>&bull; {item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+          </section>
+        )}
 
         {/* ----------------------------------------------------------------- */}
         {/* 10. TECHNOLOGY STACK                                              */}
         {/* ----------------------------------------------------------------- */}
-        <section id="tech-stack" className="space-y-6 border-b border-white/10 pb-12">
-          
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#3B82F6] font-bold">
-            <span>09 // COMPLETE STACK</span>
-          </div>
+        {project.techStack && (
+          <section id="tech-stack" className="space-y-6 border-b border-white/10 pb-12">
+            
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#3B82F6] font-bold">
+              <span>09 // COMPLETE STACK</span>
+            </div>
 
-          <h2 className="text-2xl sm:text-3xl font-headline font-bold text-white">
-            Technologies &amp; Libraries Implemented
-          </h2>
+            <h2 className="text-2xl sm:text-3xl font-headline font-bold text-white">
+              Technologies &amp; Libraries Implemented
+            </h2>
 
-          <div className="flex flex-wrap gap-2">
-            {(project.techStack || [
-              'PostgreSQL 18',
-              'SQL',
-              'Power BI',
-              'DAX',
-              'Python 3.11',
-              'Pandas',
-              'Star Schema',
-              'FastAPI',
-              'React 18',
-              'TypeScript'
-            ]).map((t) => (
-              <span key={t} className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-slate-200">
-                {t}
-              </span>
-            ))}
-          </div>
+            <div className="flex flex-wrap gap-2">
+              {project.techStack.map((t) => (
+                <span key={t} className="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-slate-200">
+                  {t}
+                </span>
+              ))}
+            </div>
 
-        </section>
+          </section>
+        )}
 
         {/* ----------------------------------------------------------------- */}
         {/* 11. NEXT PROJECT NAVIGATION                                       */}
@@ -710,7 +698,7 @@ ORDER BY 1, 2;`}
             </div>
 
             <a
-              href={asset(`/projects/${nextProject.id}/`)}
+              href={asset(`/projects/${nextProject.slug || nextProject.id}/`)}
               className="block group rounded-3xl bg-[#0D0E12] border border-white/15 hover:border-[#3B82F6]/60 p-8 sm:p-10 shadow-2xl transition-all duration-300 relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#3B82F6]/5 rounded-full blur-3xl pointer-events-none group-hover:bg-[#3B82F6]/10 transition-colors" />
@@ -725,7 +713,7 @@ ORDER BY 1, 2;`}
                     {nextProject.title}
                   </h3>
                   
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-mono">
                     {nextProject.tagline}
                   </p>
 
@@ -750,34 +738,49 @@ ORDER BY 1, 2;`}
 
       </main>
 
-      {/* =================================================================== */}
-      {/* 12. FOOTER                                                          */}
-      {/* =================================================================== */}
+      {/* Reusable Dark Editorial Footer */}
       <Footer />
 
-      {/* Fullscreen Zoom Lightbox Modal */}
+      {/* =================================================================== */}
+      {/* Fullscreen Zoom Lightbox Modal                                      */}
+      {/* =================================================================== */}
       {zoomImage && (
         <div 
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-4 sm:p-8 cursor-zoom-out"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex flex-col justify-between p-4 sm:p-8 animate-in fade-in duration-200"
           onClick={() => setZoomImage(null)}
         >
-          <button
-            onClick={() => setZoomImage(null)}
-            className="absolute top-6 right-6 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors cursor-pointer"
-            aria-label="Close fullscreen view"
+          <div className="flex items-center justify-between max-w-7xl mx-auto w-full pb-4">
+            <div>
+              <h4 className="text-sm sm:text-base font-bold text-white font-headline">
+                {zoomImage.title}
+              </h4>
+              <p className="text-xs text-slate-400 font-mono mt-0.5">
+                {zoomImage.caption}
+              </p>
+            </div>
+            
+            <button
+              onClick={() => setZoomImage(null)}
+              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer border border-white/10"
+              aria-label="Close zoom"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div 
+            className="flex-1 flex items-center justify-center p-2 max-w-7xl mx-auto w-full overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
           >
-            <X className="w-6 h-6" />
-          </button>
+            <img
+              src={asset(`/images/projects/${project.imageDir || project.id}/${zoomImage.filename}`)}
+              alt={zoomImage.title}
+              className="max-h-[82vh] max-w-full object-contain rounded-xl shadow-2xl border border-white/10"
+            />
+          </div>
 
-          <img
-            src={asset(`/images/projects/${currentId}/${zoomImage.filename}`)}
-            alt={zoomImage.title}
-            className="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl"
-          />
-
-          <div className="mt-4 text-center text-xs font-mono text-slate-300 max-w-xl">
-            <span className="font-bold text-white block mb-1">{zoomImage.title}</span>
-            <span>{zoomImage.caption}</span>
+          <div className="text-center text-xs font-mono text-slate-500 pt-3">
+            Press ESC or click anywhere outside the image to exit fullscreen inspection
           </div>
         </div>
       )}

@@ -29,7 +29,7 @@ export default function EducationCredentialsSection() {
       status: 'Completed',
       statusType: 'completed',
       date: 'Earned October 2026',
-      badgeImage: null,
+      badgeImage: asset('/images/certifications/microsoft-certified-associate.webp'),
       description: 'Advanced semantic modeling, DAX measure calculations (Time Intelligence, CALCULATE, DIVIDE), Power Query ETL, and executive dashboard development reconciled with relational SQL databases.',
       skills: ['Power BI Desktop', 'Advanced DAX', 'Data Modeling', 'Power Query M', 'KPI Design'],
       icon: BarChart3,
@@ -43,7 +43,7 @@ export default function EducationCredentialsSection() {
       status: 'Completed',
       statusType: 'completed',
       date: 'Earned October 2026',
-      badgeImage: null,
+      badgeImage: asset('/images/certifications/microsoft-certified-associate.webp'),
       description: 'Enterprise lakehouse architecture on Microsoft Fabric, Delta Lake storage, OneLake data unification, medallion architecture, and Direct Lake semantic reporting.',
       skills: ['Microsoft Fabric', 'OneLake', 'Delta Tables', 'Lakehouse', 'Data Factory'],
       icon: Layers,
@@ -57,7 +57,7 @@ export default function EducationCredentialsSection() {
       status: 'Completed',
       statusType: 'completed',
       date: 'Earned October 2026',
-      badgeImage: null,
+      badgeImage: asset('/images/certifications/microsoft-certified-fundamentals.png'),
       description: 'Core cloud data concepts, relational data warehousing in Azure Synapse, non-relational document storage in Cosmos DB, and cloud data governance.',
       skills: ['Azure Synapse', 'Cloud Storage', 'Relational DBs', 'NoSQL', 'Security'],
       icon: Cloud,
@@ -71,7 +71,7 @@ export default function EducationCredentialsSection() {
       status: 'Completed',
       statusType: 'completed',
       date: 'Earned October 2026',
-      badgeImage: asset('/images/certifications/google-cloud-associate.png'),
+      badgeImage: asset('/images/certifications/google-cloud-data-practitioner.jpg'),
       description: 'Google Cloud Computing Foundations: BigQuery SQL data warehousing, Cloud Storage data lakes, IAM security controls, and Looker Studio business analytics.',
       skills: ['BigQuery', 'Google Cloud', 'Cloud IAM', 'Data Warehousing', 'Analytics'],
       icon: Database,
@@ -319,16 +319,17 @@ export default function EducationCredentialsSection() {
                         </div>
 
                         {cert.badgeImage ? (
-                          <div className="w-14 h-14 rounded-2xl overflow-hidden bg-white/5 border border-white/15 p-1.5 shadow-md shrink-0 flex items-center justify-center">
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-white border border-white/20 p-2 shadow-md shrink-0 flex items-center justify-center">
                             <img
                               src={cert.badgeImage}
                               alt={cert.name}
                               className="w-full h-full object-contain"
+                              loading="eager"
                             />
                           </div>
                         ) : (
-                          <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/15 p-3 shadow-md shrink-0 flex items-center justify-center text-[#3B82F6]">
-                            <IconComponent className="w-7 h-7" />
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/5 border border-white/15 p-3 shadow-md shrink-0 flex items-center justify-center text-[#3B82F6]">
+                            <IconComponent className="w-8 h-8" />
                           </div>
                         )}
                       </div>

@@ -212,13 +212,13 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
                   <ExternalLink className="w-3 h-3 text-slate-400" />
                 </a>
 
-                <Link
-                  href="/projects/novacart/"
+                <a
+                  href={asset('/projects/novacart/')}
                   className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-semibold bg-blue-500/15 border border-blue-500/30 text-blue-300 hover:bg-blue-500/25 transition-colors"
                 >
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>View Case Study</span>
-                </Link>
+                </a>
               </div>
             </div>
 
@@ -391,12 +391,12 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
                 ))}
               </div>
 
-              <Link
-                href="/projects/novacart/"
+              <a
+                href={asset('/projects/novacart/')}
                 className="inline-flex items-center gap-1.5 text-blue-400 hover:text-blue-300 font-bold"
               >
                 <span>Examine Technical Schema &amp; Pytest Logs &rarr;</span>
-              </Link>
+              </a>
             </div>
 
           </motion.div>
@@ -424,13 +424,13 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
               </div>
 
               <div className="flex items-center gap-3">
-                <Link
-                  href="/projects/product-analytics/"
+                <a
+                  href={asset('/projects/product-analytics/')}
                   className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-bold bg-white text-gray-950 hover:bg-blue-400 transition-colors"
                 >
                   <span>Explore Case Study</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
-                </Link>
+                </a>
               </div>
             </div>
 
@@ -598,13 +598,13 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
                     )}
                   </div>
 
-                  <Link
-                    href={`/projects/${project.id}/`}
+                  <a
+                    href={asset(`/projects/${project.id}/`)}
                     className="inline-flex items-center gap-1 text-xs font-bold text-blue-400 hover:text-blue-300"
                   >
                     <span>Inspect System</span>
                     <ArrowUpRight className="w-3 h-3" />
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
             ))}

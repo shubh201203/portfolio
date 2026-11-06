@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { asset } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Database, 
@@ -294,9 +295,9 @@ export default function SkillsMatrix({ onOpenProject }) {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {active.connectedProjects.map((p) => (
-                      <Link
+                      <a
                         key={p.id}
-                        href={`/projects/${p.id}/`}
+                        href={asset(`/projects/${p.id}/`)}
                         className="p-4 rounded-2xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-[#3B82F6]/50 text-left transition-all duration-200 group block"
                       >
                         <div className="flex items-center justify-between">
@@ -311,7 +312,7 @@ export default function SkillsMatrix({ onOpenProject }) {
                         <div className="text-[10px] font-mono text-[#14B8A6] mt-2 group-hover:underline">
                           View Project Case Study &rarr;
                         </div>
-                      </Link>
+                      </a>
                     ))}
                   </div>
                 </div>

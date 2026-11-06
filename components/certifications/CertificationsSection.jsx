@@ -97,9 +97,9 @@ export default function CertificationsSection() {
                     </div>
 
                     {cert.badgeImage && (
-                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden bg-white/5 border border-white/15 p-1 shadow-md shrink-0">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-white border border-white/20 p-2 shadow-md shrink-0 flex items-center justify-center">
                         <img
-                          src={asset(`/${cert.badgeImage}`)}
+                          src={asset(cert.badgeImage)}
                           alt={`${cert.name} Official Badge`}
                           className="w-full h-full object-contain"
                           loading="lazy"
