@@ -14,35 +14,79 @@ export default function InsideTheDataPlayground() {
   const schemaTables = {
     fact_sales: {
       name: 'fact_sales',
-      type: 'Fact Table (Transaction Grain)',
+      type: 'Fact Table (Transaction Line Grain)',
       grain: 'One record per line-item transaction per fulfilled order',
-      pk: 'sales_key (BIGSERIAL)',
+      pk: 'sales_key (BIGSERIAL PRIMARY KEY)',
       fks: [
-        'customer_id → dim_customers.customer_id',
-        'product_id → dim_products.product_id',
-        'date_key → dim_date.date_key',
-        'region_id → dim_regions.region_id'
+        'customer_id → dim_customer.customer_id',
+        'product_id → dim_product.product_id',
+        'location_id → dim_location.location_id',
+        'payment_id → dim_payment.payment_id',
+        'date_key → dim_date.date_key'
       ],
       measures: ['order_quantity', 'realized_amount', 'discount_amount', 'return_amount', 'realized_profit'],
-      notes: 'Grain-isolated to prevent join fan-out. Measures strictly aggregated using SUMX and grain-safe CTEs.'
+      notes: 'Grain-isolated to prevent join fan-out. Measures strictly aggregated using SUMX and grain-safe CTEs without multiplying order totals.'
     },
-    dim_customers: {
-      name: 'dim_customers',
+    fact_returns: {
+      name: 'fact_returns',
+      type: 'Fact Table (Return Claim Grain)',
+      grain: 'One record per customer return incident',
+      pk: 'return_key (BIGSERIAL PRIMARY KEY)',
+      fks: [
+        'sales_key → fact_sales.sales_key',
+        'customer_id → dim_customer.customer_id',
+        'date_key → dim_date.date_key'
+      ],
+      measures: ['return_amount', 'restocking_fee', 'salvage_recovery_rate'],
+      notes: 'Maintained in a dedicated fact table to isolate return liabilities (−₹50.87M) from gross sales events.'
+    },
+    fact_payments: {
+      name: 'fact_payments',
+      type: 'Fact Table (Settlement Event Grain)',
+      grain: 'One record per gateway authorization / settlement attempt',
+      pk: 'payment_event_id (BIGSERIAL PRIMARY KEY)',
+      fks: [
+        'sales_key → fact_sales.sales_key',
+        'payment_id → dim_payment.payment_id'
+      ],
+      measures: ['settlement_amount', 'gateway_fee_amount', 'chargeback_amount'],
+      notes: 'Reconciles bank settlements against merchant accounts, confirming ₹796.75M net cash captured.'
+    },
+    dim_customer: {
+      name: 'dim_customer',
       type: 'Dimension Table (Customer Grain)',
-      grain: 'One record per unique transacting customer',
-      pk: 'customer_id (INT)',
+      grain: 'One record per unique registered customer',
+      pk: 'customer_id (INT PRIMARY KEY)',
       fks: ['None (Parent Entity)'],
       measures: ['cohort_month', 'rfm_segment', 'lifetime_orders', 'lifetime_value'],
       notes: 'Deterministic customer resolution via Python ETL cross-session recovery. 0 orphaned customer foreign keys.'
     },
-    dim_products: {
-      name: 'dim_products',
-      type: 'Dimension Table (Product Catalog Grain)',
-      grain: 'One record per SKU / item in catalog',
-      pk: 'product_id (INT)',
-      fks: ['category_id → dim_categories.category_id'],
+    dim_product: {
+      name: 'dim_product',
+      type: 'Dimension Table (Catalog SKU Grain)',
+      grain: 'One record per distinct product SKU in catalog',
+      pk: 'product_id (INT PRIMARY KEY)',
+      fks: ['category_id → dim_category.category_id'],
       measures: ['unit_cost', 'base_price', 'target_margin_pct'],
-      notes: 'Contains unit economics and manufacturer cost basis used to calculate realized operating profits.'
+      notes: 'Contains unit economics and manufacturer cost basis used to calculate realized operating profits (30.93%).'
+    },
+    dim_location: {
+      name: 'dim_location',
+      type: 'Dimension Table (Geographic Logistics Grain)',
+      grain: 'One record per state, pin-code zone, and fulfillment hub tier',
+      pk: 'location_id (INT PRIMARY KEY)',
+      fks: ['None'],
+      measures: ['state_name', 'hub_tier (Tier-1, Tier-2, Tier-3)', 'avg_transit_days'],
+      notes: 'Powers India regional logistics analysis and courier transit SLA variance tracking across 28 states.'
+    },
+    dim_payment: {
+      name: 'dim_payment',
+      type: 'Dimension Table (Payment Method Grain)',
+      grain: 'One record per payment method, gateway vendor, and channel',
+      pk: 'payment_id (INT PRIMARY KEY)',
+      fks: ['None'],
+      measures: ['payment_method (UPI, Net Banking, Credit/Debit, COD)', 'gateway_provider'],
+      notes: 'Captures UPI vs Card adoption and cash-on-delivery default correlation.'
     },
     dim_date: {
       name: 'dim_date',
@@ -52,15 +96,6 @@ export default function InsideTheDataPlayground() {
       fks: ['None'],
       measures: ['fiscal_quarter', 'fiscal_year', 'is_weekend', 'holiday_flag'],
       notes: 'Standardized integer surrogate key enabling rapid index scans and DAX time-intelligence functions.'
-    },
-    dim_regions: {
-      name: 'dim_regions',
-      type: 'Dimension Table (Logistics Geographic Grain)',
-      grain: 'One record per logistics operational zone / state',
-      pk: 'region_id (INT)',
-      fks: ['None'],
-      measures: ['state_name', 'hub_tier (Tier-1, Tier-2, Tier-3)', 'avg_transit_days'],
-      notes: 'Powers regional fulfillment breakdown and shipping SLA variance tracking.'
     }
   };
 
@@ -82,15 +117,15 @@ export default function InsideTheDataPlayground() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-6 border-b border-white/10">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-cyan-400 bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-800/60 mb-3">
-              <Terminal className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#D8F243] bg-[#D8F243]/10 px-3 py-1 rounded-full border border-[#D8F243]/30 mb-3">
+              <Terminal className="w-3.5 h-3.5 text-[#D8F243]" />
               <span>Interactive Analytics Engineering Sandbox</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
-              INSIDE THE DATA
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight font-headline">
+              BEYOND THE DASHBOARD
             </h2>
             <p className="text-slate-400 mt-2 text-sm sm:text-base max-w-2xl leading-relaxed">
-              Explore the mathematical and structural logic behind enterprise analytics: star schema schemas, live data curves, and revenue reconciliation models.
+              Explore the mathematical and structural logic behind enterprise analytics: NovaCart's 8-table star schema, interactive metric explorer, and data quality reconciliation models.
             </p>
           </div>
 
@@ -98,9 +133,9 @@ export default function InsideTheDataPlayground() {
           <div className="flex items-center gap-1.5 p-1.5 rounded-xl bg-white/5 border border-white/10 text-xs font-mono">
             <button
               onClick={() => setActiveTab('schema')}
-              className={`px-3 py-2 rounded-lg transition-all font-semibold ${
+              className={`px-3 py-2 rounded-lg transition-all font-semibold cursor-pointer ${
                 activeTab === 'schema'
-                  ? 'bg-blue-600 text-white shadow-glow-blue'
+                  ? 'bg-[#D8F243] text-gray-950 font-bold shadow-md'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -108,23 +143,23 @@ export default function InsideTheDataPlayground() {
             </button>
             <button
               onClick={() => setActiveTab('viz')}
-              className={`px-3 py-2 rounded-lg transition-all font-semibold ${
+              className={`px-3 py-2 rounded-lg transition-all font-semibold cursor-pointer ${
                 activeTab === 'viz'
-                  ? 'bg-blue-600 text-white shadow-glow-blue'
+                  ? 'bg-[#D8F243] text-gray-950 font-bold shadow-md'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              Interactive Data Curves
+              Analytics Explorer
             </button>
             <button
               onClick={() => setActiveTab('explainer')}
-              className={`px-3 py-2 rounded-lg transition-all font-semibold ${
+              className={`px-3 py-2 rounded-lg transition-all font-semibold cursor-pointer ${
                 activeTab === 'explainer'
-                  ? 'bg-blue-600 text-white shadow-glow-blue'
+                  ? 'bg-[#D8F243] text-gray-950 font-bold shadow-md'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              Analytics Explainer
+              Data Quality Explainer
             </button>
           </div>
         </div>
@@ -146,19 +181,19 @@ export default function InsideTheDataPlayground() {
                   <button
                     key={key}
                     onClick={() => setSelectedTable(key)}
-                    className={`w-full p-3.5 rounded-xl text-left border transition-all ${
+                    className={`w-full p-3.5 rounded-xl text-left border transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-blue-600 text-white border-blue-400 shadow-glow-blue -translate-x-1'
+                        ? 'bg-[#D8F243] text-gray-950 border-[#D8F243] shadow-md -translate-x-1 font-bold'
                         : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10 hover:border-white/20'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-mono font-bold text-sm">{tbl.name}</span>
-                      <span className={`text-[10px] font-mono px-2 py-0.5 rounded ${isSelected ? 'bg-white/20 text-white' : 'bg-black/40 text-cyan-400'}`}>
+                      <span className={`text-[10px] font-mono px-2 py-0.5 rounded ${isSelected ? 'bg-black/20 text-gray-950 font-bold' : 'bg-black/40 text-cyan-400'}`}>
                         {key.startsWith('fact') ? 'FACT' : 'DIM'}
                       </span>
                     </div>
-                    <div className={`text-xs mt-1 truncate ${isSelected ? 'text-blue-100' : 'text-slate-400'}`}>
+                    <div className={`text-xs mt-1 truncate ${isSelected ? 'text-gray-950/80 font-normal' : 'text-slate-400'}`}>
                       {tbl.grain}
                     </div>
                   </button>

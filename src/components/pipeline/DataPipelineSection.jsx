@@ -181,24 +181,24 @@ export default function DataPipelineSection() {
               <div key={stage.id} className="relative">
                 <button
                   onClick={() => setActiveStage(idx)}
-                  className={`w-full p-4 rounded-xl text-left border transition-all duration-300 flex flex-col justify-between h-36 ${
+                  className={`w-full p-4 rounded-2xl text-left border transition-all duration-300 flex flex-col justify-between h-36 ${
                     isActive
-                      ? 'bg-blue-600 text-white border-blue-400 shadow-glow-blue -translate-y-1'
-                      : 'bg-[#111827]/80 text-slate-300 border-white/10 hover:border-white/30 hover:bg-[#162032]'
+                      ? 'bg-[#D8F243] text-gray-950 border-[#D8F243] shadow-glow-blue -translate-y-1'
+                      : 'bg-[#10131B] text-slate-300 border-white/10 hover:border-white/30 hover:bg-[#151924]'
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className={`text-[10px] font-mono font-bold ${isActive ? 'text-blue-200' : 'text-slate-400'}`}>
+                    <span className={`text-[10px] font-mono font-bold ${isActive ? 'text-gray-950/70' : 'text-slate-400'}`}>
                       {stage.step}
                     </span>
-                    <Icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-cyan-400'}`} />
+                    <Icon className={`w-5 h-5 ${isActive ? 'text-gray-950' : 'text-[#D8F243]'}`} />
                   </div>
 
                   <div>
                     <h4 className="text-xs font-bold font-mono tracking-tight leading-snug">
                       {stage.short}
                     </h4>
-                    <p className={`text-[10px] font-mono mt-1 ${isActive ? 'text-blue-100' : 'text-slate-400'}`}>
+                    <p className={`text-[10px] font-mono mt-1 ${isActive ? 'text-gray-950/80 font-bold' : 'text-slate-400'}`}>
                       {stage.badge}
                     </p>
                   </div>
@@ -223,10 +223,10 @@ export default function DataPipelineSection() {
               <button
                 key={stage.id}
                 onClick={() => setActiveStage(idx)}
-                className={`px-3 py-2 rounded-lg text-xs font-mono font-medium whitespace-nowrap border shrink-0 transition-all ${
+                className={`px-3 py-2 rounded-xl text-xs font-mono font-medium whitespace-nowrap border shrink-0 transition-all ${
                   isActive
-                    ? 'bg-blue-600 text-white border-blue-400 shadow-sm'
-                    : 'bg-[#111827] text-slate-300 border-white/10'
+                    ? 'bg-[#D8F243] text-gray-950 font-bold border-[#D8F243] shadow-sm'
+                    : 'bg-[#10131B] text-slate-300 border-white/10'
                 }`}
               >
                 {stage.step}: {stage.short}

@@ -60,29 +60,31 @@ export default function App() {
 
       {/* Main Narrative Flow: The Data Experience */}
       <main className="flex-1">
-        {/* Act I: Unforgettable Hero & Living Analytics Telemetry */}
+        {/* Experience 01: The Opening */}
         <Hero onExploreNovaCart={() => handleOpenCaseStudy('novacart')} />
 
-        {/* Act II: The 6-Stage Transformation Engine */}
-        <DataPipelineSection />
-
-        {/* Act III: The Flagship Centerpiece (NovaCart Full-Width Experience) */}
-        <NovaCartImmersive onOpenCaseStudy={handleOpenCaseStudy} />
-
-        {/* Act IV: The Capability Web (Connected Skills Network) */}
-        <InteractiveCapabilityMap />
-
-        {/* Act V: Inside The Data (Technical Playground: Schema, Viz, & Rigor) */}
-        <InsideTheDataPlayground />
-
-        {/* Act VI: Editorial Project Case Studies (Tailored Bespoke Layouts) */}
-        <EditorialProjects onOpenCaseStudy={handleOpenCaseStudy} />
-
-        {/* Act VII: Verified Credentials & Foundations */}
-        <Certifications />
+        {/* Experience 02: The Introduction / Manifesto */}
         <AboutEditorial />
 
-        {/* Act VIII: The Decisive Finish */}
+        {/* Experience 03: The Data Engine (Interactive 6-Stage Pipeline) */}
+        <DataPipelineSection />
+
+        {/* Experience 04: The Project Archive — Flagship NovaCart */}
+        <NovaCartImmersive onOpenCaseStudy={handleOpenCaseStudy} />
+
+        {/* Experience 04: The Project Archive — Applied Systems (BitePulse, DIRS, WardrobeWhiz, Emotion Beats, TO-DO) */}
+        <EditorialProjects onOpenCaseStudy={handleOpenCaseStudy} />
+
+        {/* Experience 05: The Interactive Data Playground ("Beyond The Dashboard") */}
+        <InsideTheDataPlayground />
+
+        {/* Experience 06: Skills & Capabilities Web */}
+        <InteractiveCapabilityMap />
+
+        {/* Experience 07: Verified Credentials & Foundations */}
+        <Certifications />
+
+        {/* Experience 08: Contact & Personal Branding */}
         <ContactEditorial />
       </main>
 

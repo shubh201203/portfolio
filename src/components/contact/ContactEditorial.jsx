@@ -43,8 +43,8 @@ export default function ContactEditorial() {
             <span>Collaboration &amp; Opportunities</span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.08]">
-            LET'S MAKE DATA <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-white bg-clip-text text-transparent">MEAN SOMETHING.</span>
+          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-headline font-extrabold text-white tracking-tight leading-[1.02]">
+            LET'S TURN DATA INTO <span className="text-[#D8F243] underline decoration-[#1D4ED8] decoration-4 underline-offset-8">SOMETHING MEANINGFUL.</span>
           </h2>
 
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
@@ -54,11 +54,11 @@ export default function ContactEditorial() {
           <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
             <a
               href={`mailto:${personal.email}?subject=Data%20Analyst%20Role%20Inquiry%20-%20Shubh%20Sharma`}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-sm font-semibold bg-blue-600 text-white hover:bg-blue-500 shadow-glow-blue transition-all active:scale-[0.98]"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-sm font-bold bg-[#D8F243] text-gray-950 hover:bg-[#CCFF00] shadow-glow-blue transition-all active:scale-[0.98]"
             >
-              <Mail className="w-4 h-4" />
+              <Mail className="w-4 h-4 text-gray-950" />
               <span>Send Email Directly</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 text-gray-950" />
             </a>
 
             <a

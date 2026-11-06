@@ -45,6 +45,16 @@ export default {
           teal: '#14B8A6',
           tealLight: '#F0FDFA',
         },
+        paper: '#F5F3EC',
+        'paper-muted': '#ECE9E2',
+        'paper-dark': '#E2DDD3',
+        dark: '#08090C',
+        'dark-surface': '#101218',
+        'dark-card': '#161922',
+        acid: '#D8F243',
+        'acid-hover': '#CCFF00',
+        cobalt: '#1D4ED8',
+        'cobalt-glow': '#3B82F6',
         status: {
           success: '#16A34A',
           successBg: '#F0FDF4',
@@ -56,6 +66,8 @@ export default {
       },
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['Space Grotesk', 'Plus Jakarta Sans', 'sans-serif'],
+        headline: ['Syne', 'Space Grotesk', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace']
       },
       boxShadow: {

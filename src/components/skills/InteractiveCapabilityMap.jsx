@@ -4,11 +4,9 @@ import {
   BarChart3, 
   Terminal, 
   Layers, 
-  LineChart, 
-  Cloud, 
   Code2, 
   Cpu, 
-  Sparkles, 
+  Sparkles,
   Activity, 
   ArrowRight 
 } from 'lucide-react';
@@ -19,105 +17,79 @@ export default function InteractiveCapabilityMap() {
   const capabilities = [
     {
       id: 0,
-      name: 'SQL & PostgreSQL 18',
-      short: 'PostgreSQL & SQL',
-      category: 'Data Warehousing',
+      name: 'Data Analytics',
+      short: 'Data Analytics',
+      category: 'CATEGORY 01 // ANALYTICS',
+      icon: Terminal,
+      color: 'from-emerald-500 to-teal-500',
+      activeColor: 'bg-[#D8F243] text-gray-950 border-[#D8F243]',
+      description: 'Translating raw event logs into diagnostic, predictive, and prescriptive business outcomes using statistical rigor, cohort analysis, and exploratory profiling.',
+      skills: ['Python 3.11', 'Pandas', 'NumPy', 'EDA', 'Statistics', 'Data Cleaning', 'Cohort Retention', 'Quarantine Logging'],
+      appliedIn: 'NovaCart ETL: Built 19/19 passing test assertions and 28 overall Pytests ensuring deterministic customer resolution across messy order events.',
+      codeSample: `def clean_sales_pipeline(df: pd.DataFrame) -> pd.DataFrame:\n    df['customer_id'] = df.groupby('email')['customer_id'].ffill()\n    df = df.drop_duplicates(subset=['order_id', 'item_id'])\n    assert df['realized_revenue'].notnull().all()\n    return df`
+    },
+    {
+      id: 1,
+      name: 'SQL & Databases',
+      short: 'SQL & Databases',
+      category: 'CATEGORY 02 // DATABASE RIGOR',
       icon: Database,
       color: 'from-blue-500 to-cyan-500',
-      activeColor: 'bg-blue-600 text-white border-blue-400',
+      activeColor: 'bg-[#D8F243] text-gray-950 border-[#D8F243]',
       description: 'Relational data warehousing, complex analytical queries, recursive CTEs, window calculations, and star schema modeling.',
-      skills: ['PostgreSQL 18', 'Complex SQL', 'CTEs', 'Window Functions', 'Joins & Subqueries', 'Query Optimization', 'Star Schema'],
+      skills: ['PostgreSQL 18', 'SQL', 'CTEs', 'Window Functions', 'Joins', 'Analytical Queries', 'Star Schema', 'Query Optimization'],
       appliedIn: 'NovaCart: 8-table relational data warehouse with surrogate keys, grain isolation, and zero foreign-key orphans across 104,852 sales records.',
       codeSample: `SELECT customer_id,\n       order_date,\n       SUM(realized_amount) OVER(PARTITION BY customer_id ORDER BY order_date)\nFROM fact_sales WHERE order_status IN ('Completed', 'Shipped');`
     },
     {
-      id: 1,
-      name: 'Power BI & DAX',
-      short: 'Power BI & DAX',
-      category: 'Business Intelligence',
+      id: 2,
+      name: 'Business Intelligence',
+      short: 'Business Intelligence',
+      category: 'CATEGORY 03 // EXECUTIVE BI',
       icon: BarChart3,
       color: 'from-amber-500 to-yellow-500',
-      activeColor: 'bg-amber-600 text-white border-amber-400',
+      activeColor: 'bg-[#D8F243] text-gray-950 border-[#D8F243]',
       description: 'Production BI report authoring, tabular semantic models, time-intelligence DAX calculations, and interactive executive reporting.',
-      skills: ['Power BI Desktop', 'DAX Measures', 'Power Query M', 'Tabular Modeling', 'Dynamic Slicers', 'RFM Segmentation', 'Executive KPIs'],
+      skills: ['Power BI', 'DAX', 'Power Query', 'Semantic Modeling', 'Dashboard Development', 'Dynamic Slicers', 'RFM Segmentation'],
       appliedIn: 'NovaCart & BitePulse: 6-page dashboard suites with 30+ to 66 DAX measures reconciled against database queries with zero reconciliation variance.',
-      codeSample: `Net Cash Retained =\nCALCULATE(\n    [Realized Revenue] - [Settled Return Loss],\n    ALLSELECTED(dim_date[fiscal_quarter])\n)`
-    },
-    {
-      id: 2,
-      name: 'Python & Pandas ETL',
-      short: 'Python & Pandas',
-      category: 'Data Ingestion & Hygiene',
-      icon: Terminal,
-      color: 'from-emerald-500 to-teal-500',
-      activeColor: 'bg-emerald-600 text-white border-emerald-400',
-      description: 'Automated data pipelines, deterministic customer key recovery, quarantine logging, statistical validation, and schema tests.',
-      skills: ['Python 3.11', 'Pandas', 'NumPy', 'Pytest', 'Deterministic Cleaning', 'Data Profiling', 'Quarantine Logging'],
-      appliedIn: 'NovaCart ETL: Built 19/19 passing test assertions and 28 overall Pytests ensuring deterministic customer resolution across messy order events.',
-      codeSample: `def clean_customer_grain(df: pd.DataFrame) -> pd.DataFrame:\n    df['customer_id'] = df.groupby('email')['customer_id'].ffill()\n    assert df['customer_id'].notnull().all()\n    return df`
+      codeSample: `Post-Return Net Cash =\nSUMX(\n    fact_sales,\n    fact_sales[realized_amount] - fact_sales[return_amount]\n)\n-- Reconciled to ₹796.75M`
     },
     {
       id: 3,
       name: 'Analytics Engineering',
       short: 'Analytics Engineering',
-      category: 'Dimensional Modeling',
+      category: 'CATEGORY 04 // WAREHOUSE MODELING',
       icon: Layers,
       color: 'from-indigo-500 to-purple-500',
-      activeColor: 'bg-indigo-600 text-white border-indigo-400',
+      activeColor: 'bg-[#D8F243] text-gray-950 border-[#D8F243]',
       description: 'Kimball dimensional modeling, fact-grain isolation, surrogate key management, slowly changing dimensions, and analytical views.',
-      skills: ['Kimball Dimensional Modeling', 'Fact-Grain Isolation', 'Surrogate Keys', '1:N Relationships', 'Zero Fan-Out Traps', 'Analytical Views'],
+      skills: ['ETL', 'Dimensional Modeling', 'Data Warehousing', 'Data Validation', 'Kimball Star Schema', 'Fact-Grain Isolation', 'Surrogate Keys'],
       appliedIn: 'Public analytical views (public.vw_cohort_retention) and grain-isolated fact tables preventing order/line-item duplicate inflation.',
       codeSample: `-- Enforcing 1:N single-direction relationship\nALTER TABLE fact_sales ADD CONSTRAINT fk_sales_date\nFOREIGN KEY (date_key) REFERENCES dim_date(date_key);`
     },
     {
       id: 4,
-      name: 'Statistical Modeling & EDA',
-      short: 'Statistics & EDA',
-      category: 'Diagnostic Analytics',
-      icon: LineChart,
-      color: 'from-cyan-500 to-blue-600',
-      activeColor: 'bg-cyan-700 text-white border-cyan-400',
-      description: 'Exploratory data analysis, 18-month customer cohort retention matrices, RFM behavioral tiering, and Pareto 80/20 customer concentration.',
-      skills: ['Cohort Retention (M0–M18)', 'RFM Customer Tiering', 'Pareto 80/20 Analysis', 'Distribution Profiling', 'Funnel Conversion', 'Descriptive Statistics'],
-      appliedIn: 'BitePulse: Analyzed 7-stage conversion funnel measuring 27.78% session-to-order, 85.39% checkout, and 68.90% repeat ordering.',
-      codeSample: `WITH ranked_customers AS (\n    SELECT customer_id, SUM(realized_amount) as rev,\n           CUME_DIST() OVER(ORDER BY SUM(realized_amount) DESC) as p\n    FROM fact_sales GROUP BY 1\n) SELECT * FROM ranked_customers WHERE p <= 0.20;`
-    },
-    {
-      id: 5,
-      name: 'Cloud Lakehouse & Fabric',
-      short: 'Fabric & Cloud Lakehouse',
-      category: 'Modern Cloud Stack',
-      icon: Cloud,
-      color: 'from-sky-500 to-indigo-600',
-      activeColor: 'bg-sky-600 text-white border-sky-400',
-      description: 'Cloud data warehousing, Microsoft Fabric Lakehouse architectures, Delta Parquet tables, and Azure cloud data pipelines.',
-      skills: ['Microsoft Fabric', 'Delta Lake / Parquet', 'Azure Synapse', 'Azure Data Fundamentals (DP-900)', 'Fabric Analytics Engineer (DP-600)', 'BigQuery'],
-      appliedIn: 'Certified Microsoft Fabric Analytics Engineer (DP-600) and Azure Data Fundamentals (DP-900); Google Cloud Data Practitioner Associate credentialed.',
-      codeSample: `SELECT * FROM OPENROWSET(\n    BULK 'https://onelake.blob.core.windows.net/lakehouse/Tables/fact_sales',\n    FORMAT = 'DELTA'\n) AS [sales];`
-    },
-    {
-      id: 6,
-      name: 'Full-Stack Delivery & APIs',
-      short: 'React 19 & FastAPI',
-      category: 'Production Applications',
+      name: 'Engineering',
+      short: 'Engineering',
+      category: 'CATEGORY 05 // SOFTWARE CRAFT',
       icon: Code2,
       color: 'from-violet-500 to-pink-500',
-      activeColor: 'bg-violet-600 text-white border-violet-400',
+      activeColor: 'bg-[#D8F243] text-gray-950 border-[#D8F243]',
       description: 'High-throughput RESTful backend APIs in FastAPI, asynchronous request routing, and responsive analytical user interfaces in React 19.',
-      skills: ['React 19', 'JavaScript / TypeScript', 'FastAPI', 'Node.js', 'REST APIs', 'Vercel / Render', 'Neon PostgreSQL'],
+      skills: ['React', 'JavaScript', 'TypeScript', 'FastAPI', 'Node.js', 'Git', 'Vercel / Render', 'Neon PostgreSQL'],
       appliedIn: 'Deployed NovaCart cloud app on Vercel with FastAPI backend on Render, delivering sub-200ms analytics queries directly to browser UI.',
       codeSample: `@app.get("/api/v1/analytics/cohorts")\nasync def get_cohort_matrix(db: AsyncSession = Depends(get_db)):\n    result = await db.execute(select(CohortView))\n    return result.scalars().all()`
     },
     {
-      id: 7,
-      name: 'Applied AI & Heuristics',
-      short: 'Applied AI & Models',
-      category: 'Algorithmic Systems',
+      id: 5,
+      name: 'Applied AI',
+      short: 'Applied AI',
+      category: 'CATEGORY 06 // ALGORITHMIC HEURISTICS',
       icon: Cpu,
       color: 'from-rose-500 to-orange-500',
-      activeColor: 'bg-rose-600 text-white border-rose-400',
+      activeColor: 'bg-[#D8F243] text-gray-950 border-[#D8F243]',
       description: 'Deterministic scoring algorithms, NLP feature parsing, computer vision classification, and spatial route optimization.',
-      skills: ['Applied AI', 'MobileNet Vision', 'PuLP Linear Optimization', 'Google OR-Tools', 'TF-IDF NLP Heuristics', 'Fuzzy Scoring'],
+      skills: ['Machine Learning Fundamentals', 'Applied AI', 'Recommendation Systems', 'MobileNet Vision', 'PuLP Linear Optimization', 'Fuzzy Scoring'],
       appliedIn: 'DIRS Capstone: Applied PuLP linear programming and OR-Tools route optimization across 11 crisis scenarios with sub-15ms spatial queries.',
       codeSample: `prob = pulp.LpProblem("Disaster_Resource_Routing", pulp.LpMinimize)\nprob += pulp.lpSum([cost[i][j] * x[i][j] for i in resources for j in zones])`
     }
@@ -169,7 +141,7 @@ export default function InteractiveCapabilityMap() {
                   }`}
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className={`p-2 rounded-lg ${isSelected ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-700'}`}>
+                    <div className={`p-2 rounded-lg ${isSelected ? 'bg-black/15 text-gray-950 font-bold' : 'bg-gray-100 text-gray-700'}`}>
                       <Icon className="w-4 h-4" />
                     </div>
                     <div className="min-w-0">

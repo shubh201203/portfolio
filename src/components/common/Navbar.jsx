@@ -15,7 +15,7 @@ export default function Navbar() {
       setScrollProgress(progress);
       setIsScrolled(currentScroll > 40);
 
-      const sections = ['home', 'pipeline', 'novacart', 'skills', 'playground', 'projects', 'certifications', 'about', 'contact'];
+      const sections = ['home', 'introduction', 'pipeline', 'novacart', 'skills', 'playground', 'projects', 'certifications', 'contact'];
       const scrollPosition = window.scrollY + 140;
 
       for (const section of sections) {
@@ -36,13 +36,13 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
+    { label: 'Manifesto', href: '#introduction' },
     { label: 'Pipeline', href: '#pipeline' },
     { label: 'NovaCart', href: '#novacart' },
-    { label: 'Capability Map', href: '#skills' },
-    { label: 'Inside The Data', href: '#playground' },
+    { label: 'Capabilities', href: '#skills' },
+    { label: 'Playground', href: '#playground' },
     { label: 'Projects', href: '#projects' },
     { label: 'Credentials', href: '#certifications' },
-    { label: 'About', href: '#about' },
     { label: 'Contact', href: '#contact' },
   ];
 

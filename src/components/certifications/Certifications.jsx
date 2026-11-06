@@ -179,8 +179,35 @@ export default function Certifications() {
           </div>
         </div>
 
+        {/* Education & Academic Record Strip */}
+        <div className="mt-12 p-6 sm:p-7 rounded-3xl bg-white border border-gray-200 shadow-sm space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-gray-100 text-xs font-mono">
+            <span className="font-bold text-gray-900 uppercase">Degree Programs &amp; Academic Foundations</span>
+            <span className="text-gray-500">2023–2027</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-4 rounded-xl bg-gray-50/70 border border-gray-200/80 space-y-1">
+              <div className="text-sm font-bold text-gray-950">VIT-AP University</div>
+              <div className="text-xs text-gray-700">B.Tech in Computer Science &amp; Engineering (Core)</div>
+              <div className="text-xs font-mono text-gray-500 pt-0.5">2023–2027 • Amaravati, AP</div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-200/80 space-y-1">
+              <div className="text-sm font-bold text-gray-950">Indian Institute of Technology Madras</div>
+              <div className="text-xs text-gray-700">BS Degree in Data Science &amp; Management</div>
+              <div className="text-xs font-mono text-blue-700 font-bold pt-0.5">Foundational Level — Pursuing</div>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between pt-1 text-xs font-mono text-gray-600">
+            <span>Secondary &amp; Senior Secondary Examination Performance:</span>
+            <span className="font-bold text-gray-900">Class X: 95% &nbsp;|&nbsp; Class XII: 78%</span>
+          </div>
+        </div>
+
         {/* Verification Standards Callout */}
-        <div className="mt-12 bg-white border border-gray-200 rounded-xl p-5 shadow-subtle flex items-start sm:items-center gap-3 text-xs text-gray-600">
+        <div className="mt-6 bg-white border border-gray-200 rounded-xl p-5 shadow-subtle flex items-start sm:items-center gap-3 text-xs text-gray-600">
           <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 sm:mt-0" />
           <p className="leading-relaxed">
             <strong className="text-gray-900 font-semibold">Credential Integrity Standard:</strong> All 4 completed certifications are directly verifiable against official Microsoft and Google Cloud credential records issued in October 2026. No synthetic credential IDs or mock badges are used.

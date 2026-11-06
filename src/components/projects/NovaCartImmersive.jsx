@@ -182,6 +182,51 @@ export default function NovaCartImmersive({ onOpenCaseStudy }) {
           </div>
         </div>
 
+        {/* Financial Lifecycle Bridge & Transaction Grain Isolation */}
+        <div className="mb-12 p-6 sm:p-7 rounded-3xl bg-[#F5F3EC] border border-[#0A0A0C]/10 space-y-5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#0A0A0C]/10">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#1D4ED8]" />
+              <span className="text-xs font-mono uppercase tracking-wider font-bold text-[#0A0A0C]">
+                Financial Lifecycle Waterfall &amp; Transaction Grain Isolation
+              </span>
+            </div>
+            <span className="text-[11px] font-mono text-[#0A0A0C]/60 bg-white px-2.5 py-1 rounded-full border border-[#0A0A0C]/10">
+              Zero Join Fan-Out / 100% Reconciled
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="p-4 rounded-2xl bg-white border border-[#0A0A0C]/10 space-y-1">
+              <div className="text-[10px] font-mono uppercase text-[#0A0A0C]/50 font-bold">01. Placed Revenue</div>
+              <div className="text-xl font-bold font-mono text-[#0A0A0C]">₹920.45M</div>
+              <p className="text-[11px] text-[#0A0A0C]/60">Total gross order value booked at checkout across all sessions.</p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-[#0A0A0C]/10 space-y-1">
+              <div className="text-[10px] font-mono uppercase text-[#0A0A0C]/50 font-bold">02. Realized Revenue</div>
+              <div className="text-xl font-bold font-mono text-[#1D4ED8]">₹847.62M</div>
+              <p className="text-[11px] text-[#0A0A0C]/60">Orders successfully shipped or completed (excluding cancellations).</p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-[#0A0A0C]/10 space-y-1">
+              <div className="text-[10px] font-mono uppercase text-red-600 font-bold">03. Returned Revenue</div>
+              <div className="text-xl font-bold font-mono text-red-600">−₹50.87M</div>
+              <p className="text-[11px] text-[#0A0A0C]/60">Customer return claims deducted post-delivery (5.57% return rate).</p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-[#D8F243] shadow-sm space-y-1">
+              <div className="text-[10px] font-mono uppercase text-emerald-700 font-bold">04. Post-Return Net Cash</div>
+              <div className="text-xl font-bold font-mono text-emerald-700">₹796.75M</div>
+              <p className="text-[11px] text-[#0A0A0C]/60">Net cash retained in business bank accounts yielding ₹262.16M profit.</p>
+            </div>
+          </div>
+
+          <div className="p-4 rounded-xl bg-white/70 border border-[#0A0A0C]/10 text-xs text-[#0A0A0C]/75 leading-relaxed font-mono">
+            <strong>Grain Awareness Standard:</strong> Revenue metrics are computed strictly at <code className="bg-white px-1.5 py-0.5 rounded border border-[#0A0A0C]/10 text-[#0A0A0C] font-bold">fact_sales (sales_key)</code> line-item grain. Returns reside in a separate <code className="bg-white px-1.5 py-0.5 rounded border border-[#0A0A0C]/10 text-[#0A0A0C] font-bold">fact_returns</code> table linked via surrogate keys—preventing Cartesian product fan-out and double-counting across multi-item orders.
+          </div>
+        </div>
+
         {/* Interactive Power BI Showcase: 6 High-Res Genuine Views */}
         <div className="bg-[#0B0F19] text-white rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl space-y-8 mb-12">
           
