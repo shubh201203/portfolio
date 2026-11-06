@@ -1,7 +1,15 @@
 import React from 'react';
-import { ArrowRight, ExternalLink, BarChart3, CheckCircle2, Layers, ShieldCheck, LineChart } from 'lucide-react';
+import { 
+  ArrowRight, 
+  ExternalLink, 
+  CheckCircle2, 
+  Layers, 
+  ShieldCheck, 
+  LineChart
+} from 'lucide-react';
 import { GitHubIcon } from '../common/Icons';
 import { portfolioData } from '../../data/portfolioData';
+import NovaCartGallery from './NovaCartGallery';
 
 export default function NovaCartFeatured({ onOpenCaseStudy }) {
   const project = portfolioData.projects.find((p) => p.id === 'novacart');
@@ -18,7 +26,7 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
   ];
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 lg:p-10 shadow-subtle relative space-y-10">
+    <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-card relative space-y-10">
       
       {/* Header Banner */}
       <div className="flex flex-wrap items-start justify-between gap-6 border-b border-gray-100 pb-8">
@@ -61,7 +69,7 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
         <div className="flex flex-wrap sm:flex-col items-stretch gap-2.5 w-full sm:w-auto">
           <button
             onClick={() => onOpenCaseStudy('novacart')}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-md text-sm font-semibold bg-gray-950 text-white hover:bg-blue-600 transition-colors shadow-subtle active:scale-[0.98] whitespace-nowrap"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold bg-gray-950 text-white hover:bg-blue-600 transition-colors shadow-subtle active:scale-[0.98] whitespace-nowrap"
           >
             <span>View Detailed Case Study</span>
             <ArrowRight className="w-4 h-4" />
@@ -72,7 +80,7 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
               href={project.links.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 transition-colors"
+              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 transition-colors"
             >
               <span>Live Web App</span>
               <ExternalLink className="w-3.5 h-3.5" />
@@ -82,7 +90,7 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
               href={project.links.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100 hover:text-gray-950 transition-colors"
+              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100 hover:text-gray-950 transition-colors"
             >
               <GitHubIcon className="w-3.5 h-3.5 text-gray-700" />
               <span>Source Code</span>
@@ -105,7 +113,7 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
           {project.deliverables?.map((d) => (
             <div
               key={d.num}
-              className="p-5 rounded-lg border border-gray-200 bg-gray-50/50 hover:bg-white hover:border-blue-200 transition-colors flex flex-col justify-between space-y-3"
+              className="p-5 rounded-xl border border-gray-200 bg-gray-50/50 hover:bg-white hover:border-blue-200 hover:shadow-subtle transition-all flex flex-col justify-between space-y-3"
             >
               <div>
                 <div className="flex items-center justify-between text-xs font-mono text-gray-400 mb-1.5">
@@ -131,7 +139,7 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          <div className="p-4 rounded-lg bg-white border border-gray-200 shadow-subtle">
+          <div className="p-4 rounded-xl bg-white border border-gray-200 shadow-subtle hover:border-gray-300 transition-colors">
             <div className="text-[11px] font-mono text-gray-500 uppercase">Realized Revenue</div>
             <div className="text-xl sm:text-2xl font-extrabold text-gray-950 font-mono mt-1">₹847.62M</div>
             <div className="text-[11px] text-gray-500 mt-1 leading-snug">
@@ -139,7 +147,7 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
             </div>
           </div>
 
-          <div className="p-4 rounded-lg bg-white border border-gray-200 shadow-subtle">
+          <div className="p-4 rounded-xl bg-white border border-gray-200 shadow-subtle hover:border-blue-300 transition-colors">
             <div className="text-[11px] font-mono text-gray-500 uppercase">Post-Return Revenue</div>
             <div className="text-xl sm:text-2xl font-extrabold text-blue-600 font-mono mt-1">₹796.75M</div>
             <div className="text-[11px] text-gray-500 mt-1 leading-snug">
@@ -147,7 +155,7 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
             </div>
           </div>
 
-          <div className="p-4 rounded-lg bg-white border border-gray-200 shadow-subtle">
+          <div className="p-4 rounded-xl bg-white border border-gray-200 shadow-subtle hover:border-emerald-300 transition-colors">
             <div className="text-[11px] font-mono text-gray-500 uppercase">Realized Profit Margin</div>
             <div className="text-xl sm:text-2xl font-extrabold text-emerald-600 font-mono mt-1">30.93%</div>
             <div className="text-[11px] text-gray-500 mt-1 leading-snug">
@@ -155,7 +163,7 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
             </div>
           </div>
 
-          <div className="p-4 rounded-lg bg-white border border-gray-200 shadow-subtle">
+          <div className="p-4 rounded-xl bg-white border border-gray-200 shadow-subtle hover:border-gray-300 transition-colors">
             <div className="text-[11px] font-mono text-gray-500 uppercase">Customer Retention</div>
             <div className="text-xl sm:text-2xl font-extrabold text-gray-950 font-mono mt-1">82.12%</div>
             <div className="text-[11px] text-gray-500 mt-1 leading-snug">
@@ -165,7 +173,7 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
         </div>
 
         {/* Synthetic Dataset Notice */}
-        <div className="p-3 rounded-lg bg-gray-50 border border-gray-200 flex items-start gap-2.5 text-xs text-gray-600">
+        <div className="p-3.5 rounded-xl bg-gray-50 border border-gray-200 flex items-start gap-2.5 text-xs text-gray-600">
           <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
           <p className="leading-relaxed">
             <strong className="text-gray-900 font-medium">Synthetic Dataset Disclosure:</strong> All figures and behavioral patterns reflect rigorous, deterministic analysis on an empirically modeled synthetic India-focused e-commerce dataset generated for analytics engineering and business intelligence demonstration.
@@ -189,7 +197,7 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
             return (
               <div
                 key={s.step}
-                className={`p-3 rounded border text-left flex flex-col justify-between ${
+                className={`p-3 rounded-lg border text-left flex flex-col justify-between transition-colors ${
                   isModel ? 'bg-blue-50/50 border-blue-200' : 'bg-gray-50/60 border-gray-200'
                 }`}
               >
@@ -206,7 +214,7 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
         {/* Mobile Pipeline Flow */}
         <div className="lg:hidden grid grid-cols-2 sm:grid-cols-3 gap-2">
           {caseStudyFlow.map((s) => (
-            <div key={s.step} className="p-3 rounded border border-gray-200 bg-gray-50">
+            <div key={s.step} className="p-3 rounded-lg border border-gray-200 bg-gray-50">
               <span className="text-[10px] font-mono text-blue-600 font-bold">{s.step}</span>
               <div className="text-xs font-bold text-gray-900 mt-0.5">{s.title}</div>
               <div className="text-[10px] text-gray-500 mt-1">{s.desc}</div>
@@ -215,83 +223,9 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
         </div>
       </div>
 
-      {/* Power BI Dashboard Preview Gallery Showcase */}
-      <div className="border border-gray-200 rounded-xl bg-gray-50/40 p-6 space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-200 pb-3">
-          <div className="flex items-center gap-2">
-            <BarChart3 className="w-4 h-4 text-blue-600" />
-            <span className="text-xs font-bold text-gray-900">
-              Power BI Dashboard Suite Preview (6 Interactive Views)
-            </span>
-          </div>
-
-          <button
-            onClick={() => onOpenCaseStudy('novacart')}
-            className="text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1"
-          >
-            <span>View All 6 High-Res Views in Case Study</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
-        </div>
-
-        {/* Responsive Preview Cards showing Actual Screenshots */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div
-            onClick={() => onOpenCaseStudy('novacart')}
-            className="cursor-pointer group border border-gray-200 rounded-lg overflow-hidden bg-white shadow-subtle hover:border-blue-300 transition-all"
-          >
-            <div className="relative aspect-[16/9] overflow-hidden bg-gray-100">
-              <img
-                src={`${import.meta.env.BASE_URL}images/projects/novacart/01_executive_overview.png`}
-                alt="NovaCart Executive Overview Power BI Dashboard"
-                className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
-                loading="lazy"
-              />
-              <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-gray-900/80 text-white text-[10px] font-mono backdrop-blur-sm">
-                View 01 · Executive Overview
-              </div>
-            </div>
-            <div className="p-3.5">
-              <div className="text-xs font-bold text-gray-900">Executive Performance & Revenue Realization</div>
-              <div className="text-[11px] text-gray-500 mt-0.5">Monthly revenue trendlines (2022–2026), regional sales split, and order status breakdown.</div>
-            </div>
-          </div>
-
-          <div
-            onClick={() => onOpenCaseStudy('novacart')}
-            className="cursor-pointer group border border-gray-200 rounded-lg overflow-hidden bg-white shadow-subtle hover:border-blue-300 transition-all"
-          >
-            <div className="relative aspect-[16/9] overflow-hidden bg-gray-100">
-              <img
-                src={`${import.meta.env.BASE_URL}images/projects/novacart/06_customer_retention_rfm.png`}
-                alt="NovaCart Customer Retention & RFM Power BI Dashboard"
-                className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
-                loading="lazy"
-              />
-              <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-gray-900/80 text-white text-[10px] font-mono backdrop-blur-sm">
-                View 06 · Customer Retention & RFM
-              </div>
-            </div>
-            <div className="p-3.5">
-              <div className="text-xs font-bold text-gray-900">18-Month Customer Cohort Heatmap & RFM</div>
-              <div className="text-[11px] text-gray-500 mt-0.5">Authoritative cohort retention matrix (M0 to M18) backed by PostgreSQL view public.vw_cohort_retention.</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-gray-600 pt-2 border-t border-gray-200">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-            <span>All 6 dashboard views documented with full resolution, metric specifications, and DAX measures.</span>
-          </div>
-          <button
-            onClick={() => onOpenCaseStudy('novacart')}
-            className="text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1"
-          >
-            <span>Explore Dashboard Suite</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
-        </div>
+      {/* Interactive Power BI Dashboard Gallery Showcase */}
+      <div className="pt-2">
+        <NovaCartGallery onOpenCaseStudy={onOpenCaseStudy} />
       </div>
 
       {/* Footer Link to Full Case Study */}
@@ -317,7 +251,7 @@ export default function NovaCartFeatured({ onOpenCaseStudy }) {
             className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors"
           >
             <span>Open Complete Case Study</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>

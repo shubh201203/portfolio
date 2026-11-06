@@ -23,14 +23,14 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
   };
 
   return (
-    <div className={`bg-white border rounded-lg p-6 sm:p-7 flex flex-col justify-between ${
-      isProductAnalytics ? 'border-gray-300 shadow-subtle' : 'border-gray-200'
+    <div className={`bg-white border rounded-xl p-6 sm:p-7 flex flex-col justify-between hover:-translate-y-1 hover:shadow-elevated transition-all duration-300 ${
+      isProductAnalytics ? 'border-gray-300 shadow-card' : 'border-gray-200 shadow-subtle'
     }`}>
       <div className="space-y-4">
         {/* Top Meta */}
         <div className="flex items-center justify-between gap-3 border-b border-gray-100 pb-3">
           <div className="flex items-center gap-2">
-            <div className={`p-1.5 rounded ${isProductAnalytics ? 'text-blue-600' : 'text-gray-600'}`}>
+            <div className={`p-1.5 rounded-lg ${isProductAnalytics ? 'bg-blue-50 text-blue-600' : 'bg-gray-50 text-gray-600'}`}>
               {getCardIcon()}
             </div>
             <span className="text-[11px] font-mono text-gray-500 uppercase tracking-wider">
@@ -58,14 +58,14 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
           <div className="pt-2 pb-1 space-y-3">
             <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-gray-500 font-semibold">
               <span>Conversion Funnel & Drop-off Flow</span>
-              <span className="text-blue-600">6 Stages</span>
+              <span className="text-blue-600 font-bold">6 Stages</span>
             </div>
             
             {/* Visual Funnel Step Pills */}
             <div className="flex flex-wrap items-center gap-1 text-[11px] font-mono text-gray-800">
               {project.modules.funnel.steps.map((step, idx) => (
                 <React.Fragment key={step}>
-                  <span className="px-2 py-0.5 rounded bg-gray-50 border border-gray-200">
+                  <span className="px-2 py-0.5 rounded bg-gray-50 border border-gray-200 font-medium">
                     {step}
                   </span>
                   {idx < project.modules.funnel.steps.length - 1 && (
@@ -97,7 +97,7 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 text-center text-xs">
               {project.rolesArchitecture.map((r) => (
-                <div key={r.role} className="p-2 rounded bg-gray-50 border border-gray-200">
+                <div key={r.role} className="p-2 rounded-lg bg-gray-50 border border-gray-200">
                   <div className="font-bold text-gray-900 text-xs">{r.role}</div>
                   <div className="text-[10px] text-gray-400 font-mono mt-0.5">{r.capabilities.length} tasks</div>
                 </div>
@@ -114,15 +114,15 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
               <span className="text-amber-600 font-semibold">AI + Full Stack</span>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-center text-xs">
-              <div className="p-2 rounded bg-gray-50 border border-gray-200">
+              <div className="p-2 rounded-lg bg-gray-50 border border-gray-200">
                 <div className="font-bold text-gray-900 text-xs">Digital Closet</div>
                 <div className="text-[10px] text-gray-400 font-mono mt-0.5">MobileNet Vision</div>
               </div>
-              <div className="p-2 rounded bg-gray-50 border border-gray-200">
+              <div className="p-2 rounded-lg bg-gray-50 border border-gray-200">
                 <div className="font-bold text-gray-900 text-xs">AI Stylist</div>
                 <div className="text-[10px] text-gray-400 font-mono mt-0.5">OpenAI Context</div>
               </div>
-              <div className="p-2 rounded bg-gray-50 border border-gray-200 col-span-2 sm:col-span-1">
+              <div className="p-2 rounded-lg bg-gray-50 border border-gray-200 col-span-2 sm:col-span-1">
                 <div className="font-bold text-gray-900 text-xs">Style Analytics</div>
                 <div className="text-[10px] text-gray-400 font-mono mt-0.5">Balance Index</div>
               </div>
@@ -140,11 +140,11 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
               </span>
             </div>
             <div className="grid grid-cols-2 gap-2 text-xs">
-              <div className="p-2.5 rounded bg-gray-50 border border-gray-200">
+              <div className="p-2.5 rounded-lg bg-gray-50 border border-gray-200">
                 <div className="font-bold text-gray-900 text-xs">Deterministic Scoring</div>
                 <div className="text-[10px] text-gray-500 font-mono mt-0.5">Math 1.0–10.0 + Evidence Quotes</div>
               </div>
-              <div className="p-2.5 rounded bg-gray-50 border border-gray-200">
+              <div className="p-2.5 rounded-lg bg-gray-50 border border-gray-200">
                 <div className="font-bold text-gray-900 text-xs">Recruiter Intelligence</div>
                 <div className="text-[10px] text-gray-500 font-mono mt-0.5">3-Way Compare + CSV Export</div>
               </div>
@@ -162,11 +162,11 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
               </span>
             </div>
             <div className="grid grid-cols-2 gap-2 text-xs">
-              <div className="p-2.5 rounded bg-gray-50 border border-gray-200">
+              <div className="p-2.5 rounded-lg bg-gray-50 border border-gray-200">
                 <div className="font-bold text-gray-900 text-xs">Full CRUD & Filters</div>
                 <div className="text-[10px] text-gray-500 font-mono mt-0.5">Priority & Overdue Flags</div>
               </div>
-              <div className="p-2.5 rounded bg-gray-50 border border-gray-200">
+              <div className="p-2.5 rounded-lg bg-gray-50 border border-gray-200">
                 <div className="font-bold text-gray-900 text-xs">Dual Persistence</div>
                 <div className="text-[10px] text-gray-500 font-mono mt-0.5">PostgreSQL (Neon) + SQLite</div>
               </div>
@@ -184,11 +184,11 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
               </span>
             </div>
             <div className="grid grid-cols-2 gap-2 text-xs">
-              <div className="p-2.5 rounded bg-gray-50 border border-gray-200">
+              <div className="p-2.5 rounded-lg bg-gray-50 border border-gray-200">
                 <div className="font-bold text-gray-900 text-xs">Fuzzy Mood Engine</div>
                 <div className="text-[10px] text-gray-500 font-mono mt-0.5">Valence, Energy & Tempo Map</div>
               </div>
-              <div className="p-2.5 rounded bg-gray-50 border border-gray-200">
+              <div className="p-2.5 rounded-lg bg-gray-50 border border-gray-200">
                 <div className="font-bold text-gray-900 text-xs">Spotify + RL Feedback</div>
                 <div className="text-[10px] text-gray-500 font-mono mt-0.5">MongoDB Seed Genre Pivoting</div>
               </div>
@@ -232,7 +232,7 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
                 href={project.links.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded text-xs font-medium bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors border border-blue-200"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors border border-blue-200"
                 aria-label={`Open live demo for ${project.shortTitle || project.title}`}
               >
                 <span>Live Demo</span>
@@ -244,7 +244,7 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
                 href={project.links.docs}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded text-xs font-medium bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors border border-emerald-200"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors border border-emerald-200"
                 aria-label={`Open API documentation for ${project.shortTitle || project.title}`}
               >
                 <span>API Docs</span>
@@ -256,7 +256,7 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
                 href={project.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded text-xs font-medium bg-gray-50 text-gray-700 hover:bg-gray-100 transition-colors border border-gray-200"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-gray-50 text-gray-700 hover:bg-gray-100 transition-colors border border-gray-200"
                 aria-label={`Open GitHub repository for ${project.shortTitle || project.title}`}
               >
                 <span>GitHub</span>
@@ -269,4 +269,3 @@ export default function ProjectCard({ project, onOpenCaseStudy }) {
     </div>
   );
 }
-

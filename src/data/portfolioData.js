@@ -2,7 +2,7 @@ export const portfolioData = {
   personal: {
     name: "Shubh Sharma",
     roleTitle: "Data Analyst | BI & Product Analytics",
-    headline: "Turning raw data into actionable business insights through SQL, Python, Power BI, and analytics.",
+    headline: "Turning complex raw data into decision-grade business intelligence and analytics pipelines through SQL, Python, Power BI, and dimensional modeling.",
     email: "shubhsharmaa2003@gmail.com",
     phone: "9680749857",
     linkedin: "https://www.linkedin.com/in/shubh-sharma-2067981b5",
@@ -28,62 +28,68 @@ export const portfolioData = {
 
   skills: [
     {
-      category: "Data Analytics / BI",
+      category: "Data Analytics",
+      description: "Exploratory analysis, data hygiene, and statistical modeling with Python and numerical libraries.",
       priority: 1,
-      skills: [
-        "SQL",
-        "PostgreSQL",
-        "Microsoft Excel",
-        "Power BI",
-        "DAX",
-        "Power Query",
-        "Tableau",
-        "Data Modeling",
-        "Star Schema",
-        "Data Visualization",
-        "Business Analytics"
-      ]
-    },
-    {
-      category: "Python / Data",
-      priority: 2,
       skills: [
         "Python",
         "Pandas",
         "NumPy",
-        "Matplotlib",
-        "Statistics",
-        "Exploratory Data Analysis"
+        "Data Cleaning",
+        "Exploratory Data Analysis",
+        "Statistical Analysis"
       ]
     },
     {
-      category: "Analytics Concepts",
+      category: "Databases & SQL",
+      description: "Relational data warehousing, analytical queries, window calculations, and star schema modeling.",
+      priority: 2,
+      skills: [
+        "PostgreSQL",
+        "SQL",
+        "CTEs",
+        "Window Functions",
+        "Joins",
+        "Query Optimization",
+        "Dimensional Modeling"
+      ]
+    },
+    {
+      category: "Business Intelligence",
+      description: "Interactive executive reporting, DAX measure calculations, and dimensional ETL pipelines.",
       priority: 3,
       skills: [
-        "Data Cleaning",
-        "ETL",
-        "KPI Development",
-        "Customer Analytics",
-        "Sales Analytics",
-        "Dashboard Development",
-        "Cohort Analysis",
-        "Retention Analysis",
-        "Customer Segmentation",
-        "A/B Testing"
+        "Power BI",
+        "DAX",
+        "Power Query",
+        "Data Modeling",
+        "KPI Design",
+        "Dashboard Development"
       ]
     },
     {
-      category: "Development / Tools",
+      category: "Engineering",
+      description: "Modern web frontend frameworks, RESTful backend APIs, and developer workflows.",
       priority: 4,
       skills: [
-        "Git",
-        "GitHub",
         "React",
-        "Vite",
-        "Node.js",
-        "Express.js",
+        "JavaScript",
+        "TypeScript",
         "FastAPI",
-        "Firebase"
+        "Node.js",
+        "Git",
+        "API Integration"
+      ]
+    },
+    {
+      category: "AI / Machine Learning",
+      description: "Machine learning models, recommendation heuristics, affective computing, and NLP pipelines.",
+      priority: 5,
+      skills: [
+        "Machine Learning Fundamentals",
+        "Applied AI",
+        "Recommendation Systems",
+        "Data Processing"
       ]
     }
   ],
@@ -103,10 +109,10 @@ export const portfolioData = {
       statusType: "in_progress"
     },
     {
-      name: "Microsoft Certified: Azure Data Fundamentals (DP-900)",
+      name: "Microsoft Azure Data Fundamentals (DP-900)",
       issuer: "Microsoft",
-      status: "Completed",
-      statusType: "completed"
+      status: "Planned",
+      statusType: "planned"
     },
     {
       name: "Tableau Certified Data Analyst",
@@ -663,21 +669,6 @@ export const portfolioData = {
       isFlagship: false,
       status: "Completed & Deployed",
       tagline: "A full-stack task management application featuring a REST API, priority tracking, task filtering and sorting, and persistent PostgreSQL storage in production with SQLite support for local development.",
-      image: `${import.meta.env.BASE_URL}images/projects/todo/todo-dashboard.png`,
-      screenshots: [
-        {
-          id: 1,
-          title: "Dashboard Overview & KPI Counters",
-          image: `${import.meta.env.BASE_URL}images/projects/todo/todo-dashboard.png`,
-          caption: "Real-time task counter cards (Total, In Progress, Completed, Overdue) and task creation interface."
-        },
-        {
-          id: 2,
-          title: "Active Task Management & Priority Sorting",
-          image: `${import.meta.env.BASE_URL}images/projects/todo/todo-dashboard-tasks.png`,
-          caption: "Live task items with color-coded priority badges, debounced search, status filter tabs, and inline actions."
-        }
-      ],
       links: {
         live: "https://todo-app-shubh.onrender.com/",
         github: "https://github.com/shubh201203/TO-DO"

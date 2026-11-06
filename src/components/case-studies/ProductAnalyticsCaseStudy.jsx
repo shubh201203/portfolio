@@ -1,5 +1,5 @@
-﻿import React, { useEffect } from 'react';
-import { X, ArrowLeft, Layers, Filter, Users, TrendingUp, FlaskConical, ArrowDown, Clock } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { X, ArrowLeft, Filter, Users, TrendingUp, FlaskConical, ArrowDown, Clock } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
 import Badge from '../common/Badge';
 
