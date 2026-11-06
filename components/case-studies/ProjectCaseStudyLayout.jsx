@@ -31,6 +31,7 @@ import { getProjectBySlug, allProjects } from '@/data/projects';
 import { asset } from '@/lib/utils';
 import NovaCartChart from '@/components/visualizations/NovaCartChart';
 import BitePulseFunnel from '@/components/visualizations/BitePulseFunnel';
+import ProjectPageTransition from './ProjectPageTransition';
 
 const PROJECT_SEQUENCE = [
   'novacart',
@@ -104,6 +105,7 @@ export default function ProjectCaseStudyLayout({ slug }) {
 
   return (
     <div className="min-h-screen bg-[#0A0A0B] text-[#F5F5F4] flex flex-col justify-between selection:bg-[#3B82F6] selection:text-white relative">
+      <ProjectPageTransition project={project} />
       
       {/* =================================================================== */}
       {/* Sticky Top Header                                                   */}

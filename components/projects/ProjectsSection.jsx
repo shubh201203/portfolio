@@ -517,12 +517,12 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
                 ))}
               </div>
 
-              <Link
-                href="/projects/product-analytics/"
+              <a
+                href={asset('/projects/product-analytics/')}
                 className="inline-flex items-center gap-1.5 text-blue-400 hover:text-blue-300 font-bold"
               >
                 <span>Open Product Analytics Case Study &rarr;</span>
-              </Link>
+              </a>
             </div>
 
           </motion.div>
