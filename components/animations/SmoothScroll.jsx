@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import Lenis from 'lenis';
 import { gsap, ScrollTrigger } from '@/lib/gsap';
 
 export default function SmoothScroll({ children }) {
   const pathname = usePathname();
+  const prevPathnameRef = useRef(pathname);
 
   useEffect(() => {
     // 1. Check for reduced motion preference
@@ -48,21 +49,22 @@ export default function SmoothScroll({ children }) {
 
   // Handle route changes: reset scroll position and clean up old ScrollTriggers
   useEffect(() => {
-    // Always unlock body overflow on route changes
-    if (typeof document !== 'undefined') {
-      document.body.style.overflow = '';
-    }
+    // Only kill ScrollTriggers on actual page transitions, not initial component mount
+    if (prevPathnameRef.current !== pathname) {
+      prevPathnameRef.current = pathname;
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = '';
+      }
 
-    // Kill any existing ScrollTrigger instances from other pages
-    ScrollTrigger.getAll().forEach((t) => t.kill());
-    ScrollTrigger.clearScrollMemory();
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      ScrollTrigger.clearScrollMemory();
 
-    // Reset window scroll to top immediately
-    if (typeof window !== 'undefined') {
-      window.scrollTo(0, 0);
-      if (window.__lenis) {
-        window.__lenis.scrollTo(0, { immediate: true });
-        window.__lenis.resize();
+      if (typeof window !== 'undefined') {
+        window.scrollTo(0, 0);
+        if (window.__lenis) {
+          window.__lenis.scrollTo(0, { immediate: true });
+          window.__lenis.resize();
+        }
       }
     }
 

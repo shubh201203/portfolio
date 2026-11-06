@@ -91,16 +91,21 @@ export default function HowIWorkSequence() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
+    // Only apply brief pinning on desktop screens (>= 1024px) to prevent mobile pin-spacer issues
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
+
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: containerRef.current,
-        start: 'top top',
-        end: '+=1400',
+        start: 'top 70px',
+        end: '+=400',
         pin: pinRef.current,
-        scrub: 0.5,
+        pinSpacing: true,
+        scrub: 0.3,
+        anticipatePin: 1,
         onUpdate: (self) => {
           const progress = self.progress;
-          const idx = Math.min(5, Math.floor(progress * 6));
+          const idx = Math.min(steps.length - 1, Math.floor(progress * steps.length));
           setActiveStep(idx);
         },
       });
@@ -113,9 +118,9 @@ export default function HowIWorkSequence() {
     setActiveStep(idx);
     if (!containerRef.current) return;
     const containerTop = containerRef.current.offsetTop;
-    const scrollTarget = containerTop + (idx / (steps.length - 1)) * 1400;
+    const scrollTarget = containerTop + (idx / (steps.length - 1)) * 400;
     if (typeof window !== 'undefined' && window.__lenis) {
-      window.__lenis.scrollTo(scrollTarget, { duration: 0.8 });
+      window.__lenis.scrollTo(scrollTarget, { duration: 0.5 });
     } else if (typeof window !== 'undefined') {
       window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
     }
@@ -124,8 +129,8 @@ export default function HowIWorkSequence() {
   const StepIcon = steps[activeStep].icon;
 
   return (
-    <section id="how-it-works" ref={containerRef} className="relative bg-[#0A0A0B] text-white">
-      <div ref={pinRef} className="min-h-[85vh] flex flex-col justify-between py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    <section id="how-it-works" ref={containerRef} className="relative bg-[#0A0A0B] text-white border-b border-white/10">
+      <div ref={pinRef} className="py-14 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-8">
         
         {/* Section Header */}
         <div className="pb-6 border-b border-white/10 flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -145,11 +150,12 @@ export default function HowIWorkSequence() {
             {steps.map((s, idx) => (
               <button
                 key={idx}
+                type="button"
                 onClick={() => handleStepClick(idx)}
-                className={`px-3 py-1 rounded-full border transition-all cursor-pointer ${
+                className={`px-3 py-1.5 rounded-full border transition-all cursor-pointer ${
                   activeStep === idx
                     ? 'bg-[#3B82F6] border-[#3B82F6] text-white font-bold shadow-md shadow-[#3B82F6]/30'
-                    : 'bg-white/5 border-white/10 text-slate-400 hover:text-white'
+                    : 'bg-white/5 border-white/10 text-slate-400 hover:text-white hover:bg-white/10'
                 }`}
               >
                 <span>{s.num}</span>
@@ -160,7 +166,7 @@ export default function HowIWorkSequence() {
         </div>
 
         {/* Dynamic Interactive Stage Display */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 my-auto py-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           {/* Left Narrative Column */}
           <div className="lg:col-span-6 space-y-6">

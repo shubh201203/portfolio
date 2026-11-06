@@ -40,12 +40,12 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { num: '01', label: 'Work', href: '#work', tooltip: 'Curated Case Studies' },
-    { num: '02', label: 'Workflow', href: '#how-it-works', tooltip: 'The Analytical Method' },
-    { num: '03', label: 'About', href: '#about', tooltip: 'Thinking & Foundations' },
-    { num: '04', label: 'Skills', href: '#skills', tooltip: 'Matrix & Toolkit' },
-    { num: '05', label: 'Credentials', href: '#education', tooltip: 'Degrees & Certifications' },
-    { num: '06', label: 'Contact', href: '#contact', tooltip: 'Direct Inquiries' },
+    { label: 'Work', href: '#work', tooltip: 'Curated Case Studies' },
+    { label: 'Workflow', href: '#how-it-works', tooltip: 'The Analytical Method' },
+    { label: 'About', href: '#about', tooltip: 'Thinking & Foundations' },
+    { label: 'Skills', href: '#skills', tooltip: 'Matrix & Toolkit' },
+    { label: 'Credentials', href: '#education', tooltip: 'Degrees & Certifications' },
+    { label: 'Contact', href: '#contact', tooltip: 'Direct Inquiries' },
   ];
 
   const handleNavClick = (e, href, isExternal) => {
@@ -152,7 +152,7 @@ export default function Navbar() {
                       ? 'text-white font-semibold'
                       : 'text-slate-300 hover:text-white hover:bg-white/5 font-medium'
                   }`}
-                  aria-label={`${link.num} ${link.label}: ${link.tooltip}`}
+                  aria-label={`${link.label}: ${link.tooltip}`}
                 >
                   {isActive && (
                     <motion.span
@@ -161,9 +161,6 @@ export default function Navbar() {
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
-                  <span className={`relative z-10 text-[10px] font-bold transition-opacity ${isActive ? 'text-white/80' : 'text-slate-400 group-hover:text-white/70'}`}>
-                    {link.num}
-                  </span>
                   <span className="relative z-10">{link.label}</span>
                 </a>
               );
@@ -222,7 +219,6 @@ export default function Navbar() {
                     className="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-mono text-slate-300 hover:text-white hover:bg-white/10 transition-colors border-b border-white/5"
                   >
                     <div className="flex items-center gap-2.5">
-                      <span className="text-xs font-mono font-bold text-[#3B82F6] px-1.5 py-0.5 rounded bg-blue-500/10 border border-blue-500/20">{link.num}</span>
                       <span className="font-semibold">{link.label}</span>
                     </div>
                     <ArrowUpRight className="w-4 h-4 text-slate-500" />
