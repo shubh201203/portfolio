@@ -85,11 +85,11 @@ export default function ToolkitSection() {
   ];
 
   return (
-    <section id="toolkit" className="py-24 sm:py-32 bg-[#07080B] text-white border-b border-white/10">
+    <section id="toolkit" className="py-16 sm:py-20 bg-[#07080B] text-white border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="pb-8 border-b border-white/10 mb-14 sm:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="pb-6 border-b border-white/10 mb-8 sm:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.24em] text-blue-400 font-bold mb-3">
               <span>04 // THE TOOLKIT</span>
@@ -110,7 +110,7 @@ export default function ToolkitSection() {
         </div>
 
         {/* Category Navigation Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 border-b border-white/10">
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-6 border-b border-white/10">
           {toolkitGroups.map((group, idx) => (
             <button
               key={group.id}
@@ -128,7 +128,7 @@ export default function ToolkitSection() {
         </div>
 
         {/* Active Domain Spotlight Display */}
-        <div className="rounded-3xl bg-[#0B0E17] border border-white/15 p-6 sm:p-10 shadow-2xl space-y-8">
+        <div className="rounded-3xl bg-[#0B0E17] border border-white/15 p-6 sm:p-8 shadow-2xl space-y-6">
           
           {/* Top Domain Headline */}
           <div className="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-white/10 gap-4">

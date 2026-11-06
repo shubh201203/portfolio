@@ -35,12 +35,13 @@ export default function SpaceScrollRail() {
   const isProjectPage = pathname.startsWith('/projects');
 
   const homepageSections = [
-    { id: 'hero', label: 'Home', offset: 0.0 },
-    { id: 'work', label: 'Work', offset: 0.22 },
-    { id: 'about', label: 'About', offset: 0.48 },
-    { id: 'skills', label: 'Skills', offset: 0.65 },
-    { id: 'education', label: 'Education', offset: 0.82 },
-    { id: 'contact', label: 'Contact', offset: 0.96 }
+    { id: 'hero', label: 'Home', num: '00', offset: 0.0 },
+    { id: 'work', label: 'Selected Work', num: '01', offset: 0.16 },
+    { id: 'how-it-works', label: 'Workflow', num: '02', offset: 0.32 },
+    { id: 'about', label: 'About', num: '03', offset: 0.50 },
+    { id: 'skills', label: 'Skills & Toolkit', num: '04', offset: 0.68 },
+    { id: 'education', label: 'Credentials', num: '05', offset: 0.84 },
+    { id: 'contact', label: 'Contact', num: '06', offset: 0.96 }
   ];
 
   const projectSections = [
@@ -190,7 +191,7 @@ export default function SpaceScrollRail() {
   return (
     <nav
       aria-label="Space-Themed Scroll Navigation Rail"
-      className="fixed right-3 sm:right-6 top-0 bottom-0 z-[55] pointer-events-none hidden md:flex flex-col items-center justify-between py-5 select-none"
+      className="fixed right-3 sm:right-6 top-0 bottom-0 z-40 pointer-events-none hidden lg:flex flex-col items-center justify-between py-5 select-none"
       style={{ width: '56px' }}
     >
       {/* =================================================================== */}
@@ -384,8 +385,9 @@ export default function SpaceScrollRail() {
                       initial={{ opacity: 0, x: -8 }}
                       animate={{ opacity: 1, x: -14 }}
                       exit={{ opacity: 0, x: -8 }}
-                      className="absolute right-full px-2.5 py-1 rounded-md bg-[#0D0E12] border border-white/15 shadow-xl whitespace-nowrap text-[11px] font-mono text-white flex items-center gap-1.5"
+                      className="absolute right-full px-2.5 py-1 rounded-md bg-[#0D0E12] border border-[#3B82F6]/40 shadow-xl whitespace-nowrap text-[11px] font-mono text-white flex items-center gap-1.5"
                     >
+                      {sec.num && <span className="text-[#3B82F6] font-bold">{sec.num}</span>}
                       <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-[#3B82F6]' : 'bg-[#14B8A6]'}`} />
                       <span>{sec.label}</span>
                     </motion.div>

@@ -96,11 +96,11 @@ export default function EducationCredentialsSection() {
   const inProgress = certifications.filter(c => c.statusType === 'in_progress');
 
   return (
-    <section id="education" className="py-24 sm:py-32 bg-[#0A0A0B] text-white border-b border-white/10 relative">
+    <section id="education" className="py-16 sm:py-20 bg-[#0A0A0B] text-white border-b border-white/10 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="pb-8 border-b border-white/10 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="pb-6 border-b border-white/10 mb-8 sm:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.24em] text-[#3B82F6] font-bold mb-3">
               <span>05 // FOUNDATIONS</span>
@@ -130,7 +130,7 @@ export default function EducationCredentialsSection() {
         {/* ================================================================= */}
         {/* SUBSECTION 1: EDUCATION                                           */}
         {/* ================================================================= */}
-        <div className="mb-20">
+        <div className="mb-10 sm:mb-12">
           <div className="flex items-center gap-3 pb-3 mb-8 border-b border-white/10">
             <div className="p-2 rounded-xl bg-blue-500/10 border border-blue-500/20 text-[#3B82F6]">
               <GraduationCap className="w-5 h-5" />

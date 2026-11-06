@@ -47,7 +47,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="pt-24 sm:pt-32 pb-12 bg-[#0A0A0B] text-[#F5F5F4] border-b border-white/10 relative overflow-hidden">
+    <section id="contact" className="py-16 sm:py-20 pb-10 bg-[#0A0A0B] text-[#F5F5F4] border-b border-white/10 relative overflow-hidden">
       
       {/* Background Subtle Data Particle Field / Ambient Glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[340px] bg-[#3B82F6]/10 rounded-full blur-[140px] pointer-events-none" />
@@ -59,7 +59,7 @@ export default function ContactSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header with Exact Required Headline & Subheading */}
-        <div className="pb-12 border-b border-white/10 mb-14 sm:mb-16">
+        <div className="pb-6 border-b border-white/10 mb-8 sm:mb-10">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}

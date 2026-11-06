@@ -146,7 +146,7 @@ export default function SkillsMatrix({ onOpenProject }) {
   const ActiveIcon = active.icon;
 
   return (
-    <section id="skills" className="py-24 sm:py-32 bg-[#0A0A0B] text-[#F5F5F4] border-b border-white/10 relative overflow-hidden">
+    <section id="skills" className="py-16 sm:py-20 bg-[#0A0A0B] text-[#F5F5F4] border-b border-white/10 relative overflow-hidden">
       
       {/* Background Subtle Ambient Aura */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-[#3B82F6]/5 rounded-full blur-[140px] pointer-events-none" />
@@ -155,7 +155,7 @@ export default function SkillsMatrix({ onOpenProject }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header with Staggered Entrance */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/10">
           <div>
             <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.24em] text-[#3B82F6] font-bold mb-3">
               <span>TECHNICAL CAPABILITIES</span>
@@ -172,7 +172,7 @@ export default function SkillsMatrix({ onOpenProject }) {
         </div>
 
         {/* 2-Column Responsive Layout: Skill Selector Grid (Left) + Evidence Card (Right) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6 items-start">
           
           {/* Left Column: Interactive Skills List with Sparklines */}
           <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">

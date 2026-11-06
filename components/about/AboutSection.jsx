@@ -38,11 +38,11 @@ export default function AboutSection() {
   ];
 
   return (
-    <section id="about" className="py-24 sm:py-32 bg-[#07080B] text-white border-b border-white/10 relative">
+    <section id="about" className="py-16 sm:py-20 bg-[#07080B] text-white border-b border-white/10 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="pb-8 border-b border-white/10 mb-14 sm:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="pb-6 border-b border-white/10 mb-8 sm:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.24em] text-blue-400 font-bold mb-3">
               <span>03 // ABOUT</span>
@@ -63,10 +63,10 @@ export default function AboutSection() {
         </div>
 
         {/* Asymmetrical 2-Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* Left Column: Natural Narrative & Academic Record */}
-          <div className="lg:col-span-7 space-y-10">
+          <div className="lg:col-span-7 space-y-6">
             
             <div className="space-y-6 text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
               <p>

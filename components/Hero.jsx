@@ -72,7 +72,7 @@ export default function Hero({ onExploreWork, onExplorePipeline }) {
       id="hero" 
       data-section="home"
       onMouseMove={handleMouseMove}
-      className="relative min-h-[96vh] pt-28 sm:pt-36 pb-16 bg-[#0A0A0B] text-[#F5F5F4] overflow-hidden flex flex-col justify-between border-b border-white/10"
+      className="relative min-h-[85vh] pt-24 sm:pt-28 pb-10 bg-[#0A0A0B] text-[#F5F5F4] overflow-hidden flex flex-col justify-between border-b border-white/10"
     >
       {/* Animated Subtle Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none opacity-40" />
@@ -116,7 +116,7 @@ export default function Hero({ onExploreWork, onExplorePipeline }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 flex-1 flex flex-col justify-between">
         
         {/* Top Telemetry & Availability Strip */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-2 pb-6 border-b border-white/10 font-mono text-xs text-slate-400">
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-1 pb-4 border-b border-white/10 font-mono text-xs text-slate-400">
           <div className="flex flex-wrap items-center gap-3">
             {/* Status Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md text-slate-200">
@@ -341,7 +341,7 @@ export default function Hero({ onExploreWork, onExplorePipeline }) {
         </div>
 
         {/* Scroll Indicator: "Scroll to explore" with gentle animated line */}
-        <div className="pt-6 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-400">
+        <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-400">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#3B82F6] animate-pulse" />
             <span className="font-bold text-white uppercase tracking-wider">Scroll to explore</span>

@@ -23,6 +23,94 @@ import BitePulseFunnel from '@/components/visualizations/BitePulseFunnel';
 export default function ProjectsSection({ onOpenCaseStudy }) {
   const [activeFilter, setActiveFilter] = useState('all');
   const [activeNovaDash, setActiveNovaDash] = useState(0);
+  const [activeNovaStep, setActiveNovaStep] = useState(0);
+  const [activeBiteStep, setActiveBiteStep] = useState(0);
+
+  const novaCartSteps = [
+    {
+      num: '01',
+      title: 'Problem',
+      color: 'text-red-400',
+      summary: '39.81% demand drop between gross placed orders and settled cash, obscured by cancellation & return friction.',
+      detail: 'Gross placed orders of ₹971.49M experienced ₹123.86M in pre-fulfillment cancellation leakage, followed by ₹50.87M in post-delivery merchandise returns, leaving ₹796.75M in net settled cash.',
+      kpi: '39.81% Friction'
+    },
+    {
+      num: '02',
+      title: 'Data',
+      color: 'text-amber-400',
+      summary: '104,852 sales records across 180 SKUs & 3,970 active buyers with missing keys and multi-grain transaction logs.',
+      detail: 'Audited source files across orders, payments, customers, products, and fulfillment events. Detected 142 missing customer keys across order items resolved via co-occurring transaction records.',
+      kpi: '104,852 Records'
+    },
+    {
+      num: '03',
+      title: 'Approach',
+      color: 'text-blue-400',
+      summary: 'PostgreSQL 18 Star Schema with surrogate keys, deterministic customer key recovery, and 30+ DAX measures.',
+      detail: 'Engineered an 8-table relational data warehouse with surrogate integer keys, B-tree indexes, strict fact-grain isolation, and 0 foreign-key orphans between fact_sales and fact_payments.',
+      kpi: '8-Table Warehouse'
+    },
+    {
+      num: '04',
+      title: 'Insight',
+      color: 'text-cyan-400',
+      summary: '82.12% repeat buyer share generates 86.4% of total profit, while deep discounting eroded electronics margin by 4.8%.',
+      detail: 'Formulated monthly customer cohort retention decay matrices (M0–M18) and NTILE customer lifetime value quintiles. Discovered that repeat customer cohort retention stabilised at 68% after month 3.',
+      kpi: '82.12% Repeat Rate'
+    },
+    {
+      num: '05',
+      title: 'Impact',
+      color: 'text-emerald-400',
+      summary: '100% mathematical reconciliation between SQL and Power BI suites, validated by 28 automated Pytest test suites.',
+      detail: 'Reconciled ₹796.75M settled cash to the exact rupee between PostgreSQL database queries and Power BI DAX measures, empowering commercial strategy without speculation.',
+      kpi: '100.0% Reconciled'
+    },
+  ];
+
+  const bitePulseSteps = [
+    {
+      num: '01',
+      title: 'Problem',
+      color: 'text-red-400',
+      summary: 'User drop-off before final checkout payment completion.',
+      detail: 'Mobile ordering conversion decay was obscured by aggregate vanity traffic numbers, masking a severe funnel leakage at checkout.',
+      kpi: 'Checkout Drop-off'
+    },
+    {
+      num: '02',
+      title: 'Data',
+      color: 'text-amber-400',
+      summary: '240,000 mobile session events across 6 distinct ordering steps.',
+      detail: 'Audited timestamped session payloads across App Launch, Menu View, Item Select, Cart Addition, Address Entry, and Payment Settled.',
+      kpi: '240K Events'
+    },
+    {
+      num: '03',
+      title: 'Approach',
+      color: 'text-blue-400',
+      summary: 'SQL CTE conversion funnels + M0–M18 cohort retention decay tracking.',
+      detail: 'Constructed multi-stage Common Table Expressions with window functions to track step-by-step conversion probabilities and user path latency.',
+      kpi: 'SQL CTE Funnel'
+    },
+    {
+      num: '04',
+      title: 'Insight',
+      color: 'text-cyan-400',
+      summary: '26% of visits drop at cart addition due to unoptimized delivery fee cues.',
+      detail: 'Identified that unexpected delivery surcharges introduced late in the cart view caused the steepest drop-off in the entire 6-step ordering funnel.',
+      kpi: '26% Drop at Cart'
+    },
+    {
+      num: '05',
+      title: 'Impact',
+      color: 'text-emerald-400',
+      summary: 'Designed A/B test framework projecting +2.4% net order completion lift.',
+      detail: 'Formulated an upfront delivery fee indicator test framework with statistical power calculations, projecting a +2.4% conversion uplift.',
+      kpi: '+2.4% Order Lift'
+    },
+  ];
 
   const novaCartScreenshots = [
     {
@@ -122,11 +210,11 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
   ];
 
   return (
-    <section id="work" className="py-24 sm:py-32 bg-[#07080B] text-white border-b border-white/10">
+    <section id="work" className="py-16 sm:py-20 bg-[#07080B] text-white border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="pb-8 border-b border-white/10 mb-12 sm:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="pb-6 border-b border-white/10 mb-8 sm:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.24em] text-blue-400 font-bold mb-3">
               <span>02 // SELECTED WORK</span>
@@ -179,7 +267,7 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-16 sm:mb-20 rounded-3xl bg-[#0B0E17] border border-white/15 p-6 sm:p-10 shadow-2xl relative overflow-hidden space-y-8"
+            className="mb-8 sm:mb-10 rounded-3xl bg-[#0B0E17] border border-white/15 p-6 sm:p-10 shadow-2xl relative overflow-hidden space-y-6"
           >
             {/* Meta Bar */}
             <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10">
@@ -241,49 +329,76 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
               </div>
             </div>
 
-            {/* 5-Step Case-Study Framework: Problem → Data → Approach → Insight → Impact */}
+            {/* 5-Step Interactive Case-Study Framework: Problem → Data → Approach → Insight → Impact */}
             <div className="space-y-3 pt-2">
-              <div className="text-xs font-mono uppercase tracking-wider text-[#3B82F6] font-bold flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#14B8A6]" />
-                <span>CASE STUDY SEQUENCE // PROBLEM → DATA → APPROACH → INSIGHT → IMPACT</span>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="text-xs font-mono uppercase tracking-wider text-[#3B82F6] font-bold flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#14B8A6]" />
+                  <span>CASE STUDY SEQUENCE // SELECT STEP (01–05) TO INSPECT</span>
+                </div>
+                <span className="text-[11px] font-mono text-slate-500">
+                  Step {activeNovaStep + 1} of 5 Active
+                </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 font-mono text-xs">
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
-                  <div className="text-[10px] text-red-400 uppercase font-bold">01. Problem</div>
-                  <div className="text-slate-300 leading-snug">
-                    39.81% demand drop between gross placed orders and settled cash, obscured by cancellation &amp; return friction.
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
-                  <div className="text-[10px] text-amber-400 uppercase font-bold">02. Data</div>
-                  <div className="text-slate-300 leading-snug">
-                    104,852 sales records across 180 SKUs &amp; 3,970 active buyers with missing keys and multi-grain transaction logs.
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
-                  <div className="text-[10px] text-blue-400 uppercase font-bold">03. Approach</div>
-                  <div className="text-slate-300 leading-snug">
-                    PostgreSQL 18 Star Schema with surrogate keys, deterministic customer key recovery, and 30+ DAX measures.
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
-                  <div className="text-[10px] text-cyan-400 uppercase font-bold">04. Insight</div>
-                  <div className="text-slate-300 leading-snug">
-                    82.12% repeat buyer share generates 86.4% of total profit, while deep discounting eroded electronics margin by 4.8%.
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-white/5 border border-emerald-500/30 space-y-1.5">
-                  <div className="text-[10px] text-emerald-400 uppercase font-bold">05. Impact</div>
-                  <div className="text-slate-300 leading-snug">
-                    100% mathematical reconciliation between SQL and Power BI suites, validated by 28 automated Pytest test suites.
-                  </div>
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 font-mono text-xs" role="tablist" aria-label="NovaCart Case Study Steps">
+                {novaCartSteps.map((step, idx) => {
+                  const isSelected = activeNovaStep === idx;
+                  return (
+                    <button
+                      key={step.num}
+                      type="button"
+                      role="tab"
+                      aria-selected={isSelected}
+                      tabIndex={0}
+                      onClick={() => setActiveNovaStep(idx)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setActiveNovaStep(idx);
+                        }
+                      }}
+                      className={`text-left p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 cursor-pointer space-y-1.5 focus:outline-none focus:ring-2 focus:ring-[#3B82F6] ${
+                        isSelected
+                          ? 'bg-blue-600/15 border-[#3B82F6] ring-1 ring-[#3B82F6]/50 shadow-lg shadow-[#3B82F6]/20'
+                          : 'bg-white/5 border-white/10 hover:border-white/25 hover:bg-white/[0.08]'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className={`text-[10px] uppercase font-bold ${step.color}`}>
+                          {step.num}. {step.title}
+                        </span>
+                        {isSelected && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#3B82F6] animate-pulse" />
+                        )}
+                      </div>
+                      <div className={`leading-snug transition-colors ${isSelected ? 'text-white font-medium' : 'text-slate-300'}`}>
+                        {step.summary}
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
+
+              {/* Active Step Detailed Breakdown Panel */}
+              <motion.div
+                key={`nova-step-${activeNovaStep}`}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25 }}
+                className="p-4 rounded-2xl bg-blue-950/30 border border-blue-500/30 text-xs font-mono text-slate-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-inner"
+              >
+                <div className="space-y-1">
+                  <div className="text-blue-400 font-bold uppercase tracking-wider flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#14B8A6] animate-pulse" />
+                    <span>STEP {novaCartSteps[activeNovaStep].num} // {novaCartSteps[activeNovaStep].title.toUpperCase()} SPECIFICATION</span>
+                  </div>
+                  <div className="text-slate-200 leading-relaxed">{novaCartSteps[activeNovaStep].detail}</div>
+                </div>
+                <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-300 font-bold shrink-0 text-[11px]">
+                  {novaCartSteps[activeNovaStep].kpi}
+                </span>
+              </motion.div>
             </div>
 
             {/* Recharts Financial Trajectory Visual */}
@@ -411,7 +526,7 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-16 sm:mb-20 rounded-3xl bg-[#0B0E17] border border-white/15 p-6 sm:p-10 shadow-2xl relative space-y-8"
+            className="mb-8 sm:mb-10 rounded-3xl bg-[#0B0E17] border border-white/15 p-6 sm:p-10 shadow-2xl relative space-y-6"
           >
             {/* Meta Bar */}
             <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10 font-mono text-xs">
@@ -446,35 +561,76 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
                   End-to-end product intelligence pipeline analyzing a 6-step ordering conversion funnel, cohort retention decay (Day 1/7/30 &amp; M0–M18), customer segmentation, and A/B checkout experiment evaluation.
                 </p>
 
-                {/* 5-Step Case-Study Framework: Problem → Data → Approach → Insight → Impact */}
+                {/* 5-Step Interactive Case-Study Framework: Problem → Data → Approach → Insight → Impact */}
                 <div className="space-y-3 pt-2">
-                  <div className="text-xs font-mono uppercase tracking-wider text-[#3B82F6] font-bold flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#14B8A6]" />
-                    <span>CASE STUDY SEQUENCE // PROBLEM → DATA → APPROACH → INSIGHT → IMPACT</span>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="text-xs font-mono uppercase tracking-wider text-[#3B82F6] font-bold flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#14B8A6]" />
+                      <span>CASE STUDY SEQUENCE // SELECT STEP (01–05) TO INSPECT</span>
+                    </div>
+                    <span className="text-[11px] font-mono text-slate-500">
+                      Step {activeBiteStep + 1} of 5 Active
+                    </span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 font-mono text-xs">
-                    <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-1">
-                      <div className="text-[10px] text-red-400 uppercase font-bold">01. Problem</div>
-                      <div className="text-slate-300 text-[11px]">User drop-off before final checkout payment completion.</div>
-                    </div>
-                    <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-1">
-                      <div className="text-[10px] text-amber-400 uppercase font-bold">02. Data</div>
-                      <div className="text-slate-300 text-[11px]">240,000 mobile session events across 6 distinct ordering steps.</div>
-                    </div>
-                    <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-1">
-                      <div className="text-[10px] text-blue-400 uppercase font-bold">03. Approach</div>
-                      <div className="text-slate-300 text-[11px]">SQL CTE conversion funnels + M0–M18 cohort retention decay tracking.</div>
-                    </div>
-                    <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-1">
-                      <div className="text-[10px] text-cyan-400 uppercase font-bold">04. Insight</div>
-                      <div className="text-slate-300 text-[11px]">26% of visits drop at cart addition due to unoptimized delivery fee cues.</div>
-                    </div>
-                    <div className="p-3.5 rounded-2xl bg-white/5 border border-emerald-500/30 space-y-1">
-                      <div className="text-[10px] text-emerald-400 uppercase font-bold">05. Impact</div>
-                      <div className="text-slate-300 text-[11px]">Designed A/B test framework projecting +2.4% net order completion lift.</div>
-                    </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 font-mono text-xs" role="tablist" aria-label="BitePulse Case Study Steps">
+                    {bitePulseSteps.map((step, idx) => {
+                      const isSelected = activeBiteStep === idx;
+                      return (
+                        <button
+                          key={step.num}
+                          type="button"
+                          role="tab"
+                          aria-selected={isSelected}
+                          tabIndex={0}
+                          onClick={() => setActiveBiteStep(idx)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              setActiveBiteStep(idx);
+                            }
+                          }}
+                          className={`text-left p-3.5 rounded-2xl border transition-all duration-200 cursor-pointer space-y-1 focus:outline-none focus:ring-2 focus:ring-[#3B82F6] ${
+                            isSelected
+                              ? 'bg-blue-600/15 border-[#3B82F6] ring-1 ring-[#3B82F6]/50 shadow-lg shadow-[#3B82F6]/20'
+                              : 'bg-white/5 border-white/10 hover:border-white/25 hover:bg-white/[0.08]'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className={`text-[10px] uppercase font-bold ${step.color}`}>
+                              {step.num}. {step.title}
+                            </span>
+                            {isSelected && (
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#3B82F6] animate-pulse" />
+                            )}
+                          </div>
+                          <div className={`text-[11px] leading-snug transition-colors ${isSelected ? 'text-white font-medium' : 'text-slate-300'}`}>
+                            {step.summary}
+                          </div>
+                        </button>
+                      );
+                    })}
                   </div>
+
+                  {/* Active Step Detailed Breakdown Panel */}
+                  <motion.div
+                    key={`bite-step-${activeBiteStep}`}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="p-3.5 rounded-2xl bg-blue-950/30 border border-blue-500/30 text-xs font-mono text-slate-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-inner"
+                  >
+                    <div className="space-y-1">
+                      <div className="text-blue-400 font-bold uppercase tracking-wider flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#14B8A6] animate-pulse" />
+                        <span>STEP {bitePulseSteps[activeBiteStep].num} // {bitePulseSteps[activeBiteStep].title.toUpperCase()} SPECIFICATION</span>
+                      </div>
+                      <div className="text-slate-200 leading-relaxed text-[11px]">{bitePulseSteps[activeBiteStep].detail}</div>
+                    </div>
+                    <span className="px-2.5 py-1 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-300 font-bold shrink-0 text-[10px]">
+                      {bitePulseSteps[activeBiteStep].kpi}
+                    </span>
+                  </motion.div>
                 </div>
 
                 {/* Recharts Funnel Chart */}
@@ -531,7 +687,7 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
         {/* ============================================================== */}
         {/* EXHIBITION PROJECTS 03 — 06 (COMPACT & DISTINCT CARDS)          */}
         {/* ============================================================== */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {secondaryProjects
             .filter((p) => activeFilter === 'all' || p.category === activeFilter)
             .map((project) => (

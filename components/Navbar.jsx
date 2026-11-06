@@ -19,8 +19,8 @@ export default function Navbar() {
       setScrollProgress(progress);
       setIsScrolled(currentScroll > 40);
 
-      const sections = ['hero', 'work', 'about', 'skills', 'education', 'contact'];
-      const scrollPosition = currentScroll + 220;
+      const sections = ['hero', 'work', 'how-it-works', 'about', 'skills', 'education', 'contact'];
+      const scrollPosition = currentScroll + 200;
 
       for (const section of sections) {
         const el = document.getElementById(section);
@@ -40,13 +40,12 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: 'Home', href: '#hero' },
-    { label: 'Work', href: '#work' },
-    { label: 'About', href: '#about' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Education & Certifications', href: '#education' },
-    { label: 'Contact', href: '#contact' },
-    { label: 'Resume', href: '/portfolio/resume.pdf', isExternal: true },
+    { num: '01', label: 'Work', href: '#work', tooltip: 'Curated Case Studies' },
+    { num: '02', label: 'Workflow', href: '#how-it-works', tooltip: 'The Analytical Method' },
+    { num: '03', label: 'About', href: '#about', tooltip: 'Thinking & Foundations' },
+    { num: '04', label: 'Skills', href: '#skills', tooltip: 'Matrix & Toolkit' },
+    { num: '05', label: 'Credentials', href: '#education', tooltip: 'Degrees & Certifications' },
+    { num: '06', label: 'Contact', href: '#contact', tooltip: 'Direct Inquiries' },
   ];
 
   const handleNavClick = (e, href, isExternal) => {
@@ -94,7 +93,7 @@ export default function Navbar() {
   return (
     <>
       {/* Top Scroll Progress Indicator Bar */}
-      <div className="fixed top-0 left-0 right-0 h-[2.5px] z-[60] bg-white/5 pointer-events-none">
+      <div className="fixed top-0 left-0 right-0 h-[2.5px] z-[70] bg-white/5 pointer-events-none">
         <motion.div
           className="h-full bg-gradient-to-r from-[#3B82F6] via-[#14B8A6] to-[#3B82F6]"
           style={{ width: `${scrollProgress}%` }}
@@ -102,7 +101,7 @@ export default function Navbar() {
       </div>
 
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-[65] transition-all duration-300 ${
           isScrolled
             ? 'bg-[#07080B]/90 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl'
             : 'bg-transparent py-5 sm:py-6 border-b border-white/5'
@@ -135,7 +134,7 @@ export default function Navbar() {
             </div>
           </a>
 
-          {/* Desktop Navigation Links with Active Pill Transition */}
+          {/* Desktop Navigation Links with Active Pill Transition & Numbered Indicators */}
           <nav className="hidden lg:flex items-center gap-1 bg-white/[0.04] backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 shadow-inner">
             {navLinks.map((link) => {
               const sectionId = link.href.startsWith('#') ? link.href.substring(1) : '';
@@ -144,14 +143,16 @@ export default function Navbar() {
                 <a
                   key={link.label}
                   href={link.href}
+                  title={link.tooltip}
                   target={link.isExternal ? '_blank' : undefined}
                   rel={link.isExternal ? 'noopener noreferrer' : undefined}
                   onClick={(e) => handleNavClick(e, link.href, link.isExternal)}
-                  className={`relative flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono transition-all duration-200 ${
+                  className={`group relative flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono transition-all duration-200 cursor-pointer ${
                     isActive
                       ? 'text-white font-semibold'
                       : 'text-slate-300 hover:text-white hover:bg-white/5 font-medium'
                   }`}
+                  aria-label={`${link.num} ${link.label}: ${link.tooltip}`}
                 >
                   {isActive && (
                     <motion.span
@@ -160,6 +161,9 @@ export default function Navbar() {
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
+                  <span className={`relative z-10 text-[10px] font-bold transition-opacity ${isActive ? 'text-white/80' : 'text-slate-400 group-hover:text-white/70'}`}>
+                    {link.num}
+                  </span>
                   <span className="relative z-10">{link.label}</span>
                 </a>
               );
@@ -218,6 +222,7 @@ export default function Navbar() {
                     className="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-mono text-slate-300 hover:text-white hover:bg-white/10 transition-colors border-b border-white/5"
                   >
                     <div className="flex items-center gap-2.5">
+                      <span className="text-xs font-mono font-bold text-[#3B82F6] px-1.5 py-0.5 rounded bg-blue-500/10 border border-blue-500/20">{link.num}</span>
                       <span className="font-semibold">{link.label}</span>
                     </div>
                     <ArrowUpRight className="w-4 h-4 text-slate-500" />

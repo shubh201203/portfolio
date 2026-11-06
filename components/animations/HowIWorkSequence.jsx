@@ -95,7 +95,7 @@ export default function HowIWorkSequence() {
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: 'top top',
-        end: '+=2800',
+        end: '+=1400',
         pin: pinRef.current,
         scrub: 0.5,
         onUpdate: (self) => {
@@ -109,11 +109,23 @@ export default function HowIWorkSequence() {
     return () => ctx.revert();
   }, []);
 
+  const handleStepClick = (idx) => {
+    setActiveStep(idx);
+    if (!containerRef.current) return;
+    const containerTop = containerRef.current.offsetTop;
+    const scrollTarget = containerTop + (idx / (steps.length - 1)) * 1400;
+    if (typeof window !== 'undefined' && window.__lenis) {
+      window.__lenis.scrollTo(scrollTarget, { duration: 0.8 });
+    } else if (typeof window !== 'undefined') {
+      window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+    }
+  };
+
   const StepIcon = steps[activeStep].icon;
 
   return (
     <section id="how-it-works" ref={containerRef} className="relative bg-[#0A0A0B] text-white">
-      <div ref={pinRef} className="min-h-screen flex flex-col justify-between py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+      <div ref={pinRef} className="min-h-[85vh] flex flex-col justify-between py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         
         {/* Section Header */}
         <div className="pb-6 border-b border-white/10 flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -133,7 +145,7 @@ export default function HowIWorkSequence() {
             {steps.map((s, idx) => (
               <button
                 key={idx}
-                onClick={() => setActiveStep(idx)}
+                onClick={() => handleStepClick(idx)}
                 className={`px-3 py-1 rounded-full border transition-all cursor-pointer ${
                   activeStep === idx
                     ? 'bg-[#3B82F6] border-[#3B82F6] text-white font-bold shadow-md shadow-[#3B82F6]/30'
