@@ -96,29 +96,45 @@ export const portfolioData = {
 
   certifications: [
     {
-      name: "Google Data Practitioner Associate",
-      issuer: "Google Cloud",
-      badgeImage: "images/certifications/google-cloud-associate.png",
-      status: "Completed",
-      statusType: "completed"
-    },
-    {
       name: "Microsoft Certified: Power BI Data Analyst Associate (PL-300)",
       issuer: "Microsoft",
-      status: "In Progress",
-      statusType: "in_progress"
+      period: "October 2026",
+      status: "Completed",
+      statusType: "completed",
+      description: "Validated expertise in data preparation, star-schema semantic modeling, complex DAX calculations, and interactive Power BI report engineering."
     },
     {
-      name: "Microsoft Azure Data Fundamentals (DP-900)",
+      name: "Microsoft Certified: Fabric Analytics Engineer Associate (DP-600)",
       issuer: "Microsoft",
-      status: "Planned",
-      statusType: "planned"
+      period: "October 2026",
+      status: "Completed",
+      statusType: "completed",
+      description: "Certified in end-to-end analytics engineering across Microsoft Fabric Lakehouses, Delta Parquet architecture, T-SQL data transformation, and semantic models."
     },
     {
-      name: "Tableau Certified Data Analyst",
-      issuer: "Tableau",
-      status: "Planned",
-      statusType: "planned"
+      name: "Microsoft Certified: Azure Data Fundamentals (DP-900)",
+      issuer: "Microsoft",
+      period: "October 2026",
+      status: "Completed",
+      statusType: "completed",
+      description: "Foundational mastery of core cloud data concepts, relational and non-relational Azure storage, Cosmos DB, and modern cloud lakehouse analytics."
+    },
+    {
+      name: "Google Data Practitioner Associate",
+      issuer: "Google Cloud",
+      period: "October 2026",
+      badgeImage: "images/certifications/google-cloud-associate.png",
+      status: "Completed",
+      statusType: "completed",
+      description: "Official Google Cloud credential demonstrating practical data processing, BigQuery SQL analytics, cloud storage architectures, and ML capabilities."
+    },
+    {
+      name: "Google Data Analytics Professional Certificate",
+      issuer: "Google / Coursera",
+      period: "In Progress",
+      status: "In Progress",
+      statusType: "in_progress",
+      description: "Comprehensive multi-course professional specialization covering analytical workflows, R programming, data hygiene, exploratory analysis, and stakeholder storytelling."
     }
   ],
 

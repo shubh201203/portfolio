@@ -77,7 +77,7 @@ export default function About() {
               I specialize in the complete analytics life cycle: ingesting disparate, messy operational event streams, executing deterministic data hygiene routines in Python, engineering robust star-schema relational warehouses in PostgreSQL 18, and formulating complex SQL queries to isolate revenue leakages, customer retention decay, and category margin dilution.
             </p>
             <p>
-              On the business intelligence front, I build high-performance Power BI dashboards backed by validated DAX measures that reconcile to 100% mathematical precision against database figures. My priority is ensuring that every metric delivered to stakeholders is mathematically verified, grain-aware, and directly actionable.
+              On the business intelligence front, I build high-performance Power BI dashboards backed by validated DAX measures that reconcile to 100% mathematical precision against database figures. I hold four industry credentials completed in October 2026—Microsoft Certified: Power BI Data Analyst Associate (PL-300), Fabric Analytics Engineer Associate (DP-600), Azure Data Fundamentals (DP-900), and Google Data Practitioner Associate—and am actively pursuing the Google Data Analytics Professional Certificate.
             </p>
 
             {/* Academic Credentials Box */}
@@ -125,6 +125,9 @@ export default function About() {
                   <h3 className="text-lg font-bold text-gray-950">Shubh Sharma</h3>
                   <div className="text-xs text-blue-600 font-semibold">Data Analyst & BI Candidate</div>
                   <div className="text-[11px] text-gray-500 font-mono mt-0.5">VIT-AP & IIT Madras</div>
+                  <div className="inline-block mt-1 text-[10px] font-mono text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-medium">
+                    4x Microsoft & Google Certified (Oct 2026)
+                  </div>
                 </div>
               </div>
 
