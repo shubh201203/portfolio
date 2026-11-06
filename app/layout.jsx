@@ -1,5 +1,7 @@
 import './globals.css';
 import SmoothScroll from '@/components/animations/SmoothScroll';
+import SpaceParticleBackground from '@/components/space/SpaceParticleBackground';
+import SpaceScrollRail from '@/components/space/SpaceScrollRail';
 
 export const metadata = {
   title: 'Shubh Sharma — Data Analyst | From Raw Data to Decisions',
@@ -50,8 +52,10 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="bg-[#07080B] text-[#F1F3F7] antialiased selection:bg-blue-600 selection:text-white">
+      <body className="bg-[#080A10] text-[#F1F3F7] antialiased selection:bg-blue-600 selection:text-white relative">
+        <SpaceParticleBackground />
         <SmoothScroll>{children}</SmoothScroll>
+        <SpaceScrollRail />
       </body>
     </html>
   );

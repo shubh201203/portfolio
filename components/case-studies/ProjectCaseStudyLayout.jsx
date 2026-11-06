@@ -746,7 +746,7 @@ export default function ProjectCaseStudyLayout({ slug }) {
       {/* =================================================================== */}
       {zoomImage && (
         <div 
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex flex-col justify-between p-4 sm:p-8 animate-in fade-in duration-200"
+          className="fixed inset-0 z-[80] bg-black/95 backdrop-blur-xl flex flex-col justify-between p-4 sm:p-8 animate-in fade-in duration-200"
           onClick={() => setZoomImage(null)}
         >
           <div className="flex items-center justify-between max-w-7xl mx-auto w-full pb-4">
