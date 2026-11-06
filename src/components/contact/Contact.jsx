@@ -80,10 +80,10 @@ export default function Contact() {
               </div>
 
               {/* Single Line Guaranteed with whitespace-nowrap and overflow protection */}
-              <div className="mt-2">
+              <div className="mt-2 overflow-hidden">
                 <a
                   href={`mailto:${personal.email}`}
-                  className="text-sm sm:text-base font-mono font-medium text-gray-900 hover:text-blue-600 transition-colors inline-block whitespace-nowrap"
+                  className="text-xs sm:text-sm md:text-base font-mono font-medium text-gray-900 hover:text-blue-600 transition-colors inline-block whitespace-nowrap truncate max-w-full select-all"
                   title={personal.email}
                 >
                   {personal.email}

@@ -87,10 +87,11 @@ export default function ContactEditorial() {
                 <Mail className="w-4 h-4 text-cyan-400" />
               </div>
 
-              <div className="mt-2">
+              <div className="mt-2 overflow-hidden">
                 <a
                   href={`mailto:${personal.email}`}
-                  className="text-sm sm:text-base lg:text-lg font-mono font-bold text-white hover:text-cyan-300 transition-colors inline-block whitespace-nowrap tracking-tight"
+                  className="text-xs sm:text-sm md:text-base lg:text-lg font-mono font-bold text-white hover:text-cyan-300 transition-colors inline-block whitespace-nowrap tracking-tight truncate max-w-full select-all"
+                  title={personal.email}
                 >
                   {personal.email}
                 </a>

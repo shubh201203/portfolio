@@ -102,8 +102,8 @@ export default function Hero({ onExploreNovaCart }) {
 
             {/* Giant Monolithic Headline */}
             <div className="space-y-1">
-              <h1 className="text-6xl sm:text-7xl lg:text-8xl xl:text-[92px] font-headline font-extrabold tracking-tighter text-white leading-[0.92]">
-                SHUBH<br />
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[90px] font-headline font-extrabold tracking-tighter text-white leading-[0.95] break-words">
+                SHUBH{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-[#D8F243]">
                   SHARMA.
                 </span>
