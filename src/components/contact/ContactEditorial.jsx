@@ -90,7 +90,7 @@ export default function ContactEditorial() {
               <div className="mt-2">
                 <a
                   href={`mailto:${personal.email}`}
-                  className="text-base sm:text-lg font-mono font-bold text-white hover:text-cyan-300 transition-colors inline-block whitespace-nowrap"
+                  className="text-sm sm:text-base lg:text-lg font-mono font-bold text-white hover:text-cyan-300 transition-colors inline-block whitespace-nowrap tracking-tight"
                 >
                   {personal.email}
                 </a>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ArrowRight, 
   FileText, 
@@ -6,7 +6,9 @@ import {
   Database, 
   Sparkles, 
   ShieldCheck, 
-  ChevronDown
+  ChevronDown,
+  Clock,
+  Compass
 } from 'lucide-react';
 import { GitHubIcon, LinkedInIcon } from '../common/Icons';
 import { portfolioData } from '../../data/portfolioData';
@@ -15,6 +17,24 @@ export default function Hero() {
   const { personal } = portfolioData;
   const [activeTelemetryTab, setActiveTelemetryTab] = useState('revenue');
   const [hoveredPoint, setHoveredPoint] = useState(null);
+  const [istTime, setIstTime] = useState('');
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const formatted = now.toLocaleTimeString('en-US', {
+        timeZone: 'Asia/Kolkata',
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+      setIstTime(formatted);
+    };
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Verified dataset benchmarks
   const telemetryData = {
@@ -93,16 +113,27 @@ export default function Hero() {
         
         {/* Top Status & Verification Ribbon */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-white/10">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-slate-300 backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-white font-medium">OPEN TO INTERNSHIPS</span>
-            <span className="text-white/20">•</span>
-            <span className="text-cyan-400">VIT-AP & IIT Madras</span>
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-slate-300 backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-white font-medium">OPEN TO INTERNSHIPS</span>
+              <span className="text-white/20">•</span>
+              <span className="text-cyan-400">VIT-AP &amp; IIT Madras</span>
+            </div>
+
+            {/* Live IST Time & Telemetry Stamp */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] font-mono text-slate-400 backdrop-blur-md">
+              <Clock className="w-3 h-3 text-cyan-400" />
+              <span className="text-slate-200 font-semibold">{istTime || '20:00:00'} IST</span>
+              <span className="text-white/20">|</span>
+              <Compass className="w-3 h-3 text-cyan-400" />
+              <span>Amaravati 16.5°N · 80.5°E</span>
+            </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-400">
             <span className="px-2.5 py-1 rounded bg-blue-950/70 border border-blue-500/30 text-blue-300 font-semibold">
-              4x Microsoft & Google Certified (Oct 2026)
+              4x Microsoft &amp; Google Certified (Oct 2026)
             </span>
             <span className="hidden sm:inline text-white/20">•</span>
             <span className="text-slate-400 hidden sm:inline">100% Deterministic SQL / DAX</span>
@@ -115,20 +146,30 @@ export default function Hero() {
           {/* Left Hero Statement: Bold Editorial Typography */}
           <div className="lg:col-span-6 space-y-6 text-left">
             
-            <div className="space-y-3">
+            <div className="space-y-4">
               <div className="inline-flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-cyan-400 font-bold">
                 <Terminal className="w-3.5 h-3.5 text-cyan-400" />
                 <span>The Interactive Data Experience</span>
               </div>
 
-              {/* Central Name Anchor */}
-              <div className="space-y-1">
-                <span className="text-xs font-mono uppercase tracking-[0.25em] text-slate-400 block font-semibold">
-                  Personal Portfolio & Analytics Lab
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white font-mono">
-                  SHUBH SHARMA
-                </h2>
+              {/* Central Name Anchor with Genuine Profile Image */}
+              <div className="flex items-center gap-4 pt-1">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-cyan-400/50 shadow-glow-blue shrink-0 ring-1 ring-white/20 bg-[#0B0F19]">
+                  <img
+                    src={`${import.meta.env.BASE_URL}images/profile.jpg`}
+                    alt="Shubh Sharma"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-slate-400 block font-semibold">
+                    Personal Portfolio &amp; Analytics Lab
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white font-mono flex items-center gap-2">
+                    <span>SHUBH SHARMA</span>
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                  </h2>
+                </div>
               </div>
 
               {/* Oversized Headline */}
@@ -216,7 +257,7 @@ export default function Hero() {
               <span className="text-white/20">•</span>
               <a
                 href={`mailto:${personal.email}`}
-                className="flex items-center gap-1.5 hover:text-cyan-300 transition-colors font-mono"
+                className="flex items-center gap-1.5 hover:text-cyan-300 transition-colors font-mono whitespace-nowrap"
               >
                 <span>{personal.email}</span>
               </a>
