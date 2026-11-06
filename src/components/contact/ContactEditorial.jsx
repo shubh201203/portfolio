@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { 
   Mail, 
-  Phone, 
   Copy, 
   Check, 
   ArrowRight, 
+  ArrowUpRight, 
   FileText, 
-  ExternalLink, 
-  ArrowUp, 
-  Terminal
+  ArrowUp,
+  MapPin,
+  Clock,
+  Sparkles
 } from 'lucide-react';
 import { GitHubIcon, LinkedInIcon } from '../common/Icons';
 import { portfolioData } from '../../data/portfolioData';
@@ -20,7 +21,7 @@ export default function ContactEditorial() {
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(personal.email);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => setCopied(false), 2400);
   };
 
   const scrollToTop = () => {
@@ -28,220 +29,149 @@ export default function ContactEditorial() {
   };
 
   return (
-    <section id="contact" className="py-28 bg-[#060913] text-white relative overflow-hidden">
-      
-      {/* Background Ambience */}
-      <div className="absolute inset-0 lab-grid opacity-30 pointer-events-none" />
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none" />
-
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+    <section id="contact" className="pt-24 sm:pt-32 pb-12 bg-[#F6F4ED] text-[#111215] relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-cyan-400 bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-800/60">
-            <Terminal className="w-3.5 h-3.5" />
-            <span>Collaboration &amp; Opportunities</span>
+        <div className="pb-8 border-b border-[#111215]/10 mb-14 sm:mb-16">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#111215]/60 font-bold mb-3">
+            <span className="text-[#111215]">05 / CONTACT</span>
+            <span>—</span>
+            <span>GET IN TOUCH</span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-headline font-extrabold text-white tracking-tight leading-[1.02]">
-            LET'S TURN DATA INTO <span className="text-[#D8F243] underline decoration-[#1D4ED8] decoration-4 underline-offset-8">SOMETHING MEANINGFUL.</span>
-          </h2>
+          <div className="space-y-4 max-w-4xl">
+            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-headline font-extrabold tracking-tight text-[#111215] leading-[0.98]">
+              LET'S MAKE SOMETHING<br />
+              <span className="text-[#111215] underline decoration-[#D8F243] decoration-[6px] sm:decoration-[10px] underline-offset-4">
+                MEANINGFUL.
+              </span>
+            </h2>
 
-          <p className="text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
-            I am actively seeking <strong className="text-white font-semibold">Data Analyst, BI Analyst, and Product Analytics</strong> internship opportunities. Whether discussing dimensional modeling, DAX measures, or summer roles, I’d love to connect.
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
-            <a
-              href={`mailto:${personal.email}?subject=Data%20Analyst%20Role%20Inquiry%20-%20Shubh%20Sharma`}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-sm font-bold bg-[#D8F243] text-gray-950 hover:bg-[#CCFF00] shadow-glow-blue transition-all active:scale-[0.98]"
-            >
-              <Mail className="w-4 h-4 text-gray-950" />
-              <span>Send Email Directly</span>
-              <ArrowRight className="w-4 h-4 text-gray-950" />
-            </a>
-
-            <a
-              href={`${import.meta.env.BASE_URL}resume.pdf`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-medium bg-white/10 hover:bg-white/15 text-white border border-white/15 transition-all shadow-subtle"
-            >
-              <FileText className="w-4 h-4 text-cyan-400" />
-              <span>Download Official Resume</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+            <p className="text-base sm:text-xl font-display font-medium text-[#111215]/80 pt-2">
+              Have an interesting problem, an opportunity, or an idea worth exploring? Let's talk.
+            </p>
           </div>
         </div>
 
-        {/* Contact Cards Grid (Generous width ensuring single-line email) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-16">
+        {/* Closing Interaction Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20 items-stretch">
           
-          {/* Email Card (Single line guaranteed) */}
-          <div className="rounded-2xl border border-white/10 bg-[#0D1424] p-6 sm:p-7 shadow-2xl hover:border-blue-400/50 transition-all flex flex-col justify-between space-y-4">
-            <div>
-              <div className="flex items-center justify-between text-slate-400 mb-2">
-                <span className="text-xs font-mono uppercase tracking-wider font-semibold text-cyan-400">
-                  Primary Email
-                </span>
-                <Mail className="w-4 h-4 text-cyan-400" />
+          {/* Primary Guaranteed Single-Line Email Touchpoint Card */}
+          <div className="lg:col-span-7 rounded-3xl bg-white border border-[#111215]/15 p-6 sm:p-10 shadow-editorial flex flex-col justify-between space-y-6">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between text-xs font-mono text-[#111215]/60">
+                <span className="font-bold uppercase tracking-wider text-[#111215]">DIRECT ELECTRONIC MAIL</span>
+                <Mail className="w-4 h-4 text-[#111215]" />
               </div>
 
-              <div className="mt-2 overflow-hidden">
+              {/* Single-Line Email Guaranteed Display */}
+              <div className="pt-2 overflow-hidden">
                 <a
                   href={`mailto:${personal.email}`}
-                  className="text-xs sm:text-sm md:text-base lg:text-lg font-mono font-bold text-white hover:text-cyan-300 transition-colors inline-block whitespace-nowrap tracking-tight truncate max-w-full select-all"
+                  className="text-base sm:text-xl md:text-2xl font-mono font-bold text-[#111215] hover:text-black transition-colors inline-block whitespace-nowrap tracking-tight truncate max-w-full select-all"
                   title={personal.email}
                 >
                   {personal.email}
                 </a>
               </div>
-              <p className="text-xs text-slate-400 mt-1">
-                Typical response time: under 24 hours.
+
+              <p className="text-xs sm:text-sm text-[#111215]/70 font-normal">
+                Always open for Data Analyst, Business Intelligence, Analytics Engineering, and Product Analytics internships for Summer 2027. Typical response window: within 24 hours.
               </p>
             </div>
 
-            <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+            <div className="pt-6 border-t border-[#111215]/10 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
               <button
                 onClick={handleCopyEmail}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F6F4ED] hover:bg-stone-100 border border-[#111215]/15 font-bold text-[#111215] transition-all cursor-pointer shadow-subtle active:scale-[0.98]"
               >
-                {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                <span>{copied ? 'Copied to clipboard!' : 'Copy email address'}</span>
+                {copied ? <Check className="w-3.5 h-3.5 text-emerald-700" /> : <Copy className="w-3.5 h-3.5 text-[#111215]" />}
+                <span>{copied ? 'Copied to Clipboard!' : 'Copy Address'}</span>
               </button>
 
               <a
-                href={`mailto:${personal.email}`}
-                className="text-xs font-mono text-slate-400 hover:text-white transition-colors inline-flex items-center gap-1"
+                href={`mailto:${personal.email}?subject=Data%20Analyst%20Role%20Inquiry%20-%20Shubh%20Sharma`}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#111215] text-[#F6F4ED] hover:bg-black font-bold transition-all shadow-subtle"
               >
-                <span>Compose</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <span>Compose Email</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#D8F243]" />
               </a>
             </div>
           </div>
 
-          {/* Phone Card */}
-          <div className="rounded-2xl border border-white/10 bg-[#0D1424] p-6 sm:p-7 shadow-2xl hover:border-emerald-400/50 transition-all flex flex-col justify-between space-y-4">
-            <div>
-              <div className="flex items-center justify-between text-slate-400 mb-2">
-                <span className="text-xs font-mono uppercase tracking-wider font-semibold text-emerald-400">
-                  Direct Telephone
-                </span>
-                <Phone className="w-4 h-4 text-emerald-400" />
+          {/* Social Profiles & Resume Strip */}
+          <div className="lg:col-span-5 rounded-3xl bg-[#111215] text-[#F6F4ED] border border-[#111215] p-6 sm:p-10 shadow-editorial flex flex-col justify-between space-y-6">
+            <div className="space-y-4">
+              <div className="text-xs font-mono uppercase tracking-wider text-[#D8F243] font-bold">
+                CONNECT &amp; VERIFY
               </div>
-
-              <div className="mt-2">
-                <a
-                  href={`tel:${personal.phone}`}
-                  className="text-base sm:text-lg font-mono font-bold text-white hover:text-emerald-300 transition-colors inline-block"
-                >
-                  +91 {personal.phone}
-                </a>
-              </div>
-              <p className="text-xs text-slate-400 mt-1">
-                Available for phone screens and technical recruiter syncs.
+              <p className="text-sm text-[#F6F4ED]/80 leading-relaxed font-normal">
+                Review codebases, explore analytical schemas, or download my official curriculum vitae.
               </p>
             </div>
 
-            <div className="pt-3 border-t border-white/10 flex items-center justify-between">
-              <a
-                href={`tel:${personal.phone}`}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
-              >
-                <span>Call directly</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-
-              <span className="text-xs font-mono text-slate-400">
-                IST (UTC+05:30)
-              </span>
-            </div>
-          </div>
-
-          {/* LinkedIn Card */}
-          <div className="rounded-2xl border border-white/10 bg-[#0D1424] p-6 sm:p-7 shadow-2xl hover:border-blue-400/50 transition-all flex flex-col justify-between space-y-4">
-            <div>
-              <div className="flex items-center justify-between text-slate-400 mb-2">
-                <span className="text-xs font-mono uppercase tracking-wider font-semibold text-blue-400">
-                  LinkedIn Professional Profile
-                </span>
-                <LinkedInIcon className="w-4 h-4 text-blue-400" />
-              </div>
-
-              <div className="mt-2 text-base sm:text-lg font-mono font-bold text-white">
-                shubh-sharma
-              </div>
-              <p className="text-xs text-slate-400 mt-1">
-                Professional network updates, certifications, and recommendations.
-              </p>
-            </div>
-
-            <div className="pt-3 border-t border-white/10">
+            <div className="space-y-3 font-mono text-xs">
               <a
                 href={personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+                className="flex items-center justify-between p-3.5 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/10 transition-all text-[#F6F4ED] font-semibold"
               >
-                <span>Open LinkedIn Profile</span>
-                <ExternalLink className="w-3.5 h-3.5" />
+                <div className="flex items-center gap-2.5">
+                  <LinkedInIcon className="w-4 h-4 text-blue-400" />
+                  <span>LinkedIn Profile</span>
+                </div>
+                <ArrowUpRight className="w-4 h-4 text-[#F6F4ED]/60" />
               </a>
-            </div>
-          </div>
 
-          {/* GitHub Codebase Card */}
-          <div className="rounded-2xl border border-white/10 bg-[#0D1424] p-6 sm:p-7 shadow-2xl hover:border-white/30 transition-all flex flex-col justify-between space-y-4">
-            <div>
-              <div className="flex items-center justify-between text-slate-400 mb-2">
-                <span className="text-xs font-mono uppercase tracking-wider font-semibold text-slate-300">
-                  GitHub Repositories
-                </span>
-                <GitHubIcon className="w-4 h-4 text-slate-300" />
-              </div>
-
-              <div className="mt-2 text-base sm:text-lg font-mono font-bold text-white">
-                shubh201203
-              </div>
-              <p className="text-xs text-slate-400 mt-1">
-                Open-source analytics codebases, SQL transformation scripts, and apps.
-              </p>
-            </div>
-
-            <div className="pt-3 border-t border-white/10">
               <a
                 href={personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white transition-colors"
+                className="flex items-center justify-between p-3.5 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/10 transition-all text-[#F6F4ED] font-semibold"
               >
-                <span>Explore GitHub Repos</span>
-                <ExternalLink className="w-3.5 h-3.5" />
+                <div className="flex items-center gap-2.5">
+                  <GitHubIcon className="w-4 h-4 text-white" />
+                  <span>GitHub Repositories</span>
+                </div>
+                <ArrowUpRight className="w-4 h-4 text-[#F6F4ED]/60" />
+              </a>
+
+              <a
+                href={`${import.meta.env.BASE_URL}resume.pdf`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between p-3.5 rounded-2xl bg-[#D8F243] hover:bg-[#CCFF00] text-[#111215] font-bold transition-all shadow-md"
+              >
+                <div className="flex items-center gap-2.5">
+                  <FileText className="w-4 h-4 text-[#111215]" />
+                  <span>Download Resume PDF</span>
+                </div>
+                <ArrowUpRight className="w-4 h-4 text-[#111215]" />
               </a>
             </div>
           </div>
 
         </div>
 
-        {/* Footer Sub-Bar */}
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-          <div>
-            <div className="flex items-center justify-center md:justify-start gap-2">
-              <span className="text-base font-bold text-white">{personal.name}</span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-900/60 text-cyan-300 border border-blue-700/60">
-                The Data Experience
-              </span>
+        {/* Editorial Colophon & Bottom Footer */}
+        <div className="pt-8 border-t border-[#111215]/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-[#111215]/60">
+          <div className="space-y-1 text-center sm:text-left">
+            <div>
+              Designed &amp; Engineered by <strong className="text-[#111215]">Shubh Sharma</strong>.
             </div>
-            <div className="text-xs text-slate-400 mt-0.5 font-mono">
-              © {new Date().getFullYear()} Shubh Sharma · All models, SQL CTEs &amp; DAX measures empirically verified.
+            <div className="text-[11px] text-[#111215]/40">
+              Set in Space Grotesk, Syne &amp; JetBrains Mono • Deployed on GitHub Pages
             </div>
           </div>
 
           <button
             onClick={scrollToTop}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 hover:border-white/30 text-xs font-mono text-slate-300 hover:text-white transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white hover:bg-stone-50 border border-[#111215]/15 text-[#111215] font-bold shadow-subtle transition-all cursor-pointer active:scale-95"
           >
-            <span>Back to Top</span>
-            <ArrowUp className="w-3.5 h-3.5" />
+            <span>Return to Top</span>
+            <ArrowUp className="w-3.5 h-3.5 text-[#111215]" />
           </button>
         </div>
 

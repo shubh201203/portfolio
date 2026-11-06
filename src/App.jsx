@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/common/Navbar';
 import Hero from './components/hero/Hero';
-import DataPipelineSection from './components/pipeline/DataPipelineSection';
-import NovaCartImmersive from './components/projects/NovaCartImmersive';
-import InteractiveCapabilityMap from './components/skills/InteractiveCapabilityMap';
-import InsideTheDataPlayground from './components/playground/InsideTheDataPlayground';
-import EditorialProjects from './components/projects/EditorialProjects';
-import Certifications from './components/certifications/Certifications';
 import AboutEditorial from './components/about/AboutEditorial';
+import ProjectsExhibition from './components/projects/ProjectsExhibition';
+import Toolkit from './components/skills/Toolkit';
+import CertificationsEditorial from './components/certifications/CertificationsEditorial';
 import ContactEditorial from './components/contact/ContactEditorial';
 
 // Deep-Dive Modal Case Studies
@@ -19,11 +16,12 @@ import SecondaryProjectModal from './components/case-studies/SecondaryProjectMod
 export default function App() {
   const [activeCaseStudy, setActiveCaseStudy] = useState(null);
 
-  // Hash route listener to allow direct link sharing (e.g., #novacart-details)
+  // Hash route listener to allow direct link sharing
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '').replace('/', '');
       if (
+        hash === 'novacart' ||
         hash === 'novacart-modal' ||
         hash === 'product-analytics' ||
         hash === 'disaster-reporting' ||
@@ -34,7 +32,7 @@ export default function App() {
         hash === 'emotion-music' ||
         hash === 'mental-health-detection'
       ) {
-        setActiveCaseStudy(hash);
+        setActiveCaseStudy(hash === 'novacart-modal' ? 'novacart' : hash);
       }
     };
 
@@ -54,37 +52,32 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F7F3] text-gray-900 flex flex-col justify-between selection:bg-blue-600 selection:text-white">
-      {/* Top Adaptive Sticky Navigation */}
+    <div className="min-h-screen bg-[#F6F4ED] text-[#111215] flex flex-col justify-between selection:bg-[#D8F243] selection:text-[#111215]">
+      
+      {/* Sticky Editorial Navigation */}
       <Navbar />
 
-      {/* Main Narrative Flow: The Data Experience */}
+      {/* Main Narrative Flow: Shubh Sharma — Data × Design × Technology */}
       <main className="flex-1">
-        {/* Experience 01: The Opening */}
-        <Hero onExploreNovaCart={() => handleOpenCaseStudy('novacart')} />
+        {/* The Hero: I MAKE DATA MAKE SENSE. */}
+        <Hero onExploreWork={() => {
+          const el = document.getElementById('work');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }} />
 
-        {/* Experience 02: The Introduction / Manifesto */}
+        {/* Section 01: INTRODUCTION / ABOUT */}
         <AboutEditorial />
 
-        {/* Experience 03: The Data Engine (Interactive 6-Stage Pipeline) */}
-        <DataPipelineSection />
+        {/* Section 02: SELECTED WORK (01 / 06 Exhibition) */}
+        <ProjectsExhibition onOpenCaseStudy={handleOpenCaseStudy} />
 
-        {/* Experience 04: The Project Archive — Flagship NovaCart */}
-        <NovaCartImmersive onOpenCaseStudy={handleOpenCaseStudy} />
+        {/* Section 03: THE TOOLKIT (The Tools Behind The Thinking) */}
+        <Toolkit />
 
-        {/* Experience 04: The Project Archive — Applied Systems (BitePulse, DIRS, WardrobeWhiz, Emotion Beats, TO-DO) */}
-        <EditorialProjects onOpenCaseStudy={handleOpenCaseStudy} />
+        {/* Section 04: CREDENTIALS (Verified Certifications) */}
+        <CertificationsEditorial />
 
-        {/* Experience 05: The Interactive Data Playground ("Beyond The Dashboard") */}
-        <InsideTheDataPlayground />
-
-        {/* Experience 06: Skills & Capabilities Web */}
-        <InteractiveCapabilityMap />
-
-        {/* Experience 07: Verified Credentials & Foundations */}
-        <Certifications />
-
-        {/* Experience 08: Contact & Personal Branding */}
+        {/* Section 05: CONTACT (Let's Make Something Meaningful) */}
         <ContactEditorial />
       </main>
 
@@ -98,14 +91,18 @@ export default function App() {
       {activeCaseStudy === 'disaster-reporting' && (
         <DisasterReportingModal onClose={handleCloseCaseStudy} />
       )}
-      {(activeCaseStudy === 'smart-resume' || 
-        activeCaseStudy === 'wardrobewhiz' || 
-        activeCaseStudy === 'shortx' || 
-        activeCaseStudy === 'todo' || 
-        activeCaseStudy === 'emotion-music' || 
+      {(activeCaseStudy === 'smart-resume' ||
+        activeCaseStudy === 'wardrobewhiz' ||
+        activeCaseStudy === 'shortx' ||
+        activeCaseStudy === 'todo' ||
+        activeCaseStudy === 'emotion-music' ||
         activeCaseStudy === 'mental-health-detection') && (
-        <SecondaryProjectModal projectId={activeCaseStudy} onClose={handleCloseCaseStudy} />
+        <SecondaryProjectModal
+          projectId={activeCaseStudy}
+          onClose={handleCloseCaseStudy}
+        />
       )}
+
     </div>
   );
 }
