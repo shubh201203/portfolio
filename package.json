@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node -e \"require('fs').writeFileSync('out/.nojekyll', '')\"",
+    "build": "next build && node scripts/fix-rsc-paths.js && node -e \"require('fs').writeFileSync('out/.nojekyll', '')\"",
     "start": "next start",
     "lint": "oxlint",
     "vite:dev": "vite",

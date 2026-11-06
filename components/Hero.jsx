@@ -69,7 +69,8 @@ export default function Hero({ onExploreWork, onExplorePipeline }) {
 
   return (
     <section 
-      id="home" 
+      id="hero" 
+      data-section="home"
       onMouseMove={handleMouseMove}
       className="relative min-h-[96vh] pt-28 sm:pt-36 pb-16 bg-[#0A0A0B] text-[#F5F5F4] overflow-hidden flex flex-col justify-between border-b border-white/10"
     >

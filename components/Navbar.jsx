@@ -19,7 +19,7 @@ export default function Navbar() {
       setScrollProgress(progress);
       setIsScrolled(currentScroll > 40);
 
-      const sections = ['home', 'how-it-works', 'work', 'skills', 'experience', 'about', 'credentials', 'contact'];
+      const sections = ['hero', 'work', 'about', 'skills', 'education', 'contact'];
       const scrollPosition = currentScroll + 220;
 
       for (const section of sections) {
@@ -40,17 +40,25 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { num: '01', label: 'Process', href: '#how-it-works' },
-    { num: '02', label: 'Work', href: '#work' },
-    { num: '03', label: 'Skills', href: '#skills' },
-    { num: '04', label: 'Experience', href: '#experience' },
-    { num: '05', label: 'About', href: '#about' },
-    { num: '06', label: 'Contact', href: '#contact' },
+    { label: 'Home', href: '#hero' },
+    { label: 'Work', href: '#work' },
+    { label: 'About', href: '#about' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Education & Certifications', href: '#education' },
+    { label: 'Contact', href: '#contact' },
+    { label: 'Resume', href: '/portfolio/resume.pdf', isExternal: true },
   ];
 
-  const handleNavClick = (e, href) => {
+  const handleNavClick = (e, href, isExternal) => {
+    if (isExternal || href.endsWith('.pdf')) {
+      // Allow default browser action to download/view PDF
+      setMobileMenuOpen(false);
+      return;
+    }
+
     e.preventDefault();
     setMobileMenuOpen(false);
+
     const sectionId = href.replace('#', '');
 
     // Dispatches custom event for section entrance coordinator
@@ -63,14 +71,18 @@ export default function Navbar() {
 
       // Smooth scroll using Lenis if available
       if (window.__lenis) {
-        window.__lenis.scrollTo(href, {
+        window.__lenis.scrollTo(href === '#hero' ? 0 : href, {
           duration: 1.2,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         });
       } else {
-        const target = document.querySelector(href);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
+        if (href === '#hero') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
         }
       }
 
@@ -100,8 +112,8 @@ export default function Navbar() {
           
           {/* Brand Identity Lockup */}
           <a
-            href="#home"
-            onClick={(e) => handleNavClick(e, '#home')}
+            href="#hero"
+            onClick={(e) => handleNavClick(e, '#hero', false)}
             className="group flex items-center gap-3 cursor-pointer"
             aria-label="Shubh Sharma Home"
           >
@@ -126,13 +138,15 @@ export default function Navbar() {
           {/* Desktop Navigation Links with Active Pill Transition */}
           <nav className="hidden lg:flex items-center gap-1 bg-white/[0.04] backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 shadow-inner">
             {navLinks.map((link) => {
-              const sectionId = link.href.substring(1);
+              const sectionId = link.href.startsWith('#') ? link.href.substring(1) : '';
               const isActive = activeSection === sectionId;
               return (
                 <a
                   key={link.label}
                   href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
+                  target={link.isExternal ? '_blank' : undefined}
+                  rel={link.isExternal ? 'noopener noreferrer' : undefined}
+                  onClick={(e) => handleNavClick(e, link.href, link.isExternal)}
                   className={`relative flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono transition-all duration-200 ${
                     isActive
                       ? 'text-white font-semibold'
@@ -146,9 +160,6 @@ export default function Navbar() {
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
-                  <span className={`relative z-10 text-[10px] ${isActive ? 'text-blue-200' : 'text-slate-500'}`}>
-                    {link.num}
-                  </span>
                   <span className="relative z-10">{link.label}</span>
                 </a>
               );
@@ -198,14 +209,15 @@ export default function Navbar() {
                   <motion.a
                     key={link.label}
                     href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
+                    target={link.isExternal ? '_blank' : undefined}
+                    rel={link.isExternal ? 'noopener noreferrer' : undefined}
+                    onClick={(e) => handleNavClick(e, link.href, link.isExternal)}
                     initial={{ opacity: 0, x: -15 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
                     className="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-mono text-slate-300 hover:text-white hover:bg-white/10 transition-colors border-b border-white/5"
                   >
                     <div className="flex items-center gap-2.5">
-                      <span className="text-xs text-[#3B82F6] font-bold">{link.num}</span>
                       <span className="font-semibold">{link.label}</span>
                     </div>
                     <ArrowUpRight className="w-4 h-4 text-slate-500" />

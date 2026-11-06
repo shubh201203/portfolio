@@ -1,45 +1,39 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import CinematicIntro from '@/components/CinematicIntro';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Marquee from '@/components/Marquee';
 import HowIWorkSequence from '@/components/animations/HowIWorkSequence';
 import ProjectsSection from '@/components/projects/ProjectsSection';
-import SkillsMatrix from '@/components/skills/SkillsMatrix';
-import ExperienceTimeline from '@/components/about/ExperienceTimeline';
 import AboutSection from '@/components/about/AboutSection';
+import SkillsMatrix from '@/components/skills/SkillsMatrix';
 import ToolkitSection from '@/components/skills/ToolkitSection';
-import CertificationsSection from '@/components/certifications/CertificationsSection';
+import EducationCredentialsSection from '@/components/education/EducationCredentialsSection';
 import ContactSection from '@/components/contact/ContactSection';
-
-// Deep-Dive Modal Case Studies
-import NovaCartCaseStudy from '@/components/case-studies/NovaCartCaseStudy';
-import ProductAnalyticsCaseStudy from '@/components/case-studies/ProductAnalyticsCaseStudy';
-import DisasterReportingModal from '@/components/case-studies/DisasterReportingModal';
-import SecondaryProjectModal from '@/components/case-studies/SecondaryProjectModal';
+import Footer from '@/components/common/Footer';
 
 export default function Home() {
-  const [activeCaseStudy, setActiveCaseStudy] = useState(null);
-
-  // Hash route listener for direct case-study linking
+  // Listen for hash route navigation (e.g. #novacart, #product-analytics)
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '').replace('/', '');
-      if (
-        hash === 'novacart' ||
-        hash === 'novacart-modal' ||
-        hash === 'product-analytics' ||
-        hash === 'disaster-reporting' ||
-        hash === 'smart-resume' ||
-        hash === 'wardrobewhiz' ||
-        hash === 'shortx' ||
-        hash === 'todo' ||
-        hash === 'emotion-music' ||
-        hash === 'mental-health-detection'
-      ) {
-        setActiveCaseStudy(hash === 'novacart-modal' ? 'novacart' : hash);
+      const validProjects = [
+        'novacart',
+        'product-analytics',
+        'bitepulse',
+        'disaster-reporting',
+        'smart-resume',
+        'wardrobewhiz',
+        'shortx',
+        'todo',
+        'emotion-music',
+        'mental-health-detection'
+      ];
+      if (validProjects.includes(hash)) {
+        const targetSlug = hash === 'bitepulse' ? 'product-analytics' : hash;
+        window.location.href = `${window.location.origin}/portfolio/projects/${targetSlug}/`;
       }
     };
 
@@ -49,13 +43,8 @@ export default function Home() {
   }, []);
 
   const handleOpenCaseStudy = (id) => {
-    setActiveCaseStudy(id);
-    window.location.hash = '#' + id;
-  };
-
-  const handleCloseCaseStudy = () => {
-    setActiveCaseStudy(null);
-    history.pushState('', document.title, window.location.pathname + window.location.search);
+    const targetSlug = id === 'bitepulse' ? 'product-analytics' : id;
+    window.location.href = `${window.location.origin}/portfolio/projects/${targetSlug}/`;
   };
 
   return (
@@ -85,53 +74,31 @@ export default function Home() {
         {/* 3. Subtle Moving Marquee of Real Tools & Domains */}
         <Marquee />
 
-        {/* 6. Pinned Scroll-Driven "How I Work" Sequence (Define → Collect → Model → Analyze → Communicate → Decide) */}
+        {/* 4. Pinned Scroll-Driven "How I Work" Sequence (Define → Collect → Model → Analyze → Communicate → Decide) */}
         <HowIWorkSequence />
 
-        {/* 4 & 5. Large Featured-Project Exhibition (NovaCart & BitePulse with Problem → Data → Approach → Insight → Impact) */}
+        {/* 5. Large Featured-Project Exhibition (NovaCart & BitePulse with Problem → Data → Approach → Insight → Impact) */}
         <ProjectsSection onOpenCaseStudy={handleOpenCaseStudy} />
+
+        {/* 6. Genuine About & Analytical Foundations (Dual Academic Track & Zero Speculation Standard) */}
+        <AboutSection />
 
         {/* 7. Interactive Skills Matrix Connecting Skills to Projects */}
         <SkillsMatrix onOpenProject={handleOpenCaseStudy} />
 
-        {/* 8. Vertical Experience Timeline & Measured Impact Metrics */}
-        <ExperienceTimeline />
-
-        {/* 8. Genuine About & Education (VIT-AP CSE & IIT Madras Data Science, Zero Speculation) */}
-        <AboutSection />
-
-        {/* Toolkit Section: The Tools Behind The Thinking */}
+        {/* 8. Toolkit Section: The Tools Behind The Thinking */}
         <ToolkitSection />
 
-        {/* 8. Genuine Certifications Section (4 Completed Oct 2026, 1 In Progress) */}
-        <CertificationsSection />
+        {/* 9. Education & Credentials (VIT-AP CSE, IIT Madras Data Science, 4 Completed Oct 2026 Certs, 1 In Progress) */}
+        <EducationCredentialsSection />
 
-        {/* 9. Strong Closing Contact Section */}
+        {/* 10. Strong Closing Contact Section */}
         <ContactSection />
 
       </main>
 
-      {/* Shared-Transition Interactive Case Study Modals */}
-      {activeCaseStudy === 'novacart' && (
-        <NovaCartCaseStudy onClose={handleCloseCaseStudy} />
-      )}
-      {activeCaseStudy === 'product-analytics' && (
-        <ProductAnalyticsCaseStudy onClose={handleCloseCaseStudy} />
-      )}
-      {activeCaseStudy === 'disaster-reporting' && (
-        <DisasterReportingModal onClose={handleCloseCaseStudy} />
-      )}
-      {(activeCaseStudy === 'smart-resume' ||
-        activeCaseStudy === 'wardrobewhiz' ||
-        activeCaseStudy === 'shortx' ||
-        activeCaseStudy === 'todo' ||
-        activeCaseStudy === 'emotion-music' ||
-        activeCaseStudy === 'mental-health-detection') && (
-        <SecondaryProjectModal
-          projectId={activeCaseStudy}
-          onClose={handleCloseCaseStudy}
-        />
-      )}
+      {/* Reusable Portfolio Footer */}
+      <Footer />
 
     </div>
   );

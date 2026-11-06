@@ -110,43 +110,29 @@ export default function AboutSection() {
               </div>
             </div>
 
-            {/* Academic Foundations (Exact degree wording, NO CGPA) */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">
-                <GraduationCap className="w-4 h-4 text-blue-400" />
-                <span>Academic Foundations &amp; Degrees</span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-5 rounded-2xl bg-[#0B0E17] border border-white/10 space-y-1.5">
-                  <div className="text-sm font-bold text-white font-display">
-                    VIT-AP University
-                  </div>
-                  <div className="text-xs text-slate-300 font-medium">
-                    B.Tech in Computer Science and Engineering (Core)
-                  </div>
-                  <div className="text-xs font-mono text-slate-500 pt-1">
-                    2023–2027 • Amaravati, AP
-                  </div>
+            {/* Academic Foundations Link */}
+            <div className="p-5 rounded-2xl bg-[#0B0E17] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                  <GraduationCap className="w-5 h-5" />
                 </div>
-
-                <div className="p-5 rounded-2xl bg-[#0B0E17] border border-blue-500/30 space-y-1.5">
+                <div>
                   <div className="text-sm font-bold text-white font-display">
-                    Indian Institute of Technology Madras
+                    Dual Academic Foundations
                   </div>
-                  <div className="text-xs text-slate-300 font-medium">
-                    BS Degree in Data Science and Management
-                  </div>
-                  <div className="text-xs font-mono text-blue-400 font-bold pt-1">
-                    Foundational Level — Pursuing
+                  <div className="text-xs text-slate-400 font-mono">
+                    VIT-AP B.Tech CSE (Core) &bull; IIT Madras BS Data Science
                   </div>
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-[#0B0E17] border border-white/10 flex flex-wrap items-center justify-between text-xs font-mono text-slate-400">
-                <span>Secondary &amp; Senior Secondary Board Records:</span>
-                <span className="font-bold text-white">Class X: 95% &nbsp;|&nbsp; Class XII: 78%</span>
-              </div>
+              <a
+                href="#education"
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#3B82F6] hover:text-[#14B8A6] transition-colors whitespace-nowrap"
+              >
+                <span>View Full Credentials</span>
+                <span>&rarr;</span>
+              </a>
             </div>
 
           </div>

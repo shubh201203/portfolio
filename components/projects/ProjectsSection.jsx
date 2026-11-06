@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowUpRight, 
@@ -211,13 +212,13 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
                   <ExternalLink className="w-3 h-3 text-slate-400" />
                 </a>
 
-                <button
-                  onClick={() => onOpenCaseStudy('novacart')}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-semibold bg-blue-500/15 border border-blue-500/30 text-blue-300 hover:bg-blue-500/25 transition-colors cursor-pointer"
+                <Link
+                  href="/projects/novacart/"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-semibold bg-blue-500/15 border border-blue-500/30 text-blue-300 hover:bg-blue-500/25 transition-colors"
                 >
-                  <Maximize2 className="w-3 h-3" />
-                  <span>Deep-Dive Modal</span>
-                </button>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                  <span>View Case Study</span>
+                </Link>
               </div>
             </div>
 
@@ -390,12 +391,12 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
                 ))}
               </div>
 
-              <button
-                onClick={() => onOpenCaseStudy('novacart')}
-                className="inline-flex items-center gap-1.5 text-blue-400 hover:text-blue-300 font-bold cursor-pointer"
+              <Link
+                href="/projects/novacart/"
+                className="inline-flex items-center gap-1.5 text-blue-400 hover:text-blue-300 font-bold"
               >
-                <span>Examine Technical Schema &amp; Pytest Logs →</span>
-              </button>
+                <span>Examine Technical Schema &amp; Pytest Logs &rarr;</span>
+              </Link>
             </div>
 
           </motion.div>
@@ -423,13 +424,13 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
               </div>
 
               <div className="flex items-center gap-3">
-                <button
-                  onClick={() => onOpenCaseStudy('product-analytics')}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-bold bg-white text-gray-950 hover:bg-blue-400 transition-colors cursor-pointer"
+                <Link
+                  href="/projects/product-analytics/"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-bold bg-white text-gray-950 hover:bg-blue-400 transition-colors"
                 >
                   <span>Explore Case Study</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -516,12 +517,12 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
                 ))}
               </div>
 
-              <button
-                onClick={() => onOpenCaseStudy('product-analytics')}
-                className="inline-flex items-center gap-1.5 text-blue-400 hover:text-blue-300 font-bold cursor-pointer"
+              <Link
+                href="/projects/product-analytics/"
+                className="inline-flex items-center gap-1.5 text-blue-400 hover:text-blue-300 font-bold"
               >
-                <span>Open Product Analytics Case Study →</span>
-              </button>
+                <span>Open Product Analytics Case Study &rarr;</span>
+              </Link>
             </div>
 
           </motion.div>
@@ -597,13 +598,13 @@ export default function ProjectsSection({ onOpenCaseStudy }) {
                     )}
                   </div>
 
-                  <button
-                    onClick={() => onOpenCaseStudy(project.id)}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-blue-400 hover:text-blue-300 cursor-pointer"
+                  <Link
+                    href={`/projects/${project.id}/`}
+                    className="inline-flex items-center gap-1 text-xs font-bold text-blue-400 hover:text-blue-300"
                   >
                     <span>Inspect System</span>
-                    <Maximize2 className="w-3 h-3" />
-                  </button>
+                    <ArrowUpRight className="w-3 h-3" />
+                  </Link>
                 </div>
               </motion.div>
             ))}

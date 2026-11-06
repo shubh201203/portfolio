@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Database, 
@@ -293,12 +294,10 @@ export default function SkillsMatrix({ onOpenProject }) {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {active.connectedProjects.map((p) => (
-                      <button
+                      <Link
                         key={p.id}
-                        onClick={() => {
-                          if (onOpenProject) onOpenProject(p.id);
-                        }}
-                        className="p-4 rounded-2xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-[#3B82F6]/50 text-left transition-all duration-200 group cursor-pointer"
+                        href={`/projects/${p.id}/`}
+                        className="p-4 rounded-2xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-[#3B82F6]/50 text-left transition-all duration-200 group block"
                       >
                         <div className="flex items-center justify-between">
                           <span className="text-sm font-bold text-white group-hover:text-[#3B82F6] transition-colors">
@@ -310,9 +309,9 @@ export default function SkillsMatrix({ onOpenProject }) {
                           Role: {p.role}
                         </div>
                         <div className="text-[10px] font-mono text-[#14B8A6] mt-2 group-hover:underline">
-                          View Project Case Study →
+                          View Project Case Study &rarr;
                         </div>
-                      </button>
+                      </Link>
                     ))}
                   </div>
                 </div>
